@@ -17,12 +17,17 @@
 #include <memory>
 #include <map>
 #include <cxxabi.h>
+#include "IDisplay.hpp"
 
 class GameCore {
     public:
-        GameCore();
+        GameCore(std::string);
         ~GameCore();
-
-    protected:
+        bool play(int First = 0);
+        template <typename Obj>
+			Obj *createObject(void*);
     private:
+        IDisplay *Display;
+        std::map<std::string, std::string> libArg;
+        std::map<std::string, void*> _libArg;
 };
