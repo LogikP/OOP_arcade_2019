@@ -9,7 +9,8 @@
 
 void Display::initWindow()
 {
-    this->Menu();
+    if (this->Menu() == "kill")
+        this->closeWindow();
 }
 
 Display::Display() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
@@ -17,9 +18,15 @@ Display::Display() : window(sf::VideoMode(VideoMode.width, VideoMode.height, Vid
 
 }
 
-void Display::Menu()
+std::string Display::Menu()
 {
     window.clear();
+    sf::Sprite sprite;
+    sf::Texture texture;
+
+    if (!texture.loadFromFile("./asset/5S4kgs.jpg", sf::IntRect(0,0,1920, 1080)))
+        std::cerr << "error" << std::endl;
+    sprite.setTexture(texture);
     while (window.isOpen())
     {
         sf::Event event;
@@ -28,20 +35,16 @@ void Display::Menu()
             if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Escape)
-                    exit(0);
+                {
+                    window.clear();
+                    return "kill";
+                }
             }
-            // switch (event.type) {
-            //     case sf::Event::KeyPressed: {
-            //         switch (event.key.code)
-            //             case sf::Keyboard::Escape:
-            //                 exit(0);
-            //     }
-            // }
-            // if (event.type == sf::Event::Closed)
-            //     this->closeWindow();
         }
+        window.draw(sprite);
         window.display();
     }
+    return "success";
 }
 
 std::string Display::Game()

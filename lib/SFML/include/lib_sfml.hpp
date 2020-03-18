@@ -8,6 +8,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../../../include/IDisplay.hpp"
+#include "iostream"
 
 class Display : public IDisplay
 {
@@ -19,5 +20,5 @@ class Display : public IDisplay
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
-        void Menu();
+        std::string Menu();
 };
