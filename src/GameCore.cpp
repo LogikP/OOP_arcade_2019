@@ -19,8 +19,7 @@ bool GameCore::play()
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     while (42)
     {
-//        this->Display->initWindow();
-//        this->Display->initWindow();
+        this->Display->Menu();
     }
     return true;
 }

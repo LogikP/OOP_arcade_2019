@@ -14,7 +14,7 @@ template <>
 IDisplay *GameCore::createObject<IDisplay>(void* library) 
 {
     char *error;
-    createDisplay createMyObject = (createDisplay)(dlsym(library, "createDisp"));
+    createDisplay createMyObject = (createDisplay)(dlsym(library, "createDisplay"));
     if ((error = dlerror()) != NULL)
     {
         fprintf(stderr, "%s\n", error);
@@ -35,3 +35,4 @@ IGame *GameCore::createObject<IGame>(void* game)
     }
     return (createMyObject());
 }
+

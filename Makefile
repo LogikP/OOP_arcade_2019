@@ -18,12 +18,13 @@ OBJS = $(SRCS:.cpp=.o)
 
 
 
-all:  nibbler pacman sfml caca ncurses $(NAME)
+all:  nibbler pacman sfml caca ncurses core
 $(NAME):	$(OBJS)
 	printf "\033[0;33mBuilding Arcade...\033[0m\n"
 	$(CXX) -o $(NAME) $(OBJS) $(CPPFLAGS)
 	printf "[\033[0;32mArcade built\033[0m]   \t\t\t\t\t\t\t%s\n" $(NAME)
 
+core : $(NAME)
 
 sfml:
 	printf "\033[0;33mCompiling SFML...\033[0m\n"
