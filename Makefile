@@ -6,6 +6,7 @@ RM	= rm -rf
 
 SRCS	= 	./src/main.cpp \
 			./src/GameCore.cpp \
+			./src/createObject.cpp \
 
 CPPFLAGS = -I ./include/
 CPPFLAGS += -W -Wall -Wextra
@@ -42,8 +43,8 @@ fclean:
 	$(RM) $(OBJS)
 	printf "[\033[0;31mdeleted\033[0m] \t\t\t\t\t\t\t\t%s\n" $(OBJS)
 	make fclean -C games/pacman/
-	make clean -C games/nibbler/
+	make fclean -C games/nibbler/
 
-re: fclean all pacman nibbler sfml ncurses
+re: fclean all pacman nibbler
 
 .PHONY: all pacman nibbler clean fclean re

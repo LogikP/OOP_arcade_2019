@@ -17,17 +17,26 @@
 #include <memory>
 #include <map>
 #include <cxxabi.h>
+#include <regex>
+#include "IGame.hpp"
 #include "IDisplay.hpp"
+#include "Error.hpp"
 
 class GameCore {
+    private:
+        IDisplay *Display;
+        IGame *Game;
+        std::map<std::string, std::string> Libs;
+        std::map<std::string, std::string> games;
+        std::map<std::string, void*> libToDisplay;
     public:
         GameCore(std::string);
         ~GameCore();
-        bool play(int First = 0);
-        template <typename Obj>
-			Obj *createObject(void*);
-    private:
-        IDisplay *Display;
-        std::map<std::string, std::string> libArg;
-        std::map<std::string, void*> _libArg;
+        bool play();
+        template <typename T>
+            void getLib();
+        template <typename T>
+		    T *createObject(void* library);
+        template <typename T>
+            void setLibIdx();
 };

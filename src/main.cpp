@@ -8,17 +8,17 @@
 #include "GameCore.hpp"
 #include "Error.hpp"
 
-void Format(int ac)
+void Format_Error(int ac)
 {
     if (ac != 2)
-        throw(Error("Usage:\n\t./arcade {path to a shared graphic library}"));
+        throw(Error("Usage:\n\t./arcade {path to a dynamic graphic library}"));
 }
 
 int main(int ac, char **av)
 {
     try
     {
-        Format(ac);
+        Format_Error(ac);
         GameCore myGame(av[1]);
         while(myGame.play()){};
     }
