@@ -20,6 +20,7 @@ bool GameCore::play()
     while (42)
     {
 //        this->Display->initWindow();
+//        this->Display->initWindow();
     }
     return true;
 }

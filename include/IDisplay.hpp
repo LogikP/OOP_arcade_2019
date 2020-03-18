@@ -12,9 +12,10 @@
 #include <dlfcn.h>
 
 class IDisplay {
-    virtual ~IDisplay();
-    virtual void initWindow() = 0;
-    virtual void closeWindow() = 0;
-    virtual std::string end(std::string) = 0;
-    virtual std::string Game() = 0;
+    public:
+        virtual ~IDisplay() {}
+        virtual void initWindow() = 0;
+        virtual void closeWindow() = 0;
+        virtual std::string end(std::string) = 0;
+        virtual std::string Game() = 0;
 };
