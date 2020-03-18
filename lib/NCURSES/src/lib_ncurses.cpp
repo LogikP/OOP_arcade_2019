@@ -11,3 +11,13 @@ Display::Display()
 {
 
 }
+
+// void Display::closeWindow()
+// {
+//     return;
+// }
+
+
+// extern "C" Display *createDisplay() {
+//     return (new Display);
+// }

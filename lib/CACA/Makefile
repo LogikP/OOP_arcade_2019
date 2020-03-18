@@ -1,6 +1,6 @@
 NAME	=	../lib_arcade_caca.so
 
-CXX	=	g++ -g3 -lcaca -fPIC
+CXX	=	g++ -g3 -fPIC
 
 RM	=	rm -vf
 
