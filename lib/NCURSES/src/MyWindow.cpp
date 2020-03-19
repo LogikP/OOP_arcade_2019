@@ -20,7 +20,7 @@ MyWindow::MyWindow(int lines, int colones, int x , int y)
 
 MyWindow::~MyWindow()
 {
-    endwin();
+//    endwin();
 }
 
 void MyWindow::clear()
