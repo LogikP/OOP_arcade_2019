@@ -7,11 +7,33 @@
 
 #include "lib_caca.hpp"
 
-Display::Display()
+Display::Display() : window()
 {
 
 }
 
-// Display::~Display()
-// {
-// }
+void Display::closeWindow()
+{
+    return;
+}
+
+int Display::InitProg()
+{
+    return 0;
+}
+
+std::string Display::Game()
+{
+    return "toto";
+}
+
+void Display::initWindow()
+{
+    MyWindowC test;
+    this->window = test;
+}
+
+extern "C" Display *createDisplay() 
+{
+    return new Display;
+}

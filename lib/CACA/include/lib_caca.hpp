@@ -7,11 +7,16 @@
 
 #pragma once
 #include "../../../include/IDisplay.hpp"
+#include "MyWindowC.hpp"
 
 class Display : public IDisplay
 {
     private:
-
+        MyWindowC window;
     public:
         Display();
+        void initWindow() final;
+        void closeWindow() final;
+        std::string Game() final;
+        int InitProg() final;
 };
