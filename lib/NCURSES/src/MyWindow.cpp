@@ -31,9 +31,8 @@ void MyWindow::clear()
 
 int MyWindow::MyGetch()
 {
-    int key;
-
-    timeout(5);
-    key = getch();
-    return key;
+    int input;
+    timeout(10);
+    input = getch();
+    return input;
 }
