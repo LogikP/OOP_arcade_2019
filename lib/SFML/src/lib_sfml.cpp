@@ -9,8 +9,10 @@
 
 void Display::initWindow()
 {
-    if (this->Menu() == "kill")
+    if (this->Menu() == "kill") {
         this->closeWindow();
+        exit(0);
+    }
 }
 
 Display::Display() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
@@ -45,6 +47,11 @@ std::string Display::Menu()
         window.display();
     }
     return "success";
+}
+
+int Display::InitProg()
+{
+    return 0;
 }
 
 std::string Display::Game()

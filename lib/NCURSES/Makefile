@@ -5,6 +5,7 @@ CXX	=	g++ -g3 -lncurses -fPIC -Iinclude
 RM	=	rm -vf
 
 SRCS	= 	./src/lib_ncurses.cpp \
+			./src/MyWindow.cpp \
 
 OBJS	=	$(SRCS:.cpp=.o)
 
