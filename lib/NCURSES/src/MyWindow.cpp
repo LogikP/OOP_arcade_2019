@@ -7,19 +7,14 @@
 
 #include "MyWindow.hpp"
 
-void initObject()
+MyWindow::MyWindow(int lines, int colones, int x , int y)
 {
+    noecho();
     initscr();
     start_color();
     keypad(stdscr, TRUE);
     refresh();
     curs_set(0);
-}
-
-MyWindow::MyWindow(int lines, int colones, int x , int y)
-{
-    noecho();
-    initObject();
     window = newwin(lines, colones, x, y);
 }
 
