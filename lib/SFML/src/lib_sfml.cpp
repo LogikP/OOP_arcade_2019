@@ -57,6 +57,7 @@ void Display::closeWindow() {
 }
 
 //// For the dlsym Symbol /////
-extern "C" Display *createDisplay() {
-    return (new Display);
+extern "C" Display *createDisplay() 
+{
+    return new Display;
 }
