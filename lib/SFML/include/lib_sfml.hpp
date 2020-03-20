@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include "../../../include/IDisplay.hpp"
 #include "iostream"
+#include "../../../include/Error.hpp"
 
 class LibSfml : public IDisplay
 {
@@ -21,5 +22,6 @@ class LibSfml : public IDisplay
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
+        void DrawSprite(sf::Sprite);
         std::string Menu(std::vector<std::pair<int,std::string>>) final;
 };
