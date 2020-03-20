@@ -20,7 +20,7 @@ LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, Vid
 
 }
 
-std::string LibSfml::Menu()
+std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
 {
     window.clear();
     sf::Sprite sprite;

@@ -21,5 +21,5 @@ class LibSfml : public IDisplay
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
-        std::string Menu() final;
+        std::string Menu(std::vector<std::pair<int,std::string>>) final;
 };
