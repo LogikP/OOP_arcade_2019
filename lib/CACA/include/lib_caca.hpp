@@ -19,4 +19,5 @@ class Display : public IDisplay
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
+        std::string Menu() final;
 };

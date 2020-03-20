@@ -7,20 +7,20 @@
 
 #include "lib_sfml.hpp"
 
-void Display::initWindow()
+void LibSfml::initWindow()
 {
-    if (this->Menu() == "kill") {
-        this->closeWindow();
-        exit(0);
-    }
+    // if (this->Menu() == "kill") {
+    //     this->closeWindow();
+    //     exit(0);
+    // }
 }
 
-Display::Display() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
+LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
 {
 
 }
 
-std::string Display::Menu()
+std::string LibSfml::Menu()
 {
     window.clear();
     sf::Sprite sprite;
@@ -29,9 +29,9 @@ std::string Display::Menu()
     if (!texture.loadFromFile("./asset/5S4kgs.jpg", sf::IntRect(0,0,1920, 1080)))
         std::cerr << "error" << std::endl;
     sprite.setTexture(texture);
+    sf::Event event;
     while (window.isOpen())
     {
-        sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::KeyPressed)
@@ -49,22 +49,23 @@ std::string Display::Menu()
     return "success";
 }
 
-int Display::InitProg()
+int LibSfml::InitProg()
 {
     return 0;
 }
 
-std::string Display::Game()
+std::string LibSfml::Game()
 {
     return "toto";
 }
 
-void Display::closeWindow() {
+void LibSfml::closeWindow() 
+{
     window.close();
 }
 
 //// For the dlsym Symbol /////
-extern "C" Display *createDisplay() 
+extern "C" LibSfml *createDisplay() 
 {
-    return new Display;
+    return new LibSfml;
 }

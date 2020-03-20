@@ -18,11 +18,12 @@ bool GameCore::play()
 
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     this->Display->initWindow();
-
+    std::string PeakGame = this->Display->Menu();
+    if (PeakGame == "kill")
+        exit(0);
     while (42)
     {
         this->Display->InitProg();
-//        this->Display->Menu();
     }
     return true;
 }
