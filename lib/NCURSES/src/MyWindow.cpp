@@ -5,17 +5,15 @@
 ** MyWindow
 */
 
+#include <stdlib.h>
 #include "MyWindow.hpp"
 
 MyWindow::MyWindow(int lines, int colones, int x , int y)
 {
-    noecho();
     initscr();
-    start_color();
-    keypad(stdscr, TRUE);
-    refresh();
     curs_set(0);
     window = newwin(lines, colones, x, y);
+    wrefresh(window);
 }
 
 MyWindow::~MyWindow()

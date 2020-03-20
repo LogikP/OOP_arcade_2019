@@ -15,6 +15,8 @@ class LibNcurses : public IDisplay
 {
     private:
         MyWindow window;
+        WINDOW *_pacman;
+        WINDOW *_nibbler;
     public:
         LibNcurses();
         void initWindow() final;
@@ -24,4 +26,5 @@ class LibNcurses : public IDisplay
         std::string Game() final;
         void display_title();
         void display_help();
+        void display_game();
 };

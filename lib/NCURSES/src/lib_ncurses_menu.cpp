@@ -6,9 +6,12 @@
 */
 
 #include "lib_ncurses.hpp"
+#include <curses.h>
+#include <time.h>
 
 void LibNcurses::display_title()
 {
+    box(this->window.window, ACS_VLINE, ACS_HLINE);
     char const *ft_line = " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
     char const *sd_line = " | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
     char const *trd_line = " | | ____    ____ | || |  ____  ____  | || |              | || |    ______    | || |  ___  ____   | || |  _______     | || |  _________   | || |   _____      | || |   _____      | || | ____    ____ | |";
@@ -32,4 +35,36 @@ void LibNcurses::display_title()
     mvwprintw(this->window.window, 8, (COLS/2) - (202/2), nn_line);
     mvwprintw(this->window.window, 9, (COLS/2) - (202/2), tn_line);
     mvwprintw(this->window.window, 10, (COLS/2) - (202/2), elv_line);
+    wrefresh(this->window.window);
+}
+
+static void usage_help(WINDOW *help)
+{
+    mvwprintw(help, 1, 5, "\t\t\tHOW TO PLAY :\n\n\n\n\tMove the cursor menu to select a game\n\n\tPress enter to choose a game.\
+    \n\n\tIn Game :\n\n\tKey 2 : move to previous graphical library.\n\n\tFor starting push ENTER and for quit monitor push \"q\"");
+}
+
+void LibNcurses::display_help()
+{
+
+    box(this->window.window, '*', '*');
+    touchwin(this->window.window);
+    wrefresh(this->window.window);
+    WINDOW *help;
+    help = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 10);
+    usage_help(help);
+    box(help, ACS_VLINE, ACS_HLINE);
+    wrefresh(help);
+
+}
+
+void LibNcurses::display_game()
+{
+    WINDOW *game;
+
+    game = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 100);
+    box(game, ACS_VLINE, ACS_HLINE);
+    mvwprintw(game, 1, 5, "\t\t\tGAMES :");
+    wrefresh(game);
+
 }

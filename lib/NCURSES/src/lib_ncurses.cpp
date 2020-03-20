@@ -18,33 +18,22 @@ void LibNcurses::closeWindow()
     endwin();
     return;
 }
-static void usage_help(WINDOW *help)
-{
-    mvwprintw(help, 1, 5, "DESCRIPTION :\n The goal of this project is...\n\n How doeas it works ?\n\n Firt choose what category you want.\n\n for starting push ENTER and for quit monitor push \"q\"");
-}
-
-void LibNcurses::display_help()
-{
-    WINDOW *help;
-    help= subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 10);
-    usage_help(help);
-    box(help, ACS_VLINE, ACS_HLINE);
-    wrefresh(help);
-}
 
 void LibNcurses::initWindow()
 {
-    MyWindow ObjectWindow(1000,1000,1000,1000);
-    this->window = ObjectWindow;
+    MyWindow ObjectWindow(0,0,0,0);
+
+    this->window =  ObjectWindow;
+//    refresh();
     noecho();
     keypad(this->window.window, TRUE);
-    nodelay(this->window.window, TRUE);
+ //   nodelay(this->window.window, TRUE);
+    refresh();
 }
 
 int LibNcurses::InitProg()
 {
-    int Input;
-    Input = this->window.MyGetch();
+    return (0);
 }
 
 std::string LibNcurses::Game()
@@ -55,8 +44,48 @@ std::string LibNcurses::Game()
 
 std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
 {
-    display_title();
-    display_help();
+        int choice;
+        std::string choices[2] = { "NIBBLER", "PACMAN" };
+        int highlight = 0;
+    if (has_colors() == FALSE)
+	{	endwin();
+		throw("Your terminal does not support color\n");
+		exit(1);
+	}
+    start_color();
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+     while (choice != 'q') {
+        display_title();
+        display_help();
+        display_game();
+        for (int i = 0; i != 2; i+= 1) {
+            if (i == highlight)
+                wattron(window.window,A_REVERSE);
+                attron(COLOR_PAIR(1));
+            mvwprintw(window.window, i+20, 110, choices[i].c_str());
+        	attroff(COLOR_PAIR(1));
+            wattroff(window.window, A_REVERSE);
+        }
+        choice = wgetch(this->window.window);
+        if (choice == 'q')
+            break;
+        switch (choice) {
+            case KEY_UP:
+                highlight--;
+                if (highlight < 0)
+                    highlight = 0;
+                break;
+            case KEY_DOWN:
+                highlight++;
+                if (highlight > 2)
+                    highlight = 1;
+                break;
+        }
+        refresh();
+     }
+    this->window.clear();
+    endwin();
+    exit(0);
 }
 
 extern "C" LibNcurses *createDisplay() 
