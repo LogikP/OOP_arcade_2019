@@ -32,7 +32,7 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
     sf::Texture texture;
     sf::Sprite logo;
     sf::Texture T_logo;
-    sf::Text QGame;
+   // sf::Text QGame;
     sf::Text Game1;
     sf::Text Game2;
     sf::Font font;
@@ -47,25 +47,25 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
     logo.setTexture(T_logo);
     logo.setPosition(sf::Vector2f(660,0));
 
-    QGame.setString("Choose You're Game");
-    QGame.setFillColor(sf::Color::Green);
-    QGame.setPosition(sf::Vector2f(620, 260));
-    QGame.setFont(font);
-    QGame.setCharacterSize(70);
-    QGame.setStyle(sf::Text::Bold);
+    // QGame.setString("Choose You're Game");
+    // QGame.setFillColor(sf::Color::White);
+    // QGame.setPosition(sf::Vector2f(450, 260));
+    // QGame.setFont(font);
+    // QGame.setCharacterSize(120);
+    // QGame.setStyle(sf::Text::Bold);
 
-//    Game1.setString(Games);
+    Game1.setString(Games.front().second);
     Game1.setFillColor(sf::Color::Green);
-    Game1.setPosition(sf::Vector2f(0, 260));
+    Game1.setPosition(sf::Vector2f(200, 400));
     Game1.setFont(font);
-    Game1.setCharacterSize(70);
+    Game1.setCharacterSize(150);
     Game1.setStyle(sf::Text::Bold);
 
-//    Game2.setString(Games.data.data);
+    Game2.setString(Games.back().second);
     Game2.setFillColor(sf::Color::Green);
-    Game2.setPosition(sf::Vector2f(260, 0));
+    Game2.setPosition(sf::Vector2f(1200, 400));
     Game2.setFont(font);
-    Game2.setCharacterSize(70);
+    Game2.setCharacterSize(150);
     Game2.setStyle(sf::Text::Bold);
 
     sf::Event event;
@@ -80,11 +80,21 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
                     this->window.clear();
                     return "kill";
                 }
+                if (event.key.code == sf::Keyboard::Right)
+                { 
+                    Game2.setFillColor(sf::Color::Blue);
+                    Game1.setFillColor(sf::Color::Green);
+                }
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    Game1.setFillColor(sf::Color::Blue);
+                    Game2.setFillColor(sf::Color::Green);
+                }
             }
         }
         this->window.draw(sprite);
         this->window.draw(logo);
-        this->window.draw(QGame);
+//        this->window.draw(QGame);
         this->window.draw(Game1);
         this->window.draw(Game2);
         this->window.display();
