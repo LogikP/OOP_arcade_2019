@@ -56,10 +56,8 @@ std::vector<std::pair<int, std::string>> GameCore::GetLibName()
     int i = 1;
 
     vec.push_back(std::make_pair(0,this->Libs["IDisplay"]));
-    if (not rep) {
-        std::cout << "Erreur, le dossier n'a pas pu être ouvert." << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    if (not rep)
+        throw(Error("Error, impossible to open the folder"));
     while (true) {
         struct dirent* ent = readdir(rep);
         if (not ent) break;
@@ -81,10 +79,8 @@ std::vector<std::pair<int, std::string>> GameCore::GetGameName()
     DIR* rep = opendir(path.c_str());
     int i = 0;
 
-    if (not rep) {
-        std::cout << "Erreur, le dossier n'a pas pu être ouvert." << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    if (not rep)
+        throw(Error("Error, impossible to open the folder"));
     while (true) {
         struct dirent* ent = readdir(rep);
         if (not ent) break;

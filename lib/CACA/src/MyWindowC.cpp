@@ -13,14 +13,22 @@ MyWindowC::MyWindowC()
     if(!_dp) 
         return;
     _cv = caca_get_canvas(_dp);
-    caca_set_display_title(_dp, "Hello!");
+    caca_set_display_title(_dp, "Arcade");
     caca_set_color_ansi(_cv, CACA_BLACK, CACA_WHITE);
-    caca_put_str(_cv, 0, 0, "This is a message");
-    caca_refresh_display(_dp);
-    caca_get_event(_dp, CACA_EVENT_KEY_PRESS, &_ev, -1);
-    caca_free_display(_dp);
 }
 
 MyWindowC::~MyWindowC()
 {
+    caca_free_display(_dp);
+    caca_free_canvas(_cv);
+}
+
+caca_display_t *MyWindowC::getDisplay()
+{
+    return _dp;
+}
+
+caca_canvas_t *MyWindowC::getCanvas()
+{
+    return _cv;
 }
