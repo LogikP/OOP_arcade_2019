@@ -7,33 +7,38 @@
 
 #include "lib_caca.hpp"
 
-Display::Display() : window()
+libCaca::libCaca() : window()
 {
 
 }
 
-void Display::closeWindow()
+void libCaca::closeWindow()
 {
     return;
 }
 
-int Display::InitProg()
+int libCaca::InitProg()
 {
     return 0;
 }
 
-std::string Display::Game()
+std::string libCaca::Game()
 {
     return "toto";
 }
 
-void Display::initWindow()
+void libCaca::initWindow()
 {
     MyWindowC test;
     this->window = test;
 }
 
-extern "C" Display *createDisplay() 
+std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games)
 {
-    return new Display;
+
+}
+
+extern "C" libCaca *createlibCaca() 
+{
+    return new libCaca;
 }

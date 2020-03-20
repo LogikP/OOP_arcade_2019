@@ -11,6 +11,9 @@
 class MyWindowC {
     private:
     caca_display_t *window;
+    caca_canvas_t *_cv;
+    caca_display_t *_dp;
+    caca_event_t _ev;
 
     public:
         MyWindowC();
