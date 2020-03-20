@@ -8,15 +8,16 @@
 #pragma once
 #include <caca.h>
 
-class MyWindowC {
+class MyWindowC
+{
     private:
     caca_display_t *window;
     caca_canvas_t *_cv;
     caca_display_t *_dp;
-    caca_event_t _ev;
 
     public:
-        MyWindowC();
-        ~MyWindowC();
-
+    MyWindowC();
+    ~MyWindowC();
+    caca_display_t *getDisplay();
+    caca_canvas_t *getCanvas();
 };
