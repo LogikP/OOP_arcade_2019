@@ -29,9 +29,14 @@ class GameCore {
         std::map<std::string, std::string> Libs;
         std::map<std::string, std::string> games;
         std::map<std::string, void*> libToDisplay;
+        std::vector<std::pair<int,std::string>> Libs_names;
+        std::vector<std::pair<int,std::string>> Games_names;
+        
     public:
         GameCore(std::string);
         ~GameCore();
+        std::vector<std::pair<int,std::string>> GetLibName();
+        std::vector<std::pair<int,std::string>> GetGameName();
         bool play();
         template <typename T>
             void getLib();
