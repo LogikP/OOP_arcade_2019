@@ -9,7 +9,7 @@
 
 class Error : public std::exception {
     public:
-        std::string SendMessage() {return _ErrorMessage;}
+        std::string SendMessage() {return _ErrorMessage; exit (84);}
         Error(std::string ErrorMessage) : _ErrorMessage(ErrorMessage) {}
         ~Error() {}
 
