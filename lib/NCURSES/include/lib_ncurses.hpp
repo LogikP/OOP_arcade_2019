@@ -11,16 +11,15 @@
 #include "curses.h"
 #include "MyWindow.hpp"
 
-class Display : public IDisplay
+class LibNcurses : public IDisplay
 {
     private:
         MyWindow window;
     public:
-        Display();
+        LibNcurses();
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
-        std::string Menu();
-
+        std::string Menu() final;
 };
