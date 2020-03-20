@@ -9,15 +9,17 @@
 #include "../../../include/IDisplay.hpp"
 #include "MyWindowC.hpp"
 
-class Display : public IDisplay
+class libCaca : public IDisplay
 {
-    private:
+    protected:
         MyWindowC window;
+
     public:
-        Display();
+
+        libCaca();
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
-        std::string Menu() final;
+        std::string Menu(std::vector<std::pair<int,std::string>>) final;
 };
