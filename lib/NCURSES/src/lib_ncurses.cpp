@@ -18,14 +18,27 @@ void LibNcurses::closeWindow()
     endwin();
     return;
 }
+static void usage_help(WINDOW *help)
+{
+    mvwprintw(help, 1, 5, "DESCRIPTION :\n The goal of this project is...\n\n How doeas it works ?\n\n Firt choose what category you want.\n\n for starting push ENTER and for quit monitor push \"q\"");
+}
+
+void LibNcurses::display_help()
+{
+    WINDOW *help;
+    help= subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 10);
+    usage_help(help);
+    box(help, ACS_VLINE, ACS_HLINE);
+    wrefresh(help);
+}
 
 void LibNcurses::initWindow()
 {
     MyWindow ObjectWindow(1000,1000,1000,1000);
     this->window = ObjectWindow;
-    // if (this->Menu() == "kill")
-    //     exit(0);
-    // return;
+    noecho();
+    keypad(this->window.window, TRUE);
+    nodelay(this->window.window, TRUE);
 }
 
 int LibNcurses::InitProg()
@@ -40,18 +53,13 @@ std::string LibNcurses::Game()
 }
 
 
-std::string LibNcurses::Menu()
+std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
 {
-    //  initscr();
-    //  this->window = subwin(stdscr, 10, 10, LINES / 2, COLS /2);
-    //  //box(this->window, ACS_VLINE, ACS_HLINE); // ACS_VLINE et ACS_HLINE sont des constantes qui génèrent des bordures par défaut
-    //  refresh();
-    //  getch();
-    //  endwin();
-    //  return "kill";
+    display_title();
+    display_help();
 }
 
-extern "C" LibNcurses *createLibNcurses() 
+extern "C" LibNcurses *createDisplay() 
 {
     return new LibNcurses;
 }

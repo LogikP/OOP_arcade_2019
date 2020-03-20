@@ -6,6 +6,7 @@ RM	=	rm -vf
 
 SRCS	= 	./src/lib_ncurses.cpp \
 			./src/MyWindow.cpp \
+			./src/lib_ncurses_menu.cpp
 
 OBJS	=	$(SRCS:.cpp=.o)
 

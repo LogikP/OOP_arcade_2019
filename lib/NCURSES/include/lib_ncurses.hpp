@@ -19,7 +19,9 @@ class LibNcurses : public IDisplay
         LibNcurses();
         void initWindow() final;
         void closeWindow() final;
-        std::string Game() final;
         int InitProg() final;
-        std::string Menu() final;
+        std::string Menu(std::vector<std::pair<int, std::string>>) final;
+        std::string Game() final;
+        void display_title();
+        void display_help();
 };
