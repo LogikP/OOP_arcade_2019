@@ -23,6 +23,6 @@ class libCaca : public IDisplay
         std::string Game() final;
         int InitProg() final;
         std::string Menu(std::vector<std::pair<int,std::string>>) final;
-        int checkEvent(int, int&);
-        void displayGames(int&);
+        int checkEvent(int, int&, int);
+        void displayGames(int&, std::string name);
 };
