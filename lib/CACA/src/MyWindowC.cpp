@@ -5,14 +5,17 @@
 ** MyWindow
 */
 
+#include <iostream>
 #include "MyWindowC.hpp"
 
 MyWindowC::MyWindowC()
 {
-    _dp = caca_create_display(NULL);
-    if(!_dp) 
+    _cv = caca_create_canvas(0, 0);
+    if (!_cv)
         return;
-    _cv = caca_get_canvas(_dp);
+    _dp = caca_create_display(_cv);
+    if(!_dp)
+        return;
     caca_set_display_title(_dp, "Arcade");
     caca_set_color_ansi(_cv, CACA_BLACK, CACA_WHITE);
 }
