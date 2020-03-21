@@ -34,7 +34,7 @@ std::string LibNcurses::Game()
 }
 
 
-std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
+std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games)
 {
     MyWindow ObjectWindow(0,0,0,0);
 
@@ -42,26 +42,22 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
     keypad(this->window.window, TRUE);
     noecho();
     refresh();
-        int choice;
-        std::string choices[2] = { "NIBBLER", "PACMAN" };
-        int highlight = 0;
+    int choice;
+    std::string choices[2] = { "NIBBLER", "PACMAN" };
+    unsigned int highlight = 0;
 
-     while (choice != 'q') {
+    while (choice != 'q') {
         display_title();
         display_help();
         display_game();
-        for (int i = 0; i != 2; i+= 1) {
+        for (unsigned int i = 0; i != games.size(); i+= 1) {
             if (i == highlight) {
                 wattron(window.window,A_REVERSE);
                 wattron(window.window, COLOR_PAIR(3));
             }
-            mvwprintw(window.window, i+20, 110, choices[i].c_str());
+            mvwprintw(window.window, i+30, 133, games[i].second.c_str());
             wattroff(window.window, A_REVERSE);
             wattroff(window.window, COLOR_PAIR(3));
-            // if (i == highlight)
-            //     attron(A_REVERSE);
-            // mvprintw( i + 20, 110, choices[i].c_str());
-            // attroff(A_REVERSE);
         }
         choice = wgetch(this->window.window);
         if (choice == 'q')
@@ -69,13 +65,13 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
         switch (choice) {
             case KEY_UP:
                 highlight--;
-                if (highlight < 0)
+                if (highlight <= games.size() - games.size() - 1)
                     highlight = 0;
                 break;
             case KEY_DOWN:
                 highlight++;
-                if (highlight >= 2)
-                    highlight = 1;
+                if (highlight >= games.size())
+                    highlight--;
                 break;
         }
         refresh();
