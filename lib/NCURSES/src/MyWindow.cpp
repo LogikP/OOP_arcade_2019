@@ -10,7 +10,19 @@
 
 MyWindow::MyWindow(int lines, int colones, int x , int y)
 {
-    initscr();
+    stdscr = initscr();
+    if (has_colors() == FALSE)
+	{	endwin();
+		throw("Your terminal does not support color\n");
+		exit(1);
+	}
+    start_color();
+    use_default_colors();
+    noecho();
+    cbreak();
+    init_pair(1, COLOR_BLUE, -1);
+    init_pair(3, COLOR_GREEN, -1);
+    init_pair(2, COLOR_RED, -1);
     curs_set(0);
     window = newwin(lines, colones, x, y);
     wrefresh(window);

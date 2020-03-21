@@ -21,14 +21,6 @@ void LibNcurses::closeWindow()
 
 void LibNcurses::initWindow()
 {
-    MyWindow ObjectWindow(0,0,0,0);
-
-    this->window =  ObjectWindow;
-//    refresh();
-    noecho();
-    keypad(this->window.window, TRUE);
- //   nodelay(this->window.window, TRUE);
-    refresh();
 }
 
 int LibNcurses::InitProg()
@@ -44,27 +36,32 @@ std::string LibNcurses::Game()
 
 std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
 {
+    MyWindow ObjectWindow(0,0,0,0);
+
+    this->window =  ObjectWindow;
+    keypad(this->window.window, TRUE);
+    noecho();
+    refresh();
         int choice;
         std::string choices[2] = { "NIBBLER", "PACMAN" };
         int highlight = 0;
-    if (has_colors() == FALSE)
-	{	endwin();
-		throw("Your terminal does not support color\n");
-		exit(1);
-	}
-    start_color();
-    init_pair(1, COLOR_RED, COLOR_BLACK);
+
      while (choice != 'q') {
         display_title();
         display_help();
         display_game();
         for (int i = 0; i != 2; i+= 1) {
-            if (i == highlight)
+            if (i == highlight) {
                 wattron(window.window,A_REVERSE);
-                attron(COLOR_PAIR(1));
+                wattron(window.window, COLOR_PAIR(3));
+            }
             mvwprintw(window.window, i+20, 110, choices[i].c_str());
-        	attroff(COLOR_PAIR(1));
             wattroff(window.window, A_REVERSE);
+            wattroff(window.window, COLOR_PAIR(3));
+            // if (i == highlight)
+            //     attron(A_REVERSE);
+            // mvprintw( i + 20, 110, choices[i].c_str());
+            // attroff(A_REVERSE);
         }
         choice = wgetch(this->window.window);
         if (choice == 'q')
@@ -77,7 +74,7 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>>)
                 break;
             case KEY_DOWN:
                 highlight++;
-                if (highlight > 2)
+                if (highlight >= 2)
                     highlight = 1;
                 break;
         }
