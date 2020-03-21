@@ -36,6 +36,7 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
     sf::Text Game1;
     sf::Text Game2;
     sf::Font font;
+    int i = 0;
 
     if (!font.loadFromFile("./asset/Test-Font.ttf"))
         throw(Error("Can't find the Font file"));
@@ -84,14 +85,27 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
                 { 
                     Game2.setFillColor(sf::Color::Blue);
                     Game1.setFillColor(sf::Color::Green);
+                    i = 0;
                 }
                 if (event.key.code == sf::Keyboard::Left)
                 {
                     Game1.setFillColor(sf::Color::Blue);
                     Game2.setFillColor(sf::Color::Green);
+                    i = 1;
+                }
+                if (event.key.code == sf::Keyboard::Enter && i == 0)
+                {
+                    this->window.clear();
+                    return Games.back().second;
+                }
+                else if ( event.key.code == sf::Keyboard::Enter && i == 1)
+                {
+                    this->window.clear();
+                    return Games.front().second;
                 }
             }
         }
+        this->window.clear();
         this->window.draw(sprite);
         this->window.draw(logo);
 //        this->window.draw(QGame);
