@@ -21,6 +21,7 @@ bool GameCore::play()
     std::string PeakGame = this->Display->Menu(this->Games_names);
     if (PeakGame == "kill")
         exit(0);
+    this->Libs["IGame"] = PeakGame;
     while (42)
     {
         this->Display->InitProg();
