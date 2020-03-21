@@ -23,6 +23,7 @@ MyWindow::MyWindow(int lines, int colones, int x , int y)
     init_pair(1, COLOR_BLUE, -1);
     init_pair(3, COLOR_GREEN, -1);
     init_pair(2, COLOR_RED, -1);
+    init_pair(4, COLOR_YELLOW, -1);
     curs_set(0);
     window = newwin(lines, colones, x, y);
     wrefresh(window);

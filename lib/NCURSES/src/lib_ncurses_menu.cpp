@@ -11,49 +11,52 @@
 
 void LibNcurses::display_title()
 {
-
-
-// | |              | || |              | || |              | || |              | || |              | || |              | |
-// | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
-//  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' 
     box(this->window.window, ACS_VLINE, ACS_HLINE);
-    char const *ft_line = " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
-    char const *sd_line = "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
-    char const *trd_line = "| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |";
-    char const *fth_line = "| |     /  \     | || | |_   __ \    | || |   .' ___  |  | || |     /  \     | || | |_   ___ `.  | || | |_   ___  |  | |";
-    char const *sx_line="| |    / /\ \    | || |   | |__) |   | || |  / .'   \_|  | || |    / /\ \    | || |   | |   `. \ | || |   | |_  \_|  | |";
-    char const *sv_line="| |   / ____ \   | || |   |  __ /    | || |  | |         | || |   / ____ \   | || |   | |    | | | || |   |  _|  _   | |";
-    char const *ht_line="| | _/ /    \ \_ | || |  _| |  \ \_  | || |  \ `.___.'\  | || | _/ /    \ \_ | || |  _| |___.' / | || |  _| |___/ |  | |";
-    char const *nn_line="| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |";
-    char const *tn_line="| |              | || |              | || |              | || |              | || |              | || |              | |";
-    char const *elv_line="| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |";
-    char const *twv_line= " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ";
-//    char const *ft_line = " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
-    //char const *sd_line = " | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
-    //char const *trd_line = " | | ____    ____ | || |  ____  ____  | || |              | || |    ______    | || |  ___  ____   | || |  _______     | || |  _________   | || |   _____      | || |   _____      | || | ____    ____ | |";
-/*    char const *fth_line = " | ||_   \\  /   _|| || | |_  _||_  _| | || |              | || |  .' ___  |   | || | |_  ||_  _|  | || | |_   __ \\    | || | |_   ___  |  | || |  |_   _|     | || |  |_   _|     | || ||_   \\  /   _|| |";
-    char const *fft_line = " | |  |   \\/   |  | || |   \\ \\  / /   | || |              | || | / .'   \\_|   | || |   | |_/ /    | || |   | |__) |   | || |   | |_  \\_|  | || |    | |       | || |    | |       | || |  |   \\/   |  | |";
-    char const *sx_line=" | |  | |\\  /| |  | || |    \\ \\/ /    | || |              | || | | |    ____  | || |   |  __'.    | || |   |  __ /    | || |   |  _|  _   | || |    | |   _   | || |    | |   _   | || |  | |\\  /| |  | |";
-    char const *sv_line=" | | _| |_\\/_| |_ | || |    _|  |_    | || |              | || | \\ `.___]  _| | || |  _| |  \\ \\_  | || |  _| |  \\ \\_  | || |  _| |___/ |  | || |   _| |__/ |  | || |   _| |__/ |  | || | _| |_\\/_| |_ | |";
-    char const *ht_line=" | ||_____||_____|| || |   |______|   | || |   _______    | || |  `._____.'   | || | |____||____| | || | |____| |___| | || | |_________|  | || |  |________|  | || |  |________|  | || ||_____||_____|| |";
-    char const *nn_line=" | |              | || |              | || |  |_______|   | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |";
-    char const *tn_line=" | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |";
-    char const *elv_line=" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ";
-*/
+    char const *ft_line= " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
+    char const *sd_line= "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
+    char const *trd_line="| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |";
+    char const *fth_line="| |     /  \\     | || | |_   __ \\    | || |   .' ___  |  | || |     /  \\     | || | |_   ___ `.  | || | |_   ___  |  | |";
+    char const *fft_line="| |    / /\\ \\    | || |   | |__) |   | || |  / .'   \\_|  | || |    / /\\ \\    | || |   | |   `. \\ | || |   | |_  \\_|  | |";
+    char const *sx_line= "| |   / ____ \\   | || |   |  __ /    | || |  | |         | || |   / ____ \\   | || |   | |    | | | || |   |  _|  _   | |";
+    char const *sv_line= "| | _/ /    \\ \\_ | || |  _| |  \\ \\_  | || |  \\ `.___.'\\  | || | _/ /    \\ \\_ | || |  _| |___.' / | || |  _| |___/ |  | |";
+    char const *ht_line= "| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |";
+    char const *nn_line= "| |              | || |              | || |              | || |              | || |              | || |              | |";
+    char const *tn_line= "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |";
+    char const *elv_line=" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ";
+
     wattron(window.window,COLOR_PAIR(2));
-    mvwprintw(this->window.window, 0, (COLS/2) - (202/2), ft_line);
-    mvwprintw(this->window.window, 1, (COLS/2) - (202/2), sd_line);
-    mvwprintw(this->window.window, 2, (COLS/2) - (202/2), trd_line);
-    mvwprintw(this->window.window, 3, (COLS/2) - (202/2), fth_line);
-//    mvwprintw(this->window.window, 4, (COLS/2) - (202/2), fft_line);
-    mvwprintw(this->window.window, 5, (COLS/2) - (202/2), sx_line);
-    mvwprintw(this->window.window, 6, (COLS/2) - (202/2), sv_line);
-    mvwprintw(this->window.window, 7, (COLS/2) - (202/2), ht_line);
-    mvwprintw(this->window.window, 8, (COLS/2) - (202/2), nn_line);
-    mvwprintw(this->window.window, 9, (COLS/2) - (202/2), tn_line);
-    mvwprintw(this->window.window, 10, (COLS/2) - (202/2), elv_line);
-    mvwprintw(this->window.window, 11, (COLS/2) - (202/2), twv_line);
+    mvwprintw(this->window.window, 2, (COLS/2) - (202/2) + 35, ft_line);
     wattroff(window.window, COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 3, (COLS/2) - (202/2) + 35, sd_line);
+    wattroff(window.window, COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 4, (COLS/2) - (202/2) + 35, trd_line);
+    wattroff(window.window,COLOR_PAIR(3));
+    wattron(window.window,COLOR_PAIR(4));
+    mvwprintw(this->window.window, 5, (COLS/2) - (202/2) + 35, fth_line);
+    wattroff(window.window,COLOR_PAIR(4));
+    wattron(window.window,COLOR_PAIR(2));
+    mvwprintw(this->window.window, 6, (COLS/2) - (202/2) + 35, fft_line);
+    wattroff(window.window, COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 7, (COLS/2) - (202/2) + 35, sx_line);
+    wattroff(window.window, COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 8, (COLS/2) - (202/2) + 35, sv_line);
+    wattroff(window.window, COLOR_PAIR(3));
+    wattron(window.window,COLOR_PAIR(4));
+    mvwprintw(this->window.window, 9, (COLS/2) - (202/2) + 35, ht_line);
+    wattroff(window.window,COLOR_PAIR(4));
+    wattron(window.window,COLOR_PAIR(2));
+    mvwprintw(this->window.window, 10, (COLS/2) - (202/2) + 35, nn_line);
+    wattroff(window.window,COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 11, (COLS/2) - (202/2) + 35, tn_line);
+    wattroff(window.window,COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 12, (COLS/2) - (202/2) +35, elv_line);
+    wattroff(window.window,COLOR_PAIR(3));
     wrefresh(this->window.window);
 
 }
