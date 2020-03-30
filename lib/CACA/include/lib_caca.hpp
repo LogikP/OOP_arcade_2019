@@ -13,6 +13,12 @@
 class libCaca : public IDisplay
 {
     protected:
+        enum STATUS {
+            RUN,
+            QUIT,
+            GAME,
+            LIB
+        };
         MyWindowC window;
 
     public:
@@ -22,7 +28,8 @@ class libCaca : public IDisplay
         void closeWindow() final;
         std::string Game() final;
         int InitProg() final;
+        std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Menu(std::vector<std::pair<int,std::string>>) final;
         int checkEvent(int, int&, int);
-        void displayGames(int&, std::string name);
+        void displayGames(std::string name);
 };

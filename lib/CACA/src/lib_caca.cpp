@@ -14,6 +14,8 @@ libCaca::libCaca() : window()
 
 void libCaca::closeWindow()
 {
+    caca_free_display(window.getDisplay());
+    caca_free_canvas(window.getCanvas());
     return;
 }
 
@@ -48,9 +50,14 @@ int libCaca::checkEvent(int quit, int &game, int size)
                 case CACA_KEY_DOWN:
                     game = game + 1 == size ? 0 : game + 1;
                     break;
-                case 'q':
+                case CACA_KEY_RETURN:
+                    quit = quit == GAME ? LIB : GAME;
+                    break;
+                case 'l':
+                    quit = LIB;
+                    break;
                 case CACA_KEY_ESCAPE:
-                    quit = 1;
+                    quit = QUIT;
                     break;
             }
             if (caca_get_event_type(&ev) & CACA_EVENT_QUIT)
@@ -71,7 +78,7 @@ std::string getSquare(int n)
     return tmp;
 }
 
-void libCaca::displayGames(int &game, std::string name)
+void libCaca::displayGames(std::string name)
 {
     int size = name.size() / 2;
     int width = caca_get_canvas_width(window.getCanvas()) - size;
@@ -92,18 +99,45 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games)
     int game = Games[0].first;
     int quit = 0;
 
-    while (!quit) {
+    while (quit != LIB || quit != QUIT) {
         int width = caca_get_canvas_width(window.getCanvas());
         int height = caca_get_canvas_height(window.getCanvas());
-        if ((quit = checkEvent(quit, game, Games.size())) == 1)
+        if ((quit = checkEvent(quit, game, Games.size())) == QUIT)
             return "kill";
+        if (quit == LIB)
+            return "ChangedLib";
         caca_clear_canvas(window.getCanvas());
         caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
         caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");
-        displayGames(game, Games[game].second);
+        displayGames(Games[game].second);
         caca_refresh_display(this->window.getDisplay());
     }
     return "success";
+}
+
+std::string libCaca::MenuLib(std::vector<std::pair<int,std::string>> Lib)
+{
+    int game = Lib[0].first;
+    int quit = 0;
+
+    caca_set_display_title(window.getDisplay(), "Arcade");
+    caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
+    while (!quit) {
+        int width = caca_get_canvas_width(window.getCanvas());
+        int height = caca_get_canvas_height(window.getCanvas());
+        if ((quit = checkEvent(quit, game, Lib.size())) == QUIT)
+            return "kill";
+        if (quit == GAME) {
+            printf("%s\n", Lib[game].second.c_str());
+            return Lib[game].second;
+        }
+        caca_clear_canvas(window.getCanvas());
+        caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
+        caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");
+        displayGames(Lib[game].second);
+        caca_refresh_display(this->window.getDisplay());
+    }
+    return "toto";
 }
 
 extern "C" libCaca *createDisplay() 
