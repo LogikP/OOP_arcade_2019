@@ -15,7 +15,7 @@ class LibNcurses : public IDisplay
 {
     private:
         MyWindow window;
-        WINDOW *_pacman;
+        WINDOW *game;
         WINDOW *_nibbler;
     public:
         LibNcurses();
@@ -23,8 +23,10 @@ class LibNcurses : public IDisplay
         void closeWindow() final;
         int InitProg() final;
         std::string Menu(std::vector<std::pair<int, std::string>>) final;
+        std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Game() final;
         void display_title();
         void display_help();
+        void display_libs();
         void display_game();
 };

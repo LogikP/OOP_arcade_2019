@@ -65,7 +65,7 @@ static void usage_help(WINDOW *help)
 {
     wattron(help,COLOR_PAIR(1));
     mvwprintw(help, 10, 15, "\t\t\t\n\n\n\n\tMove the cursor menu to select a game\n\n\tPress enter to choose a game.\
-    \n\n\tIn Game :\n\n\tKey 2 : move to previous graphical library.\n\n\tFor starting push ENTER and for quit monitor push \"q\"");
+    \n\n\tIn Game :\n\n\tKey l : move to Library menu.\n\n\tFor starting push ENTER and for quit monitor push \"q\"");
     wattroff(help,COLOR_PAIR(1));
 }
 
@@ -119,7 +119,7 @@ void LibNcurses::display_help()
 
 void LibNcurses::display_game()
 {
-    WINDOW *game;
+    //WINDOW *game;
 
     game = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 100);
     wattron(game,COLOR_PAIR(2));
@@ -159,4 +159,47 @@ void LibNcurses::display_game()
     refresh();
     wrefresh(game);
 
+}
+
+void LibNcurses::display_libs()
+{
+    WINDOW *game;
+
+    game = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 100);
+    wattron(game,COLOR_PAIR(2));
+    box(game, ACS_VLINE, ACS_HLINE);
+    wattroff(game,COLOR_PAIR(2));
+    wrefresh(game);
+
+    char const *ft_line= "  _      _____ ____   _____ ";
+    char const *sd_line= " | |    |_   _|  _ \\ / ____|";
+    char const *trd_line=" | |      | | | |_) | (___  ";
+    char const *fth_line=" | |      | | |  _ < \\___ \\ ";
+    char const *fft_line=" | |____ _| |_| |_) |____) |";
+    char const *sx_line= " |______|_____|____/|_____/ ";
+    char const *sv_line= "                            ";
+
+    wattron(game,COLOR_PAIR(2));
+    mvwprintw(game, 2, (COLS/2) - (202/2) + 15, ft_line);
+    wattroff(game, COLOR_PAIR(2));
+    wattron(game,COLOR_PAIR(1));
+    mvwprintw(game, 3, (COLS/2) - (202/2) + 15, sd_line);
+    wattroff(game, COLOR_PAIR(1));
+    wattron(game,COLOR_PAIR(3));
+    mvwprintw(game, 4, (COLS/2) - (202/2) + 15, trd_line);
+    wattroff(game,COLOR_PAIR(3));
+    wattron(game,COLOR_PAIR(4));
+    mvwprintw(game, 5, (COLS/2) - (202/2) + 15, fth_line);
+    wattroff(game,COLOR_PAIR(4));
+    wattron(game,COLOR_PAIR(2));
+    mvwprintw(game, 6, (COLS/2) - (202/2) + 15, fft_line);
+    wattroff(game, COLOR_PAIR(2));
+    wattron(game,COLOR_PAIR(1));
+    mvwprintw(game, 7, (COLS/2) - (202/2) + 15, sx_line);
+    wattroff(game, COLOR_PAIR(1));
+    wattron(game,COLOR_PAIR(3));
+    mvwprintw(game, 8, (COLS/2) - (202/2) + 15, sv_line);
+    wattroff(game, COLOR_PAIR(3));
+    refresh();
+    wrefresh(game);
 }
