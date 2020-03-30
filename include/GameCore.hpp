@@ -22,6 +22,9 @@
 #include "IDisplay.hpp"
 #include "Error.hpp"
 
+typedef IGame *(*createGame)();
+typedef IDisplay *(*createDisplay)();
+
 class GameCore {
     private:
         IDisplay *Display;
@@ -44,4 +47,9 @@ class GameCore {
 		    T *createObject(void* library);
         template <typename T>
             void setLibIdx();
+        template <typename T>
+            T *setNewLib(std::string, std::string);
+        std::string NewMenu(std::string Lib);
+        std::string NewMenuLib();
+        std::vector<std::pair<int, std::string>> SelectLib();
 };
