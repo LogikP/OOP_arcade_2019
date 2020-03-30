@@ -9,6 +9,18 @@
 
 void LibSfml::initWindow()
 {
+    this->window.clear();
+    sf::Texture t_Background;
+    sf::Sprite s_Background;
+
+    if (!t_Background.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
+        throw(Error("Can't find the Asset file"));
+    s_Background.setTexture(t_Background);   
+    while (this->window.isOpen())
+    {
+        this->window.draw(s_Background);
+        this->window.display();
+    }
     // if (this->Menu() == "kill") {
     //     this->closeWindow();
     //     exit(0);
@@ -24,6 +36,102 @@ LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, Vid
 // {
 //     this->window.draw(sprite);
 // }
+
+sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Font font, sf::Vector2f vector2f)
+{
+    sf::Text tmp;
+    
+    tmp.setString(Vector[i].second);
+    tmp.setFillColor(sf::Color::Green);
+    tmp.setPosition(vector2f);
+    tmp.setFont(font);
+    tmp.setCharacterSize(150);
+    tmp.setStyle(sf::Text::Bold);
+    return tmp;
+}
+
+std::string LibSfml::MenuLib(std::vector<std::pair<int, std::string>> Libs)
+{
+    this->window.clear();
+    sf::Sprite sprite;
+    sf::Texture texture;
+    sf::Sprite logo;
+    sf::Texture T_logo;
+    sf::Text Lib1;
+    sf::Text Lib2;
+    sf::Text Lib3;
+    sf::Font font;
+    sf::Event event;
+    int i = 0;
+
+    if (!font.loadFromFile("./asset/Test-Font.ttf"))
+        throw(Error("Can't find the Font file"));
+    if (!texture.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
+        throw(Error("Can't find the Asset file"));
+    if (!T_logo.loadFromFile("./asset/test-logo.png", sf::IntRect(0, 0, 600, 400)))
+        throw(Error("Can't find the Asset file"));
+    sprite.setTexture(texture);
+    logo.setTexture(T_logo);
+    logo.setPosition(sf::Vector2f(660,0));
+
+    Lib1.setString(Libs[0].second);
+    Lib1.setFillColor(sf::Color::Green);
+    Lib1.setPosition(sf::Vector2f(200, 400));
+    Lib1.setFont(font);
+    Lib1.setCharacterSize(150);
+    Lib1.setStyle(sf::Text::Bold);
+
+    Lib2.setString(Libs[1].second);
+    Lib2.setFillColor(sf::Color::Green);
+    Lib2.setPosition(sf::Vector2f(1200, 400));
+    Lib2.setFont(font);
+    Lib2.setCharacterSize(150);
+    Lib2.setStyle(sf::Text::Bold);
+
+    while (window.isOpen())
+    {
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    this->window.clear();
+                    return "kill";
+                }
+                if (event.key.code == sf::Keyboard::Right)
+                {
+                    Lib2.setFillColor(sf::Color::Blue);
+                    Lib1.setFillColor(sf::Color::Green);
+                    i = 0;
+                }
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    Lib1.setFillColor(sf::Color::Blue);
+                    Lib2.setFillColor(sf::Color::Green);
+                    i = 1;
+                }
+                if (event.key.code == sf::Keyboard::Enter && i == 0)
+                {
+                    this->window.clear();
+                    return Libs[1].second;
+                }
+                if ( event.key.code == sf::Keyboard::Enter && i == 1)
+                {
+                    this->window.clear();
+                    return Libs[0].second;
+                }
+            }
+        }
+        this->window.clear();
+        this->window.draw(sprite);
+        this->window.draw(logo);
+        this->window.draw(Lib1);
+        this->window.draw(Lib2);
+        this->window.display();
+    }
+    return "toto";
+}
 
 std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
 {
@@ -54,7 +162,9 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
     // QGame.setFont(font);
     // QGame.setCharacterSize(120);
     // QGame.setStyle(sf::Text::Bold);
-
+    // Game1 = Test->getText();
+   // Game1 = Test->getText();
+//    Game1 = InitText(Games, 0, font, sf::Vector2f(200, 400));
     Game1.setString(Games.front().second);
     Game1.setFillColor(sf::Color::Green);
     Game1.setPosition(sf::Vector2f(200, 400));
@@ -93,6 +203,8 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
                     Game2.setFillColor(sf::Color::Green);
                     i = 1;
                 }
+                if (event.key.code == sf::Keyboard::L)
+                    return "ChangedLib";
                 if (event.key.code == sf::Keyboard::Enter && i == 0)
                 {
                     this->window.clear();

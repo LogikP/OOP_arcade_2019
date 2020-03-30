@@ -62,6 +62,12 @@ std::string GameCore::NewMenuLib()
 
 bool GameCore::play()
 {
+    //char *error;
+    // for(auto elem : Libs)
+    // {
+    //     std::cout << elem.first << " " << elem.second << std::endl;
+    // }
+
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     std::string PeakGame = this->Display->Menu(this->Games_names);
     while (PeakGame == "ChangedLib")

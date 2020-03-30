@@ -23,5 +23,6 @@ class LibSfml : public IDisplay
         std::string Game() final;
         int InitProg() final;
         void DrawSprite(sf::Sprite);
+        std::string MenuLib(std::vector<std::pair<int,std::string>>) final;
         std::string Menu(std::vector<std::pair<int,std::string>>) final;
 };
