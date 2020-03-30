@@ -166,8 +166,6 @@ GameCore::GameCore(std::string libPath)
         throw(Error(dlerror()));
     dlerror();
     this->Libs["IDisplay"] = getNameFromLibrary(libPath);
-    // this->Libs["IDisplay"] = libPath.substr(libPath.find_last_of('_') + 1,
-    // libPath.find_last_of('.') - libPath.find_last_of('_') - 1);
     this->Libs_names = GetLibName();
     this->Games_names = GetGameName();
 }
