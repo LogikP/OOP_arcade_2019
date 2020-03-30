@@ -7,11 +7,8 @@
 
 #include "GameCore.hpp"
 
-typedef IGame *(*createGame)();
-typedef IDisplay *(*createDisplay)();
-
 template <>
-IDisplay *GameCore::createObject<IDisplay>(void* library) 
+IDisplay *GameCore::createObject<IDisplay>(void* library)
 {
     char *error;
     createDisplay createMyObject = (createDisplay)(dlsym(library, "createDisplay"));
@@ -24,7 +21,7 @@ IDisplay *GameCore::createObject<IDisplay>(void* library)
 }
 
 template <>
-IGame *GameCore::createObject<IGame>(void* game) 
+IGame *GameCore::createObject<IGame>(void* game)
 {
     char *error;
     createGame createMyObject = (createGame)dlsym(game, "createGame");
