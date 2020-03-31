@@ -32,4 +32,3 @@ IGame *GameCore::createObject<IGame>(void* game)
     }
     return (createMyObject());
 }
-
