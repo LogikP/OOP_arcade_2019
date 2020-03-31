@@ -120,7 +120,7 @@ std::vector<std::pair<int, std::string>> GameCore::GetLibName()
         struct dirent* ent = readdir(rep);
         if (not ent) break;
         name = ent->d_name;
-       name = name.substr(name.find_last_of('_') + 1, 
+       name = name.substr(name.find_last_of('_') + 1,
            name.find_last_of('.') - name.find_last_of('_') - 1);
         if (CheckIfLib(ent->d_name) == 1 && name.compare(vec[0].second) != 0) {
             vec.push_back(std::make_pair(i, name));
@@ -150,14 +150,22 @@ std::vector<std::pair<int, std::string>> GameCore::GetGameName()
     return (vec);
 }
 
+std::string GameCore::getNameFromLibrary(std::string str)
+{
+    std::string tmp;
+    tmp = str.substr(str.find_last_of('_') + 1,
+    str.find_last_of('.') - str.find_last_of('_') - 1);
+    std::cout<<tmp<<std::endl;
+    return tmp;
+}
+
 GameCore::GameCore(std::string libPath)
 {
     this->libToDisplay["IDisplay"] = dlopen(libPath.c_str(), RTLD_NOW);
     if (!this->libToDisplay["IDisplay"])
         throw(Error(dlerror()));
     dlerror();
-    this->Libs["IDisplay"] = libPath.substr(libPath.find_last_of('_') + 1, 
-    libPath.find_last_of('.') - libPath.find_last_of('_') - 1);
+    this->Libs["IDisplay"] = getNameFromLibrary(libPath);
     this->Libs_names = GetLibName();
     this->Games_names = GetGameName();
 }

@@ -34,7 +34,7 @@ class GameCore {
         std::map<std::string, void*> libToDisplay;
         std::vector<std::pair<int,std::string>> Libs_names;
         std::vector<std::pair<int,std::string>> Games_names;
-        
+
     public:
         GameCore(std::string);
         ~GameCore();
@@ -52,4 +52,5 @@ class GameCore {
         std::string NewMenu(std::string Lib);
         std::string NewMenuLib();
         std::vector<std::pair<int, std::string>> SelectLib();
+        std::string getNameFromLibrary(std::string);
 };

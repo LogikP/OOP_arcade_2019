@@ -5,3 +5,12 @@
 ** pacman
 */
 
+#include "pacman.hpp"
+
+pacman::pacman(/* args */)
+{
+}
+
+pacman::~pacman()
+{
+}
