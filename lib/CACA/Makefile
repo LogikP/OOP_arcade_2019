@@ -5,6 +5,7 @@ CXX	=	g++ -g3 -fPIC
 RM	=	rm -vf
 
 SRCS	= 	./src/lib_caca.cpp	\
+			./src/menu_lib.cpp	\
 			./src/MyWindowC.cpp \
 
 OBJS	=	$(SRCS:.cpp=.o)
