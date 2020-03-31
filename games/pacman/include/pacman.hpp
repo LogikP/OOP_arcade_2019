@@ -16,6 +16,6 @@ class pacman : public IGame
         pacman();
         std::string getName() const final;
         std::vector<std::string> getMap() const final;
-        int SendEvent(int, int) final;
+        int ReceiveEvent(int, int) final;
         void saveGame(std::string) final;
 };

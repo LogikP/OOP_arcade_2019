@@ -21,7 +21,7 @@ std::vector<std::string> pacman::getMap() const
 {
 }
 
-int pacman::SendEvent(int key, int toto)
+int pacman::ReceiveEvent(int key, int toto)
 {
     return 0;
 }
