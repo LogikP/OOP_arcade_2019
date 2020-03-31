@@ -14,17 +14,16 @@ pacman::pacman()
 
 std::string pacman::getName() const
 {
-
+    return "toto";
 }
 
 std::vector<std::string> pacman::getMap() const
 {
-
 }
 
-int pacman::SendEvent(int key, int toto)
+int pacman::ReceiveEvent(int key, int toto)
 {
-
+    return 0;
 }
 
 void pacman::saveGame(std::string map)
@@ -33,7 +32,7 @@ void pacman::saveGame(std::string map)
 }
 
 //// For the dlsym Symbol /////
-extern "C" pacman *createDisplay()
+extern "C" pacman *createGame()
 {
     return new pacman;
 }

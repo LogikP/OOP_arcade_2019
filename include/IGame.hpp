@@ -14,6 +14,6 @@ class IGame {
         virtual ~IGame() {}
         virtual std::string getName() const = 0;
         virtual std::vector<std::string> getMap() const = 0;
-        virtual int SendEvent(int, int) = 0;
+        virtual int ReceiveEvent(int, int) = 0;
         virtual void saveGame(std::string) = 0;
 };

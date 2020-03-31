@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME	=	lib_arcade_pacman.so
+NAME	=	../lib_arcade_pacman.so
 
 CXX	=	g++ -g3 -fPIC -Iinclude -rdynamic
 

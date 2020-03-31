@@ -60,6 +60,23 @@ std::string GameCore::NewMenuLib()
         return "Kill";
 }
 
+std::string GameCore::madeFormatLib(std::string str, std::string repo)
+{
+    std::string tmp;
+    if (repo == "lib") {
+        tmp = "./lib/lib_arcade_" + str + ".so";
+        std::cout << tmp << std::endl;
+        return tmp;
+    }
+    else if (repo == "games") {
+        tmp = "./games/lib_arcade_" + str + ".so";
+        std::cout << tmp << std::endl;
+        return tmp;
+    }
+    else
+        return NULL;
+}
+
 bool GameCore::play()
 {
     //char *error;
@@ -75,6 +92,9 @@ bool GameCore::play()
     if (PeakGame == "kill")
         return false;
     this->Libs["IGame"] = PeakGame;
+    std::string tmp = madeFormatLib(PeakGame, "games");
+    this->libToDisplay["IGame"] = dlopen(tmp.c_str(), RTLD_NOW);
+    this->Game = createObject<IGame>(this->libToDisplay["IGame"]);
     this->Display->initWindow();
     while (42)
     {
@@ -134,6 +154,7 @@ std::vector<std::pair<int, std::string>> GameCore::GetGameName()
 {
     std::vector<std::pair<int, std::string>> vec;
     std::string path = "./games/";
+    std::string name;
     DIR* rep = opendir(path.c_str());
     int i = 0;
 
@@ -142,9 +163,17 @@ std::vector<std::pair<int, std::string>> GameCore::GetGameName()
     while (true) {
         struct dirent* ent = readdir(rep);
         if (not ent) break;
-        if (ent->d_name[0] != '.') {
-            vec.push_back(std::make_pair(i, ent->d_name));
+        name = ent->d_name;
+        name = name.substr(name.find_last_of('_') + 1,
+           name.find_last_of('.') - name.find_last_of('_') - 1);
+        if (CheckIfLib(ent->d_name) == 1) {
+            vec.push_back(std::make_pair(i, name));
             i++;
+        // if (not ent) break;
+        // if (ent->d_name[0] != '.') {
+        //     vec.push_back(std::make_pair(i, ent->d_name));
+        //     i++;
+        // }
         }
     }
     return (vec);

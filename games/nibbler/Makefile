@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME	=	lib_arcade_nibbler.so
+NAME	=	../lib_arcade_nibbler.so
 
 CXX	=	g++ -g3 -fPIC -Iinclude -rdynamic
 
