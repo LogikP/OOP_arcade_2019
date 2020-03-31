@@ -7,10 +7,7 @@
 
 #include "pacman.hpp"
 
-pacman::pacman(/* args */)
+pacman::pacman()
 {
-}
 
-pacman::~pacman()
-{
 }
