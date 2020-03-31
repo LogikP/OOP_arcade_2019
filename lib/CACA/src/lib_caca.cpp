@@ -19,20 +19,6 @@ void libCaca::closeWindow()
     return;
 }
 
-int libCaca::InitProg()
-{
-    return 0;
-}
-
-std::string libCaca::Game()
-{
-    return "toto";
-}
-
-void libCaca::initWindow()
-{
-}
-
 int libCaca::checkEventMenu(int quit, int &game, int size)
 {
     caca_event_t ev;
@@ -99,6 +85,8 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games)
     int game = Games[0].first;
     int quit = 0;
 
+    caca_set_display_title(window.getDisplay(), "Arcade");
+    caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
     while (quit != LIB || quit != QUIT) {
         int width = caca_get_canvas_width(window.getCanvas());
         int height = caca_get_canvas_height(window.getCanvas());
