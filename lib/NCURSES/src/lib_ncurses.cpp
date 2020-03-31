@@ -72,7 +72,7 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games)
                 if (highlight >= games.size())
                     highlight--;
                 break;
-            case 27:
+            case 10:
                 wclear(window.window);
                 wrefresh(window.window);
                 return (games[highlight].second);
@@ -129,7 +129,7 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
                 if (highlight >= libs.size())
                     highlight--;
                 break;
-            case 27:
+            case 10:
                 wclear(window.window);
                 wrefresh(window.window);
                 return (libs[highlight].second);
