@@ -44,14 +44,30 @@ void LibNcurses::initWindow()
     getmaxyx(stdscr, ymax, xmax);*/
 }
 
+void LibNcurses::PrintMap(std::vector<std::string> map)
+{
+    for (unsigned int i = 0; i != map.size(); i++) {
+        for (int a = 0; map[i][a] != '\n' && map[i][a]; a++) {
+            if (map[i][a] == 'W') {
+                wattron(window.window, COLOR_PAIR(2));
+                mvwaddch(window.window,i + 15, a + 80, map[i][a]);
+                wattroff(window.window, COLOR_PAIR(2));
+            } else
+                mvwaddch(window.window,i, a, map[i][a]);
+        }
+            
+    }
+}
+
 int LibNcurses::InitProg(std::vector<std::string> map)
 {
     int choice;
     unsigned int highlight = 0;
 
     while (choice != 'q') {
-        for (int i = 0; i != map.size(); i++)
-            mvwprintw(window.window,i, 0, map[i].c_str());
+     //   for (int i = 0; i != map.size(); i++)
+       //     mvwprintw(window.window,i, 0, map[i].c_str());
+        PrintMap(map);
         choice = wgetch(this->window.window);
     }
     wclear(window.window);
