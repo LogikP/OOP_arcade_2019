@@ -27,7 +27,8 @@ void LibNcurses::initWindow()
     int xmax;
     int ymax;
     int choice;
-
+//    for (int i = 0; i != map.size(); i++)
+ //       mvprintw(i, 0, map[i]);
 //    getMap();
 //    keypad(this->window.window, TRUE);
 //    noecho();

@@ -5,6 +5,10 @@
 ** nibbler
 */
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
 #include "nibbler.hpp"
 
 nibbler::nibbler()
@@ -35,6 +39,20 @@ std::string nibbler::getName() const
 
 std::vector<std::string> nibbler::getMap() const
 {
+    std::vector<std::string> map;
+    std::ifstream in("nibbler-map.txt");
+    std::string str;
+
+    if (!in)
+        std::cerr << "Cannot open the File : " << "nibbler-map.txt"<<std::endl;
+    while (std::getline(in, str)) {
+        if(str.size() > 0)
+            map.push_back(str);
+    }
+    in.close();
+  //      std::cout << map[0] << '\n'<< std::ends;
+    //    std::cout << map[1] << '\n'<< std::ends;
+    return (map);
 }
 
 int nibbler::ReceiveEvent(int key, int toto)
