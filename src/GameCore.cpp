@@ -65,12 +65,12 @@ std::string GameCore::madeFormatLib(std::string str, std::string repo)
     std::string tmp;
     if (repo == "lib") {
         tmp = "./lib/lib_arcade_" + str + ".so";
-        std::cout << tmp << std::endl;
+//        std::cout << tmp << std::endl;
         return tmp;
     }
     else if (repo == "games") {
         tmp = "./games/lib_arcade_" + str + ".so";
-        std::cout << tmp << std::endl;
+//        std::cout << tmp << std::endl;
         return tmp;
     }
     else
@@ -184,7 +184,7 @@ std::string GameCore::getNameFromLibrary(std::string str)
     std::string tmp;
     tmp = str.substr(str.find_last_of('_') + 1,
     str.find_last_of('.') - str.find_last_of('_') - 1);
-    std::cout<<tmp<<std::endl;
+//    std::cout<<tmp<<std::endl;
     return tmp;
 }
 
