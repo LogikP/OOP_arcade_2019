@@ -30,7 +30,7 @@ int libCaca::checkEventGame(int quit)
     return quit;
 }
 
-int libCaca::InitProg(std::vector<std::string> map)
+void libCaca::InitProg(std::vector<std::string> map)
 {
     int quit = 0;
 
@@ -45,7 +45,7 @@ int libCaca::InitProg(std::vector<std::string> map)
                 } else if (map[i][j] == 'W') {
                     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
                     caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
-                    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);    
+                    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
                 } else
                     caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
             }
@@ -55,7 +55,17 @@ int libCaca::InitProg(std::vector<std::string> map)
             break;
     }
     exit(0);
-    return 0;
+    return;
+}
+
+int libCaca::getEventGame()
+{
+
+}
+
+int libCaca::getEventCore()
+{
+
 }
 
 std::string libCaca::Game()

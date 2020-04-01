@@ -247,10 +247,19 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     return "success";
 }
 
-int LibSfml::InitProg(std::vector<std::string> map)
+void LibSfml::InitProg(std::vector<std::string> map)
 {
     this->_map = map;
+}
+
+int LibSfml::getEventCore()
+{
     return 0;
+}
+
+int LibSfml::getEventGame()
+{
+
 }
 
 std::string LibSfml::Game()

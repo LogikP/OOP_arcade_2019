@@ -110,8 +110,16 @@ bool GameCore::play()
     while (42)
     {
         std::vector<std::string> map = this->Game->getMap();
-        int key = 0;
-        key = this->Display->InitProg(map);
+
+        this->Display->InitProg(map);
+        this->keyCore = this->Display->getEventCore();
+        if (this->keyCore != 0)
+        {
+            ////endl event core
+        }
+        this->keyGame = this->Display->getEventGame();
+        this->Game->ReceiveEvent(this->keyGame, 0);
+//        this->Game->ReceiveEvent(key, 0);
 
     }
     return true;

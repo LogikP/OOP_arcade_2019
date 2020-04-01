@@ -34,6 +34,8 @@ class GameCore {
         std::map<std::string, void*> libToDisplay;
         std::vector<std::pair<int,std::string>> Libs_names;
         std::vector<std::pair<int,std::string>> Games_names;
+        int keyCore = 0;
+        int keyGame = 0;
 
     public:
         GameCore(std::string);
