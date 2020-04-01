@@ -35,7 +35,8 @@ std::string GameCore::NewMenu(std::string Lib)
 
     this->Display->closeWindow();
     this->Display = this->setNewLib<IDisplay>("IDisplay", Lib);
-    PeakGame = this->Display->Menu(this->Games_names);
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    PeakGame = this->Display->Menu(this->Games_names, libs_name);
     return PeakGame;
 }
 
@@ -43,10 +44,9 @@ std::string GameCore::NewMenuLib()
 {
     std::string PeakLib;
     std::string PeakGame;
-    std::vector<std::pair<int, std::string>>tmp = this->SelectLib();
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
 
-
-    PeakLib = this->Display->MenuLib(tmp);
+    PeakLib = this->Display->MenuLib(libs_name);
     // for(auto elem : this->Libs)
     // {
     //     std::cout << elem.first << " " << elem.second << std::endl;
@@ -86,7 +86,8 @@ bool GameCore::play()
     // }
 
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
-    std::string PeakGame = this->Display->Menu(this->Games_names);
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
     while (PeakGame == "ChangedLib")
         PeakGame = NewMenuLib();
     if (PeakGame == "kill")
