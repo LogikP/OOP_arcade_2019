@@ -21,7 +21,10 @@ class libCaca : public IDisplay
         };
         MyWindowC window;
 
+        int getNextLibC(std::vector<std::pair<int, std::string>>);
+        int getPrevLibC(std::vector<std::pair<int, std::string>>);
         int checkEventMenu(int, int&, int&, int,  std::vector<std::pair<int, std::string>>);
+        int checkEventGame(int);
         int checkEventMenuLib(int, int&, int);
         void displayNameGames(std::string name);
 
@@ -31,7 +34,7 @@ class libCaca : public IDisplay
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
-        int InitProg() final;
+        int InitProg(std::vector<std::string>) final;
         std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>);
 };
