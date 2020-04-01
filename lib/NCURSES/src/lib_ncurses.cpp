@@ -74,7 +74,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i;
     for (i = 0; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
-    return libs[i - 1].second;
+    return libs[i].second;
 }
 
 std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)

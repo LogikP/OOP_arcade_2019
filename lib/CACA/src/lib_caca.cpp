@@ -48,15 +48,15 @@ void libCaca::displayNameGames(std::string name)
 
 int getNextLibC(std::vector<std::pair<int, std::string>> libs)
 {
-    int i;
-    for (i = 0; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
-    return libs.size() == 0 ? 0 : libs[i - 1].first;
+    int i = 0;
+    for (; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
+    return libs.size() == 0 ? 0 : libs[i].first;
 }
 
 int getPrevLibC(std::vector<std::pair<int, std::string>> libs)
 {
-    int i;
-    for (i = libs.size() - 1; i > 0 && libs[i].second.compare("caca") >= 0; i--);
+    int i = libs.size() - 1;
+    for (; i > 0 && libs[i].second.compare("caca") >= 0; i--);
     return libs.size() == 0 ? 0 : libs[i].first;
 }
 
