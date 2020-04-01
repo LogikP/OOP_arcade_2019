@@ -46,14 +46,14 @@ void libCaca::displayNameGames(std::string name)
     caca_put_str(window.getCanvas(), (width / 2 - size), (height / 2) + 1, square.c_str());
 }
 
-int libCaca::getNextLibC(std::vector<std::pair<int, std::string>> libs)
+int libCaca::getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
     return libs.size() == 0 ? 0 : libs[i].first;
 }
 
-int libCaca::getPrevLibC(std::vector<std::pair<int, std::string>> libs)
+int libCaca::getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("caca") >= 0; i--);

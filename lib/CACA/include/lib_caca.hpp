@@ -21,8 +21,8 @@ class libCaca : public IDisplay
         };
         MyWindowC window;
 
-        int getNextLibC(std::vector<std::pair<int, std::string>>);
-        int getPrevLibC(std::vector<std::pair<int, std::string>>);
+        int getNextLib(std::vector<std::pair<int, std::string>>);
+        int getPrevLib(std::vector<std::pair<int, std::string>>);
         int checkEventMenu(int, int&, int&, int,  std::vector<std::pair<int, std::string>>);
         int checkEventGame(int);
         int checkEventMenuLib(int, int&, int);

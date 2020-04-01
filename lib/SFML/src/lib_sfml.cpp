@@ -137,7 +137,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("sfml") <= 0; i++);
-    i = i == (int)libs.size() ? i - 1 : i;
+    i = i == (int)libs.size() ? 0 : i;
     return libs[i].second;
 }
 
