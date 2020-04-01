@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2020
+** arcade
+** File description:
+** menu_lib
+*/
+
 #include "lib_caca.hpp"
 
 int libCaca::checkEventMenuLib(int quit, int &game, int size)

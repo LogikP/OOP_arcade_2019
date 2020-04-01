@@ -22,7 +22,7 @@ class LibNcurses : public IDisplay
         void initWindow() final;
         void closeWindow() final;
         int InitProg() final;
-        std::string Menu(std::vector<std::pair<int, std::string>>) final;
+        std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>);
         std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Game() final;
         void display_title();

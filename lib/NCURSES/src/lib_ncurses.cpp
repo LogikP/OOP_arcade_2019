@@ -71,7 +71,7 @@ std::string LibNcurses::Game()
 }
 
 
-std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games)
+std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std::vector<std::pair<int, std::string>> libs)
 {
     MyWindow ObjectWindow(0,0,0,0);
 
@@ -112,13 +112,27 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games)
                 wrefresh(window.window);
                 return (games[highlight].second);
                 break;
-            case 108:
+            case 'n':
+            case 'N':
                 wclear(game);
                 wrefresh(game);
                 wclear(window.window);
                 wrefresh(window.window);
-                return ("ChangedLib");
-                break;
+                return (libs[0].second);
+            case 'l':
+            case 'L':
+                wclear(game);
+                wrefresh(game);
+                wclear(window.window);
+                wrefresh(window.window);
+                return "ChangedLib";
+            case 'p':
+            case 'P':
+                wclear(game);
+                wrefresh(game);
+                wclear(window.window);
+                wrefresh(window.window);
+                return (libs[libs.size() - 1].second);
         }
         refresh();
      }

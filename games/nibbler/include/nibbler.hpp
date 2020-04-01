@@ -17,6 +17,7 @@ class nibbler : public IGame
        // int xmax;
     public:
         nibbler();
+        void InitMap() final;
      //   int GetNibblerSize();
    //     std::vector<std::pair<int,int>> GetNibblerBody();
         std::string getName() const final;

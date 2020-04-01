@@ -18,6 +18,6 @@ class IDisplay {
         virtual void closeWindow() = 0;
         virtual int InitProg() = 0;
         virtual std::string MenuLib(std::vector<std::pair<int, std::string>>) = 0;
-        virtual std::string Menu(std::vector<std::pair<int, std::string>>) = 0;
+        virtual std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>) = 0;
         virtual std::string Game() = 0;
 };

@@ -12,6 +12,11 @@ pacman::pacman()
 
 }
 
+void pacman::InitMap()
+{
+
+}
+
 std::string pacman::getName() const
 {
     return "toto";

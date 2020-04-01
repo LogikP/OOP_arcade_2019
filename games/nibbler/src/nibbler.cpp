@@ -23,6 +23,11 @@ std::vector<std::pair<int,int>> nibbler::GetNibblerBody()
     return (_NibblerBody);
 }*/
 
+void nibbler::InitMap()
+{
+
+}
+
 std::string nibbler::getName() const
 {
     return "toto";

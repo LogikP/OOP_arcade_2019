@@ -133,7 +133,7 @@ std::string LibSfml::MenuLib(std::vector<std::pair<int, std::string>> Libs)
     return "toto";
 }
 
-std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
+std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::vector<std::pair<int, std::string>> Libs)
 {
     this->window.clear();
     sf::Sprite sprite;
@@ -203,8 +203,12 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games)
                     Game2.setFillColor(sf::Color::Green);
                     i = 1;
                 }
+                if (event.key.code == sf::Keyboard::N)
+                    return Libs[0].second;
                 if (event.key.code == sf::Keyboard::L)
                     return "ChangedLib";
+                if (event.key.code == sf::Keyboard::P)
+                    return Libs[Libs.size() - 1].second;
                 if (event.key.code == sf::Keyboard::Enter && i == 0)
                 {
                     this->window.clear();

@@ -35,7 +35,8 @@ std::string GameCore::NewMenu(std::string Lib)
 
     this->Display->closeWindow();
     this->Display = this->setNewLib<IDisplay>("IDisplay", Lib);
-    PeakGame = this->Display->Menu(this->Games_names);
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    PeakGame = this->Display->Menu(this->Games_names, libs_name);
     return PeakGame;
 }
 
@@ -43,10 +44,9 @@ std::string GameCore::NewMenuLib()
 {
     std::string PeakLib;
     std::string PeakGame;
-    std::vector<std::pair<int, std::string>>tmp = this->SelectLib();
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
 
-
-    PeakLib = this->Display->MenuLib(tmp);
+    PeakLib = this->Display->MenuLib(libs_name);
     // for(auto elem : this->Libs)
     // {
     //     std::cout << elem.first << " " << elem.second << std::endl;
@@ -77,6 +77,14 @@ std::string GameCore::madeFormatLib(std::string str, std::string repo)
         return NULL;
 }
 
+int isGame(std::string peakGame, std::vector<std::pair<int, std::string>> names)
+{
+    for (int i = 0; i < (int)names.size(); i++)
+        if (peakGame.compare(names[i].second.c_str()) == 0)
+            return 1;
+    return 0;
+}
+
 bool GameCore::play()
 {
     //char *error;
@@ -86,9 +94,13 @@ bool GameCore::play()
     // }
 
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
-    std::string PeakGame = this->Display->Menu(this->Games_names);
-    while (PeakGame == "ChangedLib")
-        PeakGame = NewMenuLib();
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
+    this->Libs["IDisplay"] = PeakGame;
+    while ((isGame(PeakGame, this->Games_names) == 0 && PeakGame != "kill") || PeakGame == "ChangedLib") {
+        this->Libs["IDisplay"] = PeakGame;
+        PeakGame = PeakGame == "ChangedLib" ? NewMenuLib() : NewMenu(PeakGame);
+    }
     if (PeakGame == "kill")
         return false;
     this->Libs["IGame"] = PeakGame;
@@ -184,7 +196,6 @@ std::string GameCore::getNameFromLibrary(std::string str)
     std::string tmp;
     tmp = str.substr(str.find_last_of('_') + 1,
     str.find_last_of('.') - str.find_last_of('_') - 1);
-//    std::cout<<tmp<<std::endl;
     return tmp;
 }
 
