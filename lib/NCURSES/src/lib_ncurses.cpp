@@ -52,7 +52,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(2));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(2));
-            } else
+            } else if (map[i][a] == '#') {
+                wattron(window.window, COLOR_PAIR(3));
+                mvwaddch(window.window,i + 15, a + 80, map[i][a]);
+                wattroff(window.window, COLOR_PAIR(3));
+            }else
                 mvwaddch(window.window,i, a, map[i][a]);
         }
             
