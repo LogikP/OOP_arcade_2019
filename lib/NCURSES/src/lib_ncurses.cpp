@@ -44,12 +44,14 @@ void LibNcurses::initWindow()
     getmaxyx(stdscr, ymax, xmax);*/
 }
 
-int LibNcurses::InitProg()
+int LibNcurses::InitProg(std::vector<std::string> map)
 {
     int choice;
     unsigned int highlight = 0;
 
     while (choice != 'q') {
+        for (int i = 0; i != map.size(); i++)
+            mvwprintw(window.window,i, 0, map[i].c_str());
         choice = wgetch(this->window.window);
     }
     wclear(window.window);

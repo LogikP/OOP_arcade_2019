@@ -40,7 +40,7 @@ std::string nibbler::getName() const
 std::vector<std::string> nibbler::getMap() const
 {
     std::vector<std::string> map;
-    std::ifstream in("nibbler-map.txt");
+    std::ifstream in("./maps/nibbler-map.txt");
     std::string str;
 
     if (!in)
