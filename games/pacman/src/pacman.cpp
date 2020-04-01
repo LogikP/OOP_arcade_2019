@@ -24,6 +24,15 @@ std::string pacman::getName() const
 
 std::vector<std::string> pacman::getMap() const
 {
+    // std::vector<std::string> tmp;
+    // std::string line;
+    // std::ifstream myfile("example.txt");
+    // if (myfile.is_open())
+    // {
+    //     while (getline (myfile,line)) {}
+    //     myfile.close();
+    // }
+    // else throw(Error("Fail to open file"));
 }
 
 int pacman::ReceiveEvent(int key, int toto)

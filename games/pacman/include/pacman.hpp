@@ -7,6 +7,9 @@
 
 #pragma once
 #include "../../../include/IGame.hpp"
+#include "../../../include/Error.hpp"
+#include <iostream>
+#include <string>
 
 class pacman : public IGame
 {
