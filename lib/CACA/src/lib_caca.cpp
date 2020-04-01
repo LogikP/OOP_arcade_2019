@@ -5,6 +5,7 @@
 ** lib_caca
 */
 
+#include <iostream>
 #include "lib_caca.hpp"
 
 libCaca::libCaca() : window()
@@ -67,12 +68,12 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g, int size_
                     break;
                 case 'n':
                 case 'N':
-                    lib = lib + 1 == size_l ? 0 : lib + 1;
+                    lib = 0;
                     quit = LIB;
                     break;
                 case 'p':
                 case 'P':
-                    lib = lib == 0 ? (size_l - 1) : lib - 1;
+                    lib = size_l - 1;
                     quit = LIB;
                     break;
                 case CACA_KEY_ESCAPE:
@@ -89,10 +90,11 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g, int size_
 
 std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::vector<std::pair<int,std::string>> Libs)
 {
-    int game = Games[0].first;
+    int game = Games.size() != 0 ? Games[0].first : 0;
     int lib = Libs.size() != 0 ? Libs[0].first : 0;
     int quit = 0;
 
+    std::cout << Libs.size() << std::endl;
     caca_set_display_title(window.getDisplay(), "Arcade");
     caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
     while (quit != LIB || quit != QUIT || quit != GAME) {
