@@ -15,7 +15,7 @@ void LibSfml::initWindow()
 
     if (!t_Background.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
         throw(Error("Can't find the Asset file"));
-    s_Background.setTexture(t_Background);   
+    s_Background.setTexture(t_Background);
     while (this->window.isOpen())
     {
         this->window.draw(s_Background);
@@ -40,7 +40,7 @@ LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, Vid
 sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Font font, sf::Vector2f vector2f)
 {
     sf::Text tmp;
-    
+
     tmp.setString(Vector[i].second);
     tmp.setFillColor(sf::Color::Green);
     tmp.setPosition(vector2f);
@@ -207,7 +207,7 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
                     return "kill";
                 }
                 if (event.key.code == sf::Keyboard::Right)
-                { 
+                {
                     Game2.setFillColor(sf::Color::Blue);
                     Game1.setFillColor(sf::Color::Green);
                     i = 0;
@@ -247,8 +247,9 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     return "success";
 }
 
-int LibSfml::InitProg()
+int LibSfml::InitProg(std::vector<std::string> map)
 {
+    this->_map = map;
     return 0;
 }
 
@@ -257,13 +258,13 @@ std::string LibSfml::Game()
     return "toto";
 }
 
-void LibSfml::closeWindow() 
+void LibSfml::closeWindow()
 {
     window.close();
 }
 
 //// For the dlsym Symbol /////
-extern "C" LibSfml *createDisplay() 
+extern "C" LibSfml *createDisplay()
 {
     return new LibSfml;
 }
