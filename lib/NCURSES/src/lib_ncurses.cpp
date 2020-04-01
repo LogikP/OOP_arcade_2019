@@ -23,10 +23,45 @@ void LibNcurses::closeWindow()
 
 void LibNcurses::initWindow()
 {
+ //   window.clear();
+    int xmax;
+    int ymax;
+    int choice;
+
+//    getMap();
+//    keypad(this->window.window, TRUE);
+//    noecho();
+    wrefresh(window.window);
+
+//        display_help();
+
+/*    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    curs_set(0);
+    getmaxyx(stdscr, ymax, xmax);*/
 }
 
 int LibNcurses::InitProg()
 {
+    int choice;
+    unsigned int highlight = 0;
+
+    while (choice != 'q') {
+        choice = wgetch(this->window.window);
+    }
+    wclear(window.window);
+    wrefresh(window.window);
+    endwin();
+    exit(0);
+/*    while (true) {
+        clear();
+        std::vector<std::pair<int,int>> dim = _snake.GetSnake();
+       for (int i = 0; i != _snake.GetSnakeSize(); i++) {
+           mvaddch(_snake.GetSnake()[i].first, _snake.GetSnake()[i].second, ACS_BLOCK);
+       }
+    }*/
     return (0);
 }
 
