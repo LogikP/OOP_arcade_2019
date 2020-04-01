@@ -205,6 +205,8 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
                 }
                 if (event.key.code == sf::Keyboard::N)
                     return Libs[0].second;
+                if (event.key.code == sf::Keyboard::L)
+                    return "ChangedLib";
                 if (event.key.code == sf::Keyboard::P)
                     return Libs[Libs.size() - 1].second;
                 if (event.key.code == sf::Keyboard::Enter && i == 0)

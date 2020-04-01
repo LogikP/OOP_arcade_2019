@@ -76,6 +76,10 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g, int size_
                     lib = size_l - 1;
                     quit = LIB;
                     break;
+                case 'l':
+                case 'L':
+                    quit = 4;
+                    break;
                 case CACA_KEY_ESCAPE:
                     quit = QUIT;
                     break;
@@ -94,10 +98,9 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
     int lib = Libs.size() != 0 ? Libs[0].first : 0;
     int quit = 0;
 
-    std::cout << Libs.size() << std::endl;
     caca_set_display_title(window.getDisplay(), "Arcade");
     caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
-    while (quit != LIB || quit != QUIT || quit != GAME) {
+    while (quit != LIB || quit != QUIT || quit != GAME || quit != 4) {
         int width = caca_get_canvas_width(window.getCanvas());
         int height = caca_get_canvas_height(window.getCanvas());
         if ((quit = checkEventMenu(quit, game, lib, Games.size(), Libs.size())) == QUIT)
@@ -108,6 +111,8 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
             caca_refresh_display(this->window.getDisplay());
             return Games[game].second;
         }
+        if (quit == 4)
+            return "ChangedLib";
         caca_clear_canvas(window.getCanvas());
         caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
         caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");

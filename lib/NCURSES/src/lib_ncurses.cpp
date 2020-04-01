@@ -84,6 +84,13 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
                 wclear(window.window);
                 wrefresh(window.window);
                 return (libs[0].second);
+            case 'l':
+            case 'L':
+                wclear(game);
+                wrefresh(game);
+                wclear(window.window);
+                wrefresh(window.window);
+                return "ChangedLib";
             case 'p':
             case 'P':
                 wclear(game);

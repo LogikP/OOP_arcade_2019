@@ -97,12 +97,10 @@ bool GameCore::play()
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
     this->Libs["IDisplay"] = PeakGame;
-    while (isGame(PeakGame, this->Games_names) == 0 && PeakGame != "kill") {
+    while ((isGame(PeakGame, this->Games_names) == 0 && PeakGame != "kill") || PeakGame == "ChangedLib") {
         this->Libs["IDisplay"] = PeakGame;
-        PeakGame = NewMenu(PeakGame);
+        PeakGame = PeakGame == "ChangedLib" ? NewMenuLib() : NewMenu(PeakGame);
     }
-    //while (PeakGame == "ChangedLib")
-        //PeakGame = NewMenuLib();
     if (PeakGame == "kill")
         return false;
     this->Libs["IGame"] = PeakGame;
@@ -198,7 +196,6 @@ std::string GameCore::getNameFromLibrary(std::string str)
     std::string tmp;
     tmp = str.substr(str.find_last_of('_') + 1,
     str.find_last_of('.') - str.find_last_of('_') - 1);
-    std::cout<<tmp<<std::endl;
     return tmp;
 }
 
