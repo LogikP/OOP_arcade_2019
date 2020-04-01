@@ -46,7 +46,21 @@ void libCaca::displayNameGames(std::string name)
     caca_put_str(window.getCanvas(), (width / 2 - size), (height / 2) + 1, square.c_str());
 }
 
-int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g, int size_l)
+int getNextLibC(std::vector<std::pair<int, std::string>> libs)
+{
+    int i;
+    for (i = 0; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
+    return libs.size() == 0 ? 0 : libs[i - 1].first;
+}
+
+int getPrevLibC(std::vector<std::pair<int, std::string>> libs)
+{
+    int i;
+    for (i = libs.size() - 1; i > 0 && libs[i].second.compare("caca") >= 0; i--);
+    return libs.size() == 0 ? 0 : libs[i].first;
+}
+
+int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g,  std::vector<std::pair<int, std::string>>libs)
 {
     caca_event_t ev;
     unsigned int const event_mask = CACA_EVENT_KEY_PRESS
@@ -67,17 +81,14 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g, int size_
                     quit = GAME;
                     break;
                 case 'n':
-                case 'N':
-                    lib = 0;
+                    lib = getNextLibC(libs);
                     quit = LIB;
                     break;
                 case 'p':
-                case 'P':
-                    lib = size_l - 1;
+                    lib = getPrevLibC(libs);
                     quit = LIB;
                     break;
                 case 'l':
-                case 'L':
                     quit = 4;
                     break;
                 case CACA_KEY_ESCAPE:
@@ -98,21 +109,23 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
     int lib = Libs.size() != 0 ? Libs[0].first : 0;
     int quit = 0;
 
+    std::cout << Libs.size() << std::endl;
     caca_set_display_title(window.getDisplay(), "Arcade");
     caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
     while (quit != LIB || quit != QUIT || quit != GAME || quit != 4) {
         int width = caca_get_canvas_width(window.getCanvas());
         int height = caca_get_canvas_height(window.getCanvas());
-        if ((quit = checkEventMenu(quit, game, lib, Games.size(), Libs.size())) == QUIT)
+        quit = checkEventMenu(quit, game, lib, Games.size(), Libs);
+        if (quit == QUIT)
             return "kill";
-        if (quit == LIB)
-            return Libs[lib].second;
-        if (quit == GAME) {
+        else if (quit == LIB)
+            return Libs.size() == 0 ? "caca" : Libs[lib].second;
+        else if (quit == GAME) {
             caca_refresh_display(this->window.getDisplay());
             return Games[game].second;
         }
         if (quit == 4)
-            return "ChangedLib";
+            return Libs.size() == 0 ? "caca" : "ChangedLib";
         caca_clear_canvas(window.getCanvas());
         caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
         caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");
