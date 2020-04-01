@@ -109,7 +109,10 @@ bool GameCore::play()
     this->Display->initWindow();
     while (42)
     {
-        this->Display->InitProg();
+        std::vector<std::string> map = this->Game->getMap();
+        int key = 0;
+        key = this->Display->InitProg(map);
+
     }
     return true;
 }

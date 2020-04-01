@@ -73,15 +73,16 @@ std::string LibNcurses::Game()
 
 std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
-    int i;
-    for (i = 0; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
-    return libs[i - 1].second;
+    int i = 0;
+    for (; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
+    i = i == (int)libs.size() ? i - 1 : i;
+    return libs[i].second;
 }
 
 std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
-    int i;
-    for (i = libs.size() - 1; i > 0 && libs[i].second.compare("ncurses") >= 0; i--);
+    int i = libs.size() - 1;
+    for (; i > 0 && libs[i].second.compare("ncurses") >= 0; i--);
     return libs[i].second;
 }
 

@@ -16,12 +16,13 @@ class LibSfml : public IDisplay
     private:
         sf::RenderWindow window;
         sf::VideoMode VideoMode = sf::VideoMode::getDesktopMode();
+        std::vector<std::string> _map;
     public:
         LibSfml();
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
-        int InitProg() final;
+        int InitProg(std::vector<std::string>) final;
         void DrawSprite(sf::Sprite);
         std::string MenuLib(std::vector<std::pair<int,std::string>>) final;
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>) final;
