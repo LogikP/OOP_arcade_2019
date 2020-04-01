@@ -96,9 +96,8 @@ bool GameCore::play()
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
-    this->Libs["IDisplay"] = PeakGame;
     while ((isGame(PeakGame, this->Games_names) == 0 && PeakGame != "kill") || PeakGame == "ChangedLib") {
-        this->Libs["IDisplay"] = PeakGame;
+        this->Libs["IDisplay"] = PeakGame == "ChangedLib" ? this->Libs["IDisplay"] : PeakGame;
         PeakGame = PeakGame == "ChangedLib" ? NewMenuLib() : NewMenu(PeakGame);
     }
     if (PeakGame == "kill")
