@@ -77,6 +77,14 @@ std::string GameCore::madeFormatLib(std::string str, std::string repo)
         return NULL;
 }
 
+int isGame(std::string peakGame, std::vector<std::pair<int, std::string>> names)
+{
+    for (int i = 0; i < (int)names.size(); i++)
+        if (peakGame.compare(names[i].second.c_str()) == 0)
+            return 1;
+    return 0;
+}
+
 bool GameCore::play()
 {
     //char *error;
@@ -88,8 +96,11 @@ bool GameCore::play()
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
-    while (PeakGame == "ChangedLib")
-        PeakGame = NewMenuLib();
+    this->Libs["IDisplay"] = PeakGame;
+    if (isGame(PeakGame, this->Games_names) == 0)
+        PeakGame = NewMenu(PeakGame);
+    //while (PeakGame == "ChangedLib")
+        //PeakGame = NewMenuLib();
     if (PeakGame == "kill")
         return false;
     this->Libs["IGame"] = PeakGame;
