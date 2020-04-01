@@ -81,11 +81,11 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g,  std::vec
                     quit = GAME;
                     break;
                 case 'n':
-                    lib = getNextLibC(libs);
+                    lib = getNextLib(libs);
                     quit = LIB;
                     break;
                 case 'p':
-                    lib = getPrevLibC(libs);
+                    lib = getPrevLib(libs);
                     quit = LIB;
                     break;
                 case 'l':
