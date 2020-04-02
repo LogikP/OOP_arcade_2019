@@ -76,6 +76,7 @@ void nibbler::deadSnake()
     _map[1][2] = 'o';
     _map[1][3] = '0';
     _food = 0;
+    SaveLastKey = -1;
 }
 
 std::vector<std::string> nibbler::getMap()
@@ -139,7 +140,8 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x + 1;
         _snake[0].second = y; 
         MoveSnakeBody();
-    } 
+    } else if (press == 1)
+        deadSnake();
 }
 
 int nibbler::ReceiveEvent(int key, int toto)
@@ -148,20 +150,28 @@ int nibbler::ReceiveEvent(int key, int toto)
     switch (key)
     {
         case 1:
-            MovePlayer(key);
-            SaveLastKey = 1;
+            if (SaveLastKey != 2) {
+                MovePlayer(key);
+                SaveLastKey = 1;
+            }
             break;
         case 2:
-            MovePlayer(key);
-            SaveLastKey = 2;
+            if (SaveLastKey != 1) {
+                MovePlayer(key);
+                SaveLastKey = 2;
+            }
             break;
         case 3:
-            MovePlayer(key);
-            SaveLastKey = 3;
+            if (SaveLastKey != 4) {
+                MovePlayer(key);
+                SaveLastKey = 3;
+            }
             break;
         case 4:
-            MovePlayer(key);
-            SaveLastKey = 4;
+            if (SaveLastKey != 3) {
+                MovePlayer(key);
+                SaveLastKey = 4;
+            }
             break;
         case -1:
             KeepMoving(SaveLastKey);
@@ -216,6 +226,8 @@ void nibbler::MovePlayer(int key)
     int y = GetY();
 
     press = 1;
+    if (y == 0 || x == 0)
+        return ;
     switch (key) {
         case 1:
             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == 'x') {
