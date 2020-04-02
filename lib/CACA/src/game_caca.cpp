@@ -5,6 +5,7 @@
 ** game_displayer_caca_lib
 */
 
+#include <iostream>
 #include "lib_caca.hpp"
 
 int libCaca::checkEventGame(int quit)
@@ -19,11 +20,13 @@ int libCaca::checkEventGame(int quit)
         if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
             switch (caca_get_event_key_ch(&ev)) {
                 case CACA_KEY_ESCAPE:
+                    std::cout << "leave" << std::endl;
                     quit = QUIT;
                     break;
             }
-            if (caca_get_event_type(&ev) & CACA_EVENT_QUIT)
+            if (caca_get_event_type(&ev) & CACA_EVENT_QUIT) {
                 quit = 1;
+            }
         }
         event = caca_get_event(window.getDisplay(), CACA_EVENT_KEY_PRESS, &ev, 0);
     }
@@ -50,13 +53,57 @@ void libCaca::InitProg(std::vector<std::string> map)
         }
     }
     caca_refresh_display(this->window.getDisplay());
-    if ((quit = checkEventGame(quit)) == QUIT)
+    quit = checkEventGame(quit);
+    if (quit == QUIT)
         exit(0);
+}
+
+int libCaca::getKeyEventGame(int quit)
+{
+    caca_event_t ev;
+    unsigned int const event_mask = CACA_EVENT_KEY_PRESS
+| CACA_EVENT_RESIZE | CACA_EVENT_MOUSE_PRESS | CACA_EVENT_QUIT;
+    int event = caca_get_event(window.getDisplay(),  event_mask, &ev, 0);
+
+    while (event) {
+        if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
+            switch (caca_get_event_key_ch(&ev)) {
+                case CACA_KEY_UP:
+                    std::cout << "up" << std::endl;
+                    quit = UP_KEY;
+                    break;
+                case CACA_KEY_DOWN:
+                    std::cout << "down" << std::endl;
+                    quit = DOWN_KEY;
+                    break;
+                case CACA_KEY_LEFT:
+                    std::cout << "left" << std::endl;
+                    quit = LEFT_KEY;
+                    break;
+                case CACA_KEY_RIGHT:
+                    std::cout << "rught" << std::endl;
+                    quit = RIGHT_KEY;
+                    break;
+            }
+            if (caca_get_event_type(&ev) & CACA_EVENT_QUIT) {
+                quit = 1;
+            }
+        }
+        event = caca_get_event(window.getDisplay(), CACA_EVENT_KEY_PRESS, &ev, 0);
+    }
+    return quit;
 }
 
 int libCaca::getEventGame()
 {
-    return 0;
+    int direction = -1;
+
+    //caca_clear_canvas(window.getCanvas());
+//    caca_refresh_display(this->window.getDisplay());
+    direction = getKeyEventGame(direction);
+    if (direction == UP_KEY)
+        std::cout << "lol: " << direction << std::endl;
+    return direction;
 }
 
 int libCaca::getEventCore()

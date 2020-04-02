@@ -13,6 +13,13 @@
 class libCaca : public IDisplay
 {
     private:
+        enum EventKey {
+            UP_KEY,
+            DOWN_KEY,
+            LEFT_KEY,
+            RIGHT_KEY
+        };
+
         enum STATUS {
             RUN,
             QUIT,
@@ -27,6 +34,7 @@ class libCaca : public IDisplay
         int checkEventGame(int);
         int checkEventMenuLib(int, int&, int);
         void displayNameGames(std::string name);
+        int getKeyEventGame(int);
 
     public:
 
