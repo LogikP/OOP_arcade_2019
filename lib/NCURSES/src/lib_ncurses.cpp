@@ -53,14 +53,14 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
     }
 }
 
-void LibNcurses::InitProg(std::vector<std::string> map)
+void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     _map = map;
     PrintMap(_map);
 
 }
 
-int LibNcurses::getEventCore()
+int LibNcurses::getEvent()
 {
     int choice;
 
@@ -92,11 +92,6 @@ int LibNcurses::getEventCore()
     wrefresh(window.window);
     endwin();
     exit(0);
-    return (0);
-}
-
-int LibNcurses::getEventGame()
-{
     return (0);
 }
 

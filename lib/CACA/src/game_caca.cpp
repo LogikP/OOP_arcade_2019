@@ -8,7 +8,7 @@
 #include <iostream>
 #include "lib_caca.hpp"
 
-void libCaca::InitProg(std::vector<std::string> map)
+void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     caca_clear_canvas(window.getCanvas());
     for (int i = 0; i < (int)map.size(); i++) {
@@ -67,14 +67,7 @@ int libCaca::getKeyEventGame(int quit)
     return quit;
 }
 
-int libCaca::getEventGame()
-{
-    int direction = -1;
-
-    return direction;
-}
-
-int libCaca::getEventCore()
+int libCaca::getEvent()
 {
     int direction = -1;
 

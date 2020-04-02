@@ -13,6 +13,7 @@ class IGame {
     public:
         virtual ~IGame() {}
         virtual std::string getName() const = 0;
+        virtual std::vector<std::string> getScore() const = 0;
         virtual void InitMap() = 0;
         virtual std::vector<std::string> getMap() = 0;
         virtual int ReceiveEvent(int, int) = 0;

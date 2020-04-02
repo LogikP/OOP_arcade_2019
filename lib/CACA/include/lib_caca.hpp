@@ -43,9 +43,8 @@ class libCaca : public IDisplay
         void initWindow() final;
         void closeWindow() final;
         std::string Game() final;
-        int getEventCore() final;
-        int getEventGame() final;
-        void InitProg(std::vector<std::string>) final;
+        int getEvent() final;
+        void InitProg(std::vector<std::string> map, std::vector<std::string> score) final;
         std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>);
 };

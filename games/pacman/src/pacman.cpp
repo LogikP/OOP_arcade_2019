@@ -10,6 +10,7 @@
 pacman::pacman()
 {
     _init = 0;
+    _score.push_back("0");
 }
 
 void pacman::InitMap()
@@ -20,6 +21,11 @@ void pacman::InitMap()
 std::string pacman::getName() const
 {
     return "Pacman";
+}
+
+std::vector<std::string> pacman::getScore() const
+{
+    return _score;
 }
 
 std::vector<std::string> pacman::getMap()
