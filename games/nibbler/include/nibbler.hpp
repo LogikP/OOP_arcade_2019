@@ -8,6 +8,8 @@
 #pragma once
 #include "../../../include/IGame.hpp"
 #include <vector>
+#include <stdlib.h>
+#include <time.h>   
 
 class nibbler : public IGame
 {
@@ -15,6 +17,12 @@ class nibbler : public IGame
        std::vector<std::string> _map;
        std::vector<std::pair<int,int>> _snake;
        int SaveLastKey;
+       int _food;
+       int _snakeSize;
+       int _init;
+
+       void initSnake();
+       void deadSnake();
        // std::vector<std::pair<int,int>> _NibblerBody;
        // int ymax;
        // int xmax;
@@ -30,6 +38,7 @@ class nibbler : public IGame
         void MovePlayer(int);
         void KeepMoving(int SaveLastKey);
         void MoveSnakeBody();
+        void addFood();
         int GetY();
         int GetX();        
 };

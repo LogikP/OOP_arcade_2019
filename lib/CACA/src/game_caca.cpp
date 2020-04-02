@@ -21,6 +21,10 @@ void libCaca::InitProg(std::vector<std::string> map)
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
                 caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
+            } else if (map[i][j] == 'x') {
+                caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
+                caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
+                caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
             } else
                 caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
         }
