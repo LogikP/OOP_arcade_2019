@@ -5,7 +5,6 @@
 ** lib_caca
 */
 
-#include <iostream>
 #include "lib_caca.hpp"
 
 libCaca::libCaca() : window()
@@ -46,14 +45,14 @@ void libCaca::displayNameGames(std::string name)
     caca_put_str(window.getCanvas(), (width / 2 - size), (height / 2) + 1, square.c_str());
 }
 
-int getNextLibC(std::vector<std::pair<int, std::string>> libs)
+int libCaca::getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
     return libs.size() == 0 ? 0 : libs[i].first;
 }
 
-int getPrevLibC(std::vector<std::pair<int, std::string>> libs)
+int libCaca::getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("caca") >= 0; i--);
@@ -66,7 +65,6 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g,  std::vec
     unsigned int const event_mask = CACA_EVENT_KEY_PRESS
 | CACA_EVENT_RESIZE | CACA_EVENT_MOUSE_PRESS | CACA_EVENT_QUIT;
     int event = caca_get_event(window.getDisplay(),  event_mask, &ev, 0);
-
 
     while (event) {
         if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
@@ -81,11 +79,11 @@ int libCaca::checkEventMenu(int quit, int &game, int &lib, int size_g,  std::vec
                     quit = GAME;
                     break;
                 case 'n':
-                    lib = getNextLibC(libs);
+                    lib = getNextLib(libs);
                     quit = LIB;
                     break;
                 case 'p':
-                    lib = getPrevLibC(libs);
+                    lib = getPrevLib(libs);
                     quit = LIB;
                     break;
                 case 'l':
@@ -109,7 +107,6 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
     int lib = Libs.size() != 0 ? Libs[0].first : 0;
     int quit = 0;
 
-    std::cout << Libs.size() << std::endl;
     caca_set_display_title(window.getDisplay(), "Arcade");
     caca_set_color_ansi(window.getCanvas(), CACA_BLACK, CACA_WHITE);
     while (quit != LIB || quit != QUIT || quit != GAME || quit != 4) {
@@ -120,10 +117,8 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
             return "kill";
         else if (quit == LIB)
             return Libs.size() == 0 ? "caca" : Libs[lib].second;
-        else if (quit == GAME) {
-            caca_refresh_display(this->window.getDisplay());
+        else if (quit == GAME)
             return Games[game].second;
-        }
         if (quit == 4)
             return Libs.size() == 0 ? "caca" : "ChangedLib";
         caca_clear_canvas(window.getCanvas());

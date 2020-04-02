@@ -12,6 +12,7 @@ CXX	=	g++ -g3 -fPIC
 RM	=	rm -vf
 
 SRCS	= 	./src/lib_sfml.cpp \
+			./src/bind.cpp \
 
 OBJS	= $(SRCS:.cpp=.o)
 

@@ -9,6 +9,7 @@
 #include "../../../include/IGame.hpp"
 #include "../../../include/Error.hpp"
 #include <iostream>
+#include <fstream>
 #include <string>
 
 class pacman : public IGame

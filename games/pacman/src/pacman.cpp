@@ -19,21 +19,23 @@ void pacman::InitMap()
 
 std::string pacman::getName() const
 {
-    return "toto";
+    return "Pacman";
 }
 
 std::vector<std::string> pacman::getMap() const
 {
-    // std::vector<std::string> tmp;
-    // std::string line;
-    // std::ifstream myfile("example.txt");
-    // if (myfile.is_open())
-    // {
-    //     while (getline (myfile,line)) {}
-    //     myfile.close();
-    // }
-    // else throw(Error("Fail to open file"));
-}
+    std::vector<std::string> map;
+    std::ifstream in("./maps/nibbler-map.txt");
+    std::string str;
+
+    if (!in)
+        std::cerr << "Cannot open the File : " << "nibbler-map.txt"<<std::endl;
+    while (std::getline(in, str)) {
+        if(str.size() > 0)
+            map.push_back(str);
+    }
+    in.close();
+    return (map);}
 
 int pacman::ReceiveEvent(int key, int toto)
 {

@@ -59,11 +59,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
             }else
                 mvwaddch(window.window,i, a, map[i][a]);
         }
-            
+
     }
 }
 
-int LibNcurses::InitProg(std::vector<std::string> map)
+void LibNcurses::InitProg(std::vector<std::string> map)
 {
     int choice;
     unsigned int highlight = 0;
@@ -94,7 +94,17 @@ int LibNcurses::InitProg(std::vector<std::string> map)
            mvaddch(_snake.GetSnake()[i].first, _snake.GetSnake()[i].second, ACS_BLOCK);
        }
     }*/
-    return (0);
+    return;
+}
+
+int LibNcurses::getEventCore()
+{
+
+}
+
+int LibNcurses::getEventGame()
+{
+
 }
 
 std::string LibNcurses::Game()
@@ -106,7 +116,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
-    i = i == (int)libs.size() ? i - 1 : i;
+    i = i == (int)libs.size() ? 0 : i;
     return libs[i].second;
 }
 
@@ -238,7 +248,7 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
     endwin();
     return ("kill");
 }
-extern "C" LibNcurses *createDisplay() 
+extern "C" LibNcurses *createDisplay()
 {
     return new LibNcurses;
 }
