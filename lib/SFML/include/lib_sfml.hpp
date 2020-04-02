@@ -19,29 +19,31 @@ enum BindingTouch {
     top = 3,
     bot = 4,
 };
+enum EventKey {
+    UNKNOWN,
+    LEFT_KEY,
+    RIGHT_KEY,
+    UP_KEY,
+    DOWN_KEY,
+    LEAVE = 'k',
+};
+
+enum STATUS {
+    RUN,
+    QUIT,
+    GAME,
+    LIB
+};
 
 //account_num = static_cast<int>(Suit::Hearts);
 
 class LibSfml : public IDisplay
 {
     private:
-        enum EventKey {
-            UNKNOWN,
-            LEFT_KEY,
-            RIGHT_KEY,
-            UP_KEY,
-            DOWN_KEY,
-            LEAVE,
-        };
-        enum STATUS {
-            RUN,
-            QUIT,
-            GAME,
-            LIB
-        };
         sf::RenderWindow window;
         sf::VideoMode VideoMode = sf::VideoMode::getDesktopMode();
         std::vector<std::string> _map;
+        std::vector<std::string> _score;
         sf::Texture Wall_N;
         sf::Texture Wall_P;
         sf::Texture Pacman_Left;

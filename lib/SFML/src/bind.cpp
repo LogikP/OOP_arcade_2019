@@ -17,13 +17,15 @@ int LibSfml::bind()
             if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Down)
-                    return this->DOWN_KEY;
+                    return DOWN_KEY;
                 if (event.key.code == sf::Keyboard::Up)
-                    return this->UP_KEY;
+                    return UP_KEY;
                 if (event.key.code == sf::Keyboard::Right)
-                    return this->RIGHT_KEY;
+                    return RIGHT_KEY;
                 if (event.key.code == sf::Keyboard::Left)
-                    return this->LEFT_KEY;
+                    return LEFT_KEY;
+                if (event.key.code == sf::Keyboard::Escape)
+                    return LEAVE;
             }
             else
                 return -1;

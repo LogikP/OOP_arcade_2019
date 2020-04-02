@@ -282,7 +282,6 @@ void LibSfml::DrawMap(std::vector<std::string> map)
     int pos1 = 0;
     int pos2 = 0;
     int lenLine = map[0].length();
-    static int i = 0;
 
     for (std::string i : map) {
         pos2 = 0;
@@ -313,6 +312,7 @@ void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> sc
 {
     this->window.clear();
     this->_map = map;
+    this->_score = score;
     if (this->window.isOpen())
         DrawMap(map);
     usleep(100000);

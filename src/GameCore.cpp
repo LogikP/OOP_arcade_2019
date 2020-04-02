@@ -111,9 +111,10 @@ bool GameCore::play()
     {
         std::vector<std::string> map = this->Game->getMap();
         std::vector<std::string> score = this->Game->getScore();
-//        std::string score = Game->g
         this->Display->InitProg(map, score);
         this->keyCore = this->Display->getEvent();
+        if (this->keyCore == 'k')
+            return false;
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;

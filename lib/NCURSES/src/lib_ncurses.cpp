@@ -78,12 +78,17 @@ int LibNcurses::getEvent()
                     return (down);
             case KEY_LEFT:
                     wclear(window.window);
-                    wrefresh(window.window);return (left);
+                    wrefresh(window.window);
                     return (left);
             case KEY_RIGHT:
                     wclear(window.window);
-                    wrefresh(window.window);return (right);
+                    wrefresh(window.window);
                     return (right);
+            case 27:
+                wclear(window.window);
+                wrefresh(window.window);
+                endwin();
+                return (LEAVE);
         }
         wclear(window.window);
         wrefresh(window.window);
