@@ -20,6 +20,7 @@ class nibbler : public IGame
        int _food;
        int _snakeSize;
        int _init;
+       int press;
 
        void initSnake();
        void deadSnake();

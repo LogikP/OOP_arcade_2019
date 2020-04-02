@@ -54,6 +54,7 @@ void nibbler::addFood()
 }
 void nibbler::initSnake()
 {
+    press = 0;
     _snakeSize = 3;
     _snake.push_back(std::make_pair(1,3));
     _snake.push_back(std::make_pair(1,2));
@@ -64,9 +65,16 @@ void nibbler::initSnake()
 void nibbler::deadSnake()
 {
     _snake.clear();
-    _map.clear();
     initSnake();
-    _init = 0;
+    for (int i = 1; i != (int)_map.size() - 1; i++) {
+        for (int j = 1; j != (int)_map[0].size() - 2; j++) {
+            if (_map[i][j] == 'o' || _map[i][j] == '0' || _map[i][j] == 'x')
+                _map[i][j] = ' ';
+        }
+    }
+    _map[1][1] = 'o';
+    _map[1][2] = 'o';
+    _map[1][3] = '0';
     _food = 0;
 }
 
@@ -84,7 +92,7 @@ std::vector<std::string> nibbler::getMap()
                 map.push_back(str);
         }
         in.close();
-        _init++;
+        _init = 1;
         _map = map;
         initSnake();
     } else
@@ -99,7 +107,9 @@ void nibbler::KeepMoving(int SaveLastKey)
     int x = GetX();
     int y = GetY();
 
-    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == 'x')) {
+    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == 'x' || _map[x][y - 1] == 'o')) {
+        if (_map[x][y - 1] == 'o')
+            return;
         for (int i = _snake.size(); i != 0 ; i--) {
             _snake[i].first = _snake[i - 1].first;
             _snake[i].second = _snake[i - 1].second;
@@ -107,15 +117,19 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x;
         _snake[0].second = y - 1; 
         MoveSnakeBody();
-    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == 'x')) {
-        for (int i = _snake.size(); i != 0 ; i--) {
+    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == 'x' || _map[x][y + 1] == 'o')) {
+            if (_map[x][y + 1] == 'o')
+                return;
+            for (int i = _snake.size(); i != 0 ; i--) {
             _snake[i].first = _snake[i - 1].first;
             _snake[i].second = _snake[i - 1].second;
         }
         _snake[0].first = x;
         _snake[0].second = y + 1; 
         MoveSnakeBody();
-    } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == 'x')) {
+    } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == 'x' || _map[x - 1][y] == 'o')) {
+        if (_map[x - 1][y] == 'o')
+            return;
         for (int i = _snake.size(); i != 0 ; i--) {
             _snake[i].first = _snake[i - 1].first;
             _snake[i].second = _snake[i - 1].second;
@@ -123,7 +137,9 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x - 1;
         _snake[0].second = y; 
         MoveSnakeBody();       
-    } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' | _map[x + 1][y] == 'x')) {
+    } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' | _map[x + 1][y] == 'x' || _map[x + 1][y] == 'o')) {
+        if (_map[x + 1][y] == 'o')
+            return;
         for (int i = _snake.size(); i != 0 ; i--) {
             _snake[i].first = _snake[i - 1].first;
             _snake[i].second = _snake[i - 1].second;
@@ -131,7 +147,8 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x + 1;
         _snake[0].second = y; 
         MoveSnakeBody();
-    }
+    } else if (press == 1)
+        deadSnake();
 }
 
 int nibbler::ReceiveEvent(int key, int toto)
@@ -206,10 +223,11 @@ void nibbler::MovePlayer(int key)
 {
     int x = GetX();
     int y = GetY();
-    
+
+    press = 1;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ') {
+            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == 'x') {
                 for (int i = _snake.size(); i != 0 ; i--) {
                     _snake[i].first = _snake[i - 1].first;
                     _snake[i].second = _snake[i - 1].second;
@@ -221,7 +239,7 @@ void nibbler::MovePlayer(int key)
                 deadSnake();
             break;
         case 2:
-            if (_map[x][y + 1] == ' ') {
+            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == 'x') {
          for (int i = _snake.size(); i != 0 ; i--) {
          _snake[i].first = _snake[i - 1].first;
          _snake[i].second = _snake[i - 1].second;
@@ -232,31 +250,27 @@ void nibbler::MovePlayer(int key)
                 deadSnake();
             break;
         case 3:
-        if (_map[x - 1][y] == ' ') {
-            for (int i = _snake.size(); i != 0 ; i--) {
-                _snake[i].first = _snake[i - 1].first;
-                _snake[i].second = _snake[i - 1].second;
-            }
-            _snake[0].first = x - 1;
-            _snake[0].second = y;
-            MoveSnakeBody();
-        } else
-            deadSnake();
-        break;
+         for (int i = _snake.size(); i != 0 ; i--) {
+         _snake[i].first = _snake[i - 1].first;
+         _snake[i].second = _snake[i - 1].second;
+     }       if (_map[x - 1][y] == ' ' || _map[x - 1][y] == 'x') {
+               _snake[0].first = x - 1;
+                _snake[0].second = y;
+                MoveSnakeBody();
+            } else
+                deadSnake();
+            break;
         case 4:
-        if (_map[x + 1][y] == ' ') {
-            for (int i = _snake.size(); i != 0 ; i--) {
-                _snake[i].first = _snake[i - 1].first;
-                _snake[i].second = _snake[i - 1].second;
-            }
-            _snake[0].first = x + 1;
-            _snake[0].second = y;
-            MoveSnakeBody();
-        } else
-            deadSnake();
-        break;
-        default:
-        break;
+            if (_map[x + 1][y] == ' ' || _map[x + 1][y] == ' ') {
+          for (int i = _snake.size(); i != 0 ; i--) {
+         _snake[i].first = _snake[i - 1].first;
+         _snake[i].second = _snake[i - 1].second;
+     }         _snake[0].first = x + 1;
+                _snake[0].second = y;
+                MoveSnakeBody();
+            } else
+                deadSnake();
+            break;            
     }
 }
 
