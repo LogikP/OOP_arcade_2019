@@ -71,22 +71,33 @@ void LibNcurses::InitProg(std::vector<std::string> map)
 int LibNcurses::getEventCore()
 {
     int choice;
-    unsigned int highlight = 0;
 
-    while (choice != 'q') {
+//    while (choice != 'q') {
         PrintMap(_map);
+        wtimeout(window.window, 100);
         choice = wgetch(this->window.window);
         switch (choice) {
             case KEY_UP:
+                    wclear(window.window);
+                    wrefresh(window.window);
                     return (up);
             case KEY_DOWN:
+                    wclear(window.window);
+                    wrefresh(window.window);
                     return (down);
             case KEY_LEFT:
-                    return (down);
+                    wclear(window.window);
+                    wrefresh(window.window);return (left);
+                    return (left);
             case KEY_RIGHT:
-                    return (down);
+                    wclear(window.window);
+                    wrefresh(window.window);return (right);
+                    return (right);
         }
-    }
+        wclear(window.window);
+        wrefresh(window.window);
+        return (-1);
+  //  }
     wclear(window.window);
     wrefresh(window.window);
     endwin();

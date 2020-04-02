@@ -57,28 +57,50 @@ std::vector<std::string> nibbler::getMap()
         map = _map;
     return (map);
 }
+void nibbler::KeepMoving(int SaveLastKey)
+{
+    int x = GetX();
+    int y = GetY();
+
+    if (SaveLastKey == 1 && _map[x][y - 1] == ' ') {
+        _map[x][y - 1] = '0';
+        _map[x][y] = ' ';
+    } else if (SaveLastKey == 2 && _map[x][y + 1] == ' ') {
+        _map[x][y + 1] = '0';
+        _map[x][y] = ' ';
+    } else if (SaveLastKey == 3 && _map[x - 1][y] == ' ') {
+        _map[x - 1][y] = '0';
+        _map[x][y] = ' ';
+    } else if (SaveLastKey == 4 && _map[x + 1][y] == ' ') {
+        _map[x + 1][y] = '0';
+        _map[x][y] = ' ';
+    }
+}
 
 int nibbler::ReceiveEvent(int key, int toto)
 {
-            std::cout << key <<std::endl;
-
+    std::cout << SaveLastKey <<std::endl;
     switch (key)
     {
         case 1:
-            std::cout << "YESSSSSSS" <<std::endl;
             MovePlayer(key);
+            SaveLastKey = 1;
             break;
         case 2:
-            std::cout << "YESSSSSSS" <<std::endl;
             MovePlayer(key);
+            SaveLastKey = 2;
             break;
         case 3:
-            std::cout << "YESSSSSSS" <<std::endl;
             MovePlayer(key);
+            SaveLastKey = 3;
             break;
         case 4:
-            std::cout << "YESSSSSSS" <<std::endl;
             MovePlayer(key);
+            SaveLastKey = 4;
+            break;
+        case -1:
+          // std::cout << "KEEEPPP MOVVIIING" <<std::endl;
+            KeepMoving(SaveLastKey);
             break;
 
     }
@@ -118,24 +140,28 @@ void nibbler::MovePlayer(int key)
     
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ')
+            if (_map[x][y - 1] == ' ') {
                 _map[x][y - 1] = '0';
-            _map[x][y] = ' ';
+                _map[x][y] = ' ';
+            }
             break;
         case 2:
-            if (_map[x][y + 1] == ' ')
+            if (_map[x][y + 1] == ' ') {
                 _map[x][y + 1] = '0';
-            _map[x][y] = ' ';
+                _map[x][y] = ' ';
+            }
             break;
         case 3:
-            if (_map[x - 1][y] == ' ')
+            if (_map[x - 1][y] == ' ') {
+                _map[x][y] = ' ';
                 _map[x - 1][y] = '0';
-            _map[x][y] = ' ';
+            }
             break;
         case 4:
-            if (_map[x + 1][y] == ' ')
+            if (_map[x + 1][y] == ' ') {
+                _map[x][y] = ' ';
                 _map[x + 1][y] = '0';
-            _map[x][y] = ' ';
+            }
             break;            
     }
 
