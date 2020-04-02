@@ -80,7 +80,7 @@ int libCaca::getEvent()
     caca_set_display_time(window.getDisplay(), 80000);
     direction = getKeyEventGame(direction);
     if (direction == LEAVE)
-        exit(0);
+        return 'k';
     return direction;
 }
 
