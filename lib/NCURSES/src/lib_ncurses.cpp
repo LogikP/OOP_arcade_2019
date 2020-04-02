@@ -112,6 +112,7 @@ std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("ncurses") >= 0; i--);
+    i = i == 0 ? (int)libs.size() - 1 : i;
     return libs[i].second;
 }
 
