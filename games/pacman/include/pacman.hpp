@@ -24,9 +24,5 @@ class pacman : public IGame
         std::vector<std::string> getMap() final;
         int ReceiveEvent(int, int) final;
         void saveGame(std::string) final;
-<<<<<<< HEAD
         void MovePlayer(int);
-=======
-        void MovePlayer();
->>>>>>> 7a7921a6378c8f8ecfe745734c4aa89be5f5b757
 };
