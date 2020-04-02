@@ -67,14 +67,7 @@ int libCaca::getKeyEventGame(int quit)
     return quit;
 }
 
-int libCaca::getEventGame()
-{
-    int direction = -1;
-
-    return direction;
-}
-
-int libCaca::getEventCore()
+int libCaca::getEvent()
 {
     int direction = -1;
 

@@ -68,7 +68,7 @@ void LibNcurses::InitProg(std::vector<std::string> map)
     _map = map;
 }
 
-int LibNcurses::getEventCore()
+int LibNcurses::getEvent()
 {
     int choice;
 
@@ -110,11 +110,6 @@ int LibNcurses::getEventCore()
        }
     }*/
     return (0);
-}
-
-int LibNcurses::getEventGame()
-{
-
 }
 
 std::string LibNcurses::Game()
