@@ -15,6 +15,7 @@ class nibbler : public IGame
 {
     private:
        std::vector<std::string> _map;
+       std::vector<std::string> _score;
        std::vector<std::pair<int,int>> _snake;
        int SaveLastKey;
        int _food;
@@ -35,6 +36,7 @@ class nibbler : public IGame
         std::vector<std::string> getMap() final;
         int ReceiveEvent(int, int) final;
         void saveGame(std::string) final;
+        std::vector<std::string> getScore() const final;
         void MovePlayer(int);
         void KeepMoving(int SaveLastKey);
         void MoveSnakeBody();

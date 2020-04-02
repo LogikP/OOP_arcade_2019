@@ -23,25 +23,7 @@ void LibNcurses::closeWindow()
 
 void LibNcurses::initWindow()
 {
- //   window.clear();
-    int xmax;
-    int ymax;
-    int choice;
-//    for (int i = 0; i != map.size(); i++)
- //       mvprintw(i, 0, map[i]);
-//    getMap();
-//    keypad(this->window.window, TRUE);
-//    noecho();
     wrefresh(window.window);
-
-//        display_help();
-
-/*    initscr();
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
-    curs_set(0);
-    getmaxyx(stdscr, ymax, xmax);*/
 }
 
 void LibNcurses::PrintMap(std::vector<std::string> map)
@@ -52,10 +34,18 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(2));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(2));
-            } else if (map[i][a] == 'o'|| map[i][a] == '0' || map[i][a] == '~' || map[i][a] == ' ' || map[i][a] == 'x') {
+            } else if (map[i][a] == 'o'|| map[i][a] == '0' || map[i][a] == ' ' || map[i][a] == 'x') {
                 wattron(window.window, COLOR_PAIR(3));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(3));
+            } else if (map[i][a] == 'C') {
+                wattron(window.window, COLOR_PAIR(4));
+                mvwaddch(window.window,i + 15, a + 80, map[i][a]);
+                wattroff(window.window, COLOR_PAIR(4));
+            } else if (map[i][a] == 'M') {
+                wattron(window.window, COLOR_PAIR(1));
+                mvwaddch(window.window,i + 15, a + 80, map[i][a]);
+                wattroff(window.window, COLOR_PAIR(1));
             } else
                 mvwaddch(window.window,i, a, map[i][a]);
         }
@@ -63,9 +53,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
     }
 }
 
-void LibNcurses::InitProg(std::vector<std::string> map)
+void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     _map = map;
+    PrintMap(_map);
+
 }
 
 int LibNcurses::getEvent()
@@ -73,7 +65,6 @@ int LibNcurses::getEvent()
     int choice;
 
 //    while (choice != 'q') {
-        PrintMap(_map);
         wtimeout(window.window, 100);
         choice = wgetch(this->window.window);
         switch (choice) {
@@ -97,18 +88,10 @@ int LibNcurses::getEvent()
         wclear(window.window);
         wrefresh(window.window);
         return (-1);
-  //  }
     wclear(window.window);
     wrefresh(window.window);
     endwin();
     exit(0);
-/*    while (true) {
-        clear();
-        std::vector<std::pair<int,int>> dim = _snake.GetSnake();
-       for (int i = 0; i != _snake.GetSnakeSize(); i++) {
-           mvaddch(_snake.GetSnake()[i].first, _snake.GetSnake()[i].second, ACS_BLOCK);
-       }
-    }*/
     return (0);
 }
 
@@ -135,10 +118,7 @@ std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std::vector<std::pair<int, std::string>> libs)
 {
     MyWindow ObjectWindow(0,0,0,0);
-    int ymax;
-    int xmax;
     this->window =  ObjectWindow;
-    getmaxyx(window.window, ymax, xmax);
     keypad(this->window.window, TRUE);
     noecho();
     refresh();

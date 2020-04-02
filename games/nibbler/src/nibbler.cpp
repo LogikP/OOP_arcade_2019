@@ -16,6 +16,7 @@ nibbler::nibbler()
     SaveLastKey = 0;
     _food = 0;
     _init = 0;
+    _score.push_back("0");
    // _NibblerBody.push_back(std::make_pair(2,2));
     //_NibblerBody.push_back(std::make_pair(2,3));
 }
@@ -37,6 +38,11 @@ void nibbler::InitMap()
 std::string nibbler::getName() const
 {
     return "toto";
+}
+
+std::vector<std::string> nibbler::getScore() const
+{
+    return _score;
 }
 
 void nibbler::addFood()

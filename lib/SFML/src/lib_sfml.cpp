@@ -309,7 +309,7 @@ void LibSfml::DrawMap(std::vector<std::string> map)
 
 }
 
-void LibSfml::InitProg(std::vector<std::string> map)
+void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     this->window.clear();
     this->_map = map;
