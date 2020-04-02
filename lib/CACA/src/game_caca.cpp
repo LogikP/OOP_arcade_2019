@@ -34,38 +34,34 @@ void libCaca::InitProg(std::vector<std::string> map)
 {
     int quit = 0;
 
-    while (quit != LIB || quit != QUIT || quit != GAME || quit != 4) {
-        caca_clear_canvas(window.getCanvas());
-        for (int i = 0; i < (int)map.size(); i++) {
-            for (int j = 0; j < (int)map[i].size(); j++) {
-                if ((map[i][j] == '#')) {
-                    caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
-                    caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
-                    caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
-                } else if (map[i][j] == 'W') {
-                    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-                    caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
-                    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-                } else
-                    caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
-            }
+    caca_clear_canvas(window.getCanvas());
+    for (int i = 0; i < (int)map.size(); i++) {
+        for (int j = 0; j < (int)map[i].size(); j++) {
+            if ((map[i][j] == '#')) {
+                caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
+                caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
+                caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
+            } else if (map[i][j] == 'W') {
+                caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
+                caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
+                caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);    
+            } else
+                caca_put_str(window.getCanvas(), j, i, &(map[i].c_str())[j]);
         }
-        caca_refresh_display(this->window.getDisplay());
-        if ((quit = checkEventGame(quit)) == QUIT)
-            break;
     }
-    exit(0);
-    return;
+    caca_refresh_display(this->window.getDisplay());
+    if ((quit = checkEventGame(quit)) == QUIT)
+        exit(0);
 }
 
 int libCaca::getEventGame()
 {
-
+    return 0;
 }
 
 int libCaca::getEventCore()
 {
-
+    return 0;
 }
 
 std::string libCaca::Game()
