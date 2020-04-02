@@ -69,10 +69,19 @@ int LibNcurses::InitProg(std::vector<std::string> map)
     unsigned int highlight = 0;
 
     while (choice != 'q') {
-     //   for (int i = 0; i != map.size(); i++)
-       //     mvwprintw(window.window,i, 0, map[i].c_str());
         PrintMap(map);
         choice = wgetch(this->window.window);
+        switch (choice) {
+            case KEY_UP:
+                    return (up);
+            case KEY_DOWN:
+                    return (down);
+            case KEY_LEFT:
+                    return (down);
+            case KEY_RIGHT:
+                    return (down);
+        }
+
     }
     wclear(window.window);
     wrefresh(window.window);
@@ -111,8 +120,10 @@ std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std::vector<std::pair<int, std::string>> libs)
 {
     MyWindow ObjectWindow(0,0,0,0);
-
+    int ymax;
+    int xmax;
     this->window =  ObjectWindow;
+    getmaxyx(window.window, ymax, xmax);
     keypad(this->window.window, TRUE);
     noecho();
     refresh();
