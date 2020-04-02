@@ -29,8 +29,7 @@ class LibNcurses : public IDisplay
         LibNcurses();
         void initWindow() final;
         void closeWindow() final;
-        int getEventCore() final;
-        int getEventGame() final;
+        int getEvent() final;
         void InitProg(std::vector<std::string> map) final;
         void PrintMap(std::vector<std::string> map);
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>);

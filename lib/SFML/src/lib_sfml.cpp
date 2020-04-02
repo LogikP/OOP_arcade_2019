@@ -9,22 +9,56 @@
 
 void LibSfml::initWindow()
 {
-    this->window.clear();
-    sf::Texture t_Background;
-    sf::Sprite s_Background;
-
-    if (!t_Background.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
+    sf::FloatRect Rect;
+    if (!this->Background.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
         throw(Error("Can't find the Asset file"));
-    s_Background.setTexture(t_Background);
-    while (this->window.isOpen())
-    {
-        this->window.draw(s_Background);
-        this->window.display();
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Background);
+        Rect = sprite.getGlobalBounds();
+        ListSprite["Background"] = sprite;
+        this->window.draw(ListSprite["Background"]);
     }
-    // if (this->Menu() == "kill") {
-    //     this->closeWindow();
-    //     exit(0);
-    // }
+    if (!this->Wall_N.loadFromFile("./asset/assets-game/bric.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Wall_N);
+        Rect = sprite.getGlobalBounds();
+        this->Wall_N.setSmooth(true);
+        sprite.setScale(0.20, 0.20);
+        ListSprite["WallNibbler"] = sprite;
+    }
+    if (!this->Nibbler_Head.loadFromFile("./asset/assets-game/head.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Nibbler_Head);
+        this->Nibbler_Head.setSmooth(true);
+        sprite.setScale(0.15, 0.15);
+        Rect = sprite.getGlobalBounds();
+        ListSprite["Nibbler_Head"] = sprite;
+    }
+    if (!this->Nibbler_Tail.loadFromFile("./asset/assets-game/tail.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Nibbler_Tail);
+        this->Nibbler_Tail.setSmooth(true);
+        sprite.setScale(0.10, 0.10);
+        Rect = sprite.getGlobalBounds();
+        ListSprite["Nibbler_Tail"] = sprite;
+    }
+    if (!this->Apple.loadFromFile("./asset/assets-game/apple.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Apple);
+        this->Apple.setSmooth(true);
+        sprite.setScale(0.10, 0.10);
+        Rect = sprite.getGlobalBounds();
+        ListSprite["Apple"] = sprite;
+    }
 }
 
 LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
@@ -36,6 +70,7 @@ LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, Vid
 // {
 //     this->window.draw(sprite);
 // }
+
 
 sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Font font, sf::Vector2f vector2f)
 {
@@ -155,7 +190,6 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     sf::Texture texture;
     sf::Sprite logo;
     sf::Texture T_logo;
-   // sf::Text QGame;
     sf::Text Game1;
     sf::Text Game2;
     sf::Font font;
@@ -171,15 +205,6 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     logo.setTexture(T_logo);
     logo.setPosition(sf::Vector2f(660,0));
 
-    // QGame.setString("Choose You're Game");
-    // QGame.setFillColor(sf::Color::White);
-    // QGame.setPosition(sf::Vector2f(450, 260));
-    // QGame.setFont(font);
-    // QGame.setCharacterSize(120);
-    // QGame.setStyle(sf::Text::Bold);
-    // Game1 = Test->getText();
-   // Game1 = Test->getText();
-//    Game1 = InitText(Games, 0, font, sf::Vector2f(200, 400));
     Game1.setString(Games.front().second);
     Game1.setFillColor(sf::Color::Green);
     Game1.setPosition(sf::Vector2f(200, 400));
@@ -239,7 +264,6 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
         this->window.clear();
         this->window.draw(sprite);
         this->window.draw(logo);
-//        this->window.draw(QGame);
         this->window.draw(Game1);
         this->window.draw(Game2);
         this->window.display();
@@ -247,19 +271,58 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     return "success";
 }
 
+void LibSfml::SetSpritePos(std::string Name, int LenLine, int pos1, int pos2)
+{
+    this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 10) + pos2 * 20, this->window.getSize().y / 8 + pos1 * 20);
+    this->window.draw(this->ListSprite[Name]);
+}
+
+void LibSfml::DrawMap(std::vector<std::string> map)
+{
+    int pos1 = 0;
+    int pos2 = 0;
+    int lenLine = map[0].length();
+    static int i = 0;
+
+    for (std::string i : map) {
+        pos2 = 0;
+        for (char c : i) {
+            switch (c)
+            {
+                case 'W':
+                    SetSpritePos("WallNibbler", lenLine, pos1, pos2);
+                    break;
+                case 'x':
+                    SetSpritePos("Apple", lenLine, pos1,pos2);
+                    break;
+                case 'o':
+                    SetSpritePos("Nibbler_Tail", lenLine, pos1, pos2);
+                    break;
+                case '0':
+                    SetSpritePos("Nibbler_Head", lenLine, pos1, pos2);
+                    break;
+            }
+            pos2++;
+        }
+        pos1++;
+    }
+
+}
+
 void LibSfml::InitProg(std::vector<std::string> map)
 {
+    this->window.clear();
     this->_map = map;
+    if (this->window.isOpen())
+        DrawMap(map);
+    usleep(100000);
+    this->window.display();
 }
 
-int LibSfml::getEventCore()
+int LibSfml::getEvent()
 {
-    return 0;
-}
-
-int LibSfml::getEventGame()
-{
-
+    return this->bind();
+//    return 0;
 }
 
 std::string LibSfml::Game()

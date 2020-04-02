@@ -46,7 +46,7 @@ class GameCore {
         template <typename T>
             void getLib();
         template <typename T>
-		    T *createObject(void* library);
+            T *createObject(void* library);
         template <typename T>
             void setLibIdx();
         template <typename T>
