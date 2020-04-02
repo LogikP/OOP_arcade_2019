@@ -52,11 +52,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(2));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(2));
-            } else if (map[i][a] == '#') {
+            } else if (map[i][a] == 'o'|| map[i][a] == '0') {
                 wattron(window.window, COLOR_PAIR(3));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(3));
-            }else
+            } else
                 mvwaddch(window.window,i, a, map[i][a]);
         }
 
@@ -71,22 +71,33 @@ void LibNcurses::InitProg(std::vector<std::string> map)
 int LibNcurses::getEventCore()
 {
     int choice;
-    unsigned int highlight = 0;
 
-    while (choice != 'q') {
+//    while (choice != 'q') {
         PrintMap(_map);
+        wtimeout(window.window, 100);
         choice = wgetch(this->window.window);
         switch (choice) {
             case KEY_UP:
+                    wclear(window.window);
+                    wrefresh(window.window);
                     return (up);
             case KEY_DOWN:
+                    wclear(window.window);
+                    wrefresh(window.window);
                     return (down);
             case KEY_LEFT:
-                    return (down);
+                    wclear(window.window);
+                    wrefresh(window.window);return (left);
+                    return (left);
             case KEY_RIGHT:
-                    return (down);
+                    wclear(window.window);
+                    wrefresh(window.window);return (right);
+                    return (right);
         }
-    }
+        wclear(window.window);
+        wrefresh(window.window);
+        return (-1);
+  //  }
     wclear(window.window);
     wrefresh(window.window);
     endwin();

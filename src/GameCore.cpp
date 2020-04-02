@@ -118,7 +118,7 @@ bool GameCore::play()
             ////endl event core
         }
         this->keyGame = this->Display->getEventGame();
-        this->Game->ReceiveEvent(this->keyGame, 0);
+        this->Game->ReceiveEvent(this->keyCore, 0);
 //        this->Game->ReceiveEvent(key, 0);
 
     }
