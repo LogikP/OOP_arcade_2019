@@ -24,6 +24,7 @@ class LibNcurses : public IDisplay
         MyWindow window;
         WINDOW *game;
         WINDOW *_nibbler;
+        std::vector<std::string> _map;
     public:
         LibNcurses();
         void initWindow() final;

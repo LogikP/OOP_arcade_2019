@@ -57,6 +57,7 @@ std::vector<std::string> nibbler::getMap() const
 
 int nibbler::ReceiveEvent(int key, int toto)
 {
+  //  MovePlayer();
     return 0;
 }
 
@@ -64,6 +65,11 @@ void nibbler::saveGame(std::string map)
 {
 
 }
+/*
+void MovePlayer()
+{
+
+}*/
 
 //// For the dlsym Symbol /////
 extern "C" nibbler *createGame()

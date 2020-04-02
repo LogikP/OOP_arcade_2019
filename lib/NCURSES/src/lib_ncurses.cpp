@@ -65,11 +65,16 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
 
 void LibNcurses::InitProg(std::vector<std::string> map)
 {
+    _map = map;
+}
+
+int LibNcurses::getEventCore()
+{
     int choice;
     unsigned int highlight = 0;
 
     while (choice != 'q') {
-        PrintMap(map);
+        PrintMap(_map);
         choice = wgetch(this->window.window);
         switch (choice) {
             case KEY_UP:
@@ -81,7 +86,6 @@ void LibNcurses::InitProg(std::vector<std::string> map)
             case KEY_RIGHT:
                     return (down);
         }
-
     }
     wclear(window.window);
     wrefresh(window.window);
@@ -94,12 +98,7 @@ void LibNcurses::InitProg(std::vector<std::string> map)
            mvaddch(_snake.GetSnake()[i].first, _snake.GetSnake()[i].second, ACS_BLOCK);
        }
     }*/
-    return;
-}
-
-int LibNcurses::getEventCore()
-{
-
+    return (0);
 }
 
 int LibNcurses::getEventGame()
