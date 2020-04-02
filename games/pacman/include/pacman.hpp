@@ -17,6 +17,8 @@ class pacman : public IGame
     private:
         /* data */
         std::vector<std::string> _map;
+       int SaveLastKey;
+       int _init;
     public:
         pacman();
         std::string getName() const final;
@@ -25,4 +27,7 @@ class pacman : public IGame
         int ReceiveEvent(int, int) final;
         void saveGame(std::string) final;
         void MovePlayer(int);
+        void KeepMoving(int SaveLastKey);
+        int GetY();
+        int GetX(); 
 };
