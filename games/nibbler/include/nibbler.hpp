@@ -12,7 +12,7 @@
 class nibbler : public IGame
 {
     private:
-       // std::vector<std::string> _map;
+       std::vector<std::string> _map;
        // std::vector<std::pair<int,int>> _NibblerBody;
        // int ymax;
        // int xmax;
@@ -22,8 +22,10 @@ class nibbler : public IGame
      //   int GetNibblerSize();
    //     std::vector<std::pair<int,int>> GetNibblerBody();
         std::string getName() const final;
-        std::vector<std::string> getMap() const final;
+        std::vector<std::string> getMap() final;
         int ReceiveEvent(int, int) final;
         void saveGame(std::string) final;
-     //   void MovePlayer() final;
+        void MovePlayer(int);
+        int GetY();
+        int GetX();        
 };
