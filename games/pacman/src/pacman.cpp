@@ -11,6 +11,7 @@ pacman::pacman()
 {
     _init = 0;
     _score.push_back("0");
+    _score.push_back("0");
 }
 
 void pacman::InitMap()

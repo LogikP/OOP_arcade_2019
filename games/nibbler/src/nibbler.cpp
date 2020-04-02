@@ -13,12 +13,20 @@
 
 nibbler::nibbler()
 {
+    std::ifstream in("./maps/HightScore.txt");
+    std::string str;
+
+    _score.push_back("0");
+    if (!in)
+        std::cerr << "Cannot open the File : " << "nibbler-map.txt"<<std::endl;
+    while (std::getline(in, str)) {
+        if(str.size() > 0)
+            _score.push_back(str);
+    }
+    in.close();
     SaveLastKey = 0;
     _food = 0;
     _init = 0;
-    _score.push_back("0");
-   // _NibblerBody.push_back(std::make_pair(2,2));
-    //_NibblerBody.push_back(std::make_pair(2,3));
 }
 /*
 int nibbler::GetNibblerSize()
@@ -216,8 +224,10 @@ void nibbler::MoveSnakeBody()
 {
     int i = 1;
 
-    if (_map[_snake[0].first][_snake[0].second] == 'x')
+    if (_map[_snake[0].first][_snake[0].second] == 'x') {
+        _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 50);
         _food = 0;
+    }
     _map[_snake[0].first][_snake[0].second] = '0';
     for (; i != (int)_snake.size() - 1; i++)
         _map[_snake[i].first][_snake[i].second] = 'o';

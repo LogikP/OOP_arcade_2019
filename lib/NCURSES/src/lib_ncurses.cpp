@@ -26,6 +26,48 @@ void LibNcurses::initWindow()
     wrefresh(window.window);
 }
 
+void LibNcurses::PrintScore(std::vector<std::string> score)
+{
+    char const *ft_line= "  ____   ____ ___  ____  _____ ";
+    char const *sd_line= " / ___| / ___/ _ \\|  _ \\| ____|";
+    char const *trd_line=" \\___ \\| |  | | | | |_) |  _|  ";
+    char const *fth_line="  ___) | |__| |_| |  _ <| |___ ";
+    char const *fft_line=" |____/ \\____\\___/|_| \\_\\_____|";
+    char const *sx_line= "                               ";
+
+    wattron(window.window,COLOR_PAIR(2));
+    mvwprintw(this->window.window, 12, (COLS/2) - (202/2) + 15, ft_line);
+    wattroff(window.window, COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 13, (COLS/2) - (202/2) + 15, sd_line);
+    wattroff(window.window, COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 14, (COLS/2) - (202/2) + 15, trd_line);
+    wattroff(window.window,COLOR_PAIR(3));
+    wattron(window.window,COLOR_PAIR(4));
+    mvwprintw(this->window.window, 15, (COLS/2) - (202/2) + 15, fth_line);
+    wattroff(window.window,COLOR_PAIR(4));
+    wattron(window.window,COLOR_PAIR(2));
+    mvwprintw(this->window.window, 16, (COLS/2) - (202/2) + 15, fft_line);
+    wattroff(window.window, COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 17, (COLS/2) - (202/2) + 15, sx_line);
+    wattroff(window.window, COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(1));
+    mvwprintw(this->window.window, 22, (COLS/2) - (202/2) + 20, "Current Score: ");
+    wattroff(window.window,COLOR_PAIR(1));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 22, (COLS/2) - (202/2) + 35, score[0].c_str());
+    wattroff(window.window,COLOR_PAIR(3));
+    wattron(window.window,COLOR_PAIR(2));
+    mvwprintw(this->window.window, 24, (COLS/2) - (202/2) + 20, "High Score: ");
+    wattroff(window.window,COLOR_PAIR(2));
+    wattron(window.window,COLOR_PAIR(3));
+    mvwprintw(this->window.window, 24, (COLS/2) - (202/2) + 35, score[1].c_str());
+    wattroff(window.window,COLOR_PAIR(3));
+    wrefresh(this->window.window);
+}
+
 void LibNcurses::PrintMap(std::vector<std::string> map)
 {
     for (unsigned int i = 0; i != map.size(); i++) {
@@ -57,7 +99,7 @@ void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string>
 {
     _map = map;
     PrintMap(_map);
-
+    PrintScore(score);
 }
 
 int LibNcurses::getEvent()
@@ -84,6 +126,11 @@ int LibNcurses::getEvent()
                     wclear(window.window);
                     wrefresh(window.window);return (right);
                     return (right);
+            case 27:
+                    wclear(window.window);
+                    wrefresh(window.window);
+                    endwin();
+                    exit(0);           
         }
         wclear(window.window);
         wrefresh(window.window);
@@ -125,7 +172,7 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
     int choice;
     unsigned int highlight = 0;
 
-    while (choice != 'q') {
+    while (choice != 27) {
         display_title();
         display_help();
         display_game();
@@ -196,7 +243,7 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
     unsigned int highlight = 0;
 
 
-    while (choice != 'q') {
+    while (choice != 27) {
         display_title();
         display_help();
         display_libs();
