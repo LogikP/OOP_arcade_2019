@@ -112,15 +112,7 @@ bool GameCore::play()
         std::vector<std::string> map = this->Game->getMap();
         this->Display->InitProg(map);
         this->keyCore = this->Display->getEvent();
-        // if (this->keyCore != 0)
-        // {
-        //     ////endl event core
-        // }
-//        this->keyGame = this->Display->getEventGame();
         this->Game->ReceiveEvent(this->keyCore, 0);
-//        this->Game->ReceiveEvent(key, 0);
-//        usleep(100000);
-
     }
     return true;
 }
