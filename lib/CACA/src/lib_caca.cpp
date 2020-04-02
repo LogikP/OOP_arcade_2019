@@ -49,6 +49,7 @@ int libCaca::getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
+    i = i == (int)libs.size() ? 0 : i;
     return libs.size() == 0 ? 0 : libs[i].first;
 }
 
@@ -56,6 +57,7 @@ int libCaca::getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("caca") >= 0; i--);
+    i = i == 0 ? (int)libs.size() - 1 : i;
     return libs.size() == 0 ? 0 : libs[i].first;
 }
 
