@@ -18,7 +18,6 @@ class nibbler : public IGame
        std::vector<std::pair<int,int>> _snake;
        int SaveLastKey;
        int _food;
-       int _snakeSize;
        int _init;
        int press;
 
