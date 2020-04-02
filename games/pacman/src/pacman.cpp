@@ -22,7 +22,7 @@ std::string pacman::getName() const
     return "Pacman";
 }
 
-std::vector<std::string> pacman::getMap() const
+std::vector<std::string> pacman::getMap()
 {
     std::vector<std::string> map;
     std::ifstream in("./maps/nibbler-map.txt");
@@ -35,7 +35,8 @@ std::vector<std::string> pacman::getMap() const
             map.push_back(str);
     }
     in.close();
-    return (map);}
+    return (map);
+}
 
 int pacman::ReceiveEvent(int key, int toto)
 {
