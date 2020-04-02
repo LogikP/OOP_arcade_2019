@@ -14,10 +14,12 @@ class libCaca : public IDisplay
 {
     private:
         enum EventKey {
+            UNKNOWN,
+            LEFT_KEY,
+            RIGHT_KEY,
             UP_KEY,
             DOWN_KEY,
-            LEFT_KEY,
-            RIGHT_KEY
+            LEAVE,
         };
 
         enum STATUS {
@@ -31,7 +33,6 @@ class libCaca : public IDisplay
         int getNextLib(std::vector<std::pair<int, std::string>>);
         int getPrevLib(std::vector<std::pair<int, std::string>>);
         int checkEventMenu(int, int&, int&, int,  std::vector<std::pair<int, std::string>>);
-        int checkEventGame(int);
         int checkEventMenuLib(int, int&, int);
         void displayNameGames(std::string name);
         int getKeyEventGame(int);
