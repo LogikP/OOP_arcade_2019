@@ -73,15 +73,12 @@ int libCaca::getKeyEventGame(int quit)
                     quit = UP_KEY;
                     break;
                 case CACA_KEY_DOWN:
-                    std::cout << "down" << std::endl;
                     quit = DOWN_KEY;
                     break;
                 case CACA_KEY_LEFT:
-                    std::cout << "left" << std::endl;
                     quit = LEFT_KEY;
                     break;
                 case CACA_KEY_RIGHT:
-                    std::cout << "rught" << std::endl;
                     quit = RIGHT_KEY;
                     break;
             }
