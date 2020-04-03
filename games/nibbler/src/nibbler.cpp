@@ -83,6 +83,7 @@ void nibbler::initSnake()
     countFood();
     while (_food != 10)
         addFood();
+    _snake.push_back(std::make_pair(1,4));
     _snake.push_back(std::make_pair(1,3));
     _snake.push_back(std::make_pair(1,2));
     _snake.push_back(std::make_pair(1,1));
@@ -99,7 +100,8 @@ void nibbler::deadSnake()
     initSnake();
     _map[1][1] = 'o';
     _map[1][2] = 'o';
-    _map[1][3] = '0';
+    _map[1][3] = 'o';
+    _map[1][4] = '0';
     SaveLastKey = -1;
 }
 
