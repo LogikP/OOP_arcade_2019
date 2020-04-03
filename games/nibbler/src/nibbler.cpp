@@ -164,8 +164,10 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x + 1;
         _snake[0].second = y; 
         MoveSnakeBody();
-    } else if (press == 1)
+    } else if (press == 1) {
+        _score[0] = "0";
         deadSnake();
+    }
 }
 
 int nibbler::ReceiveEvent(int key, int toto)
