@@ -14,9 +14,9 @@
 nibbler::nibbler()
 {
     SaveLastKey = 0;
-    _food = 0;
     _init = 0;
     _score.push_back("0");
+    srand(time(NULL));
    // _NibblerBody.push_back(std::make_pair(2,2));
     //_NibblerBody.push_back(std::make_pair(2,3));
 }
@@ -50,18 +50,30 @@ void nibbler::addFood()
     int i = 0;
     int j = 0;
 
-    srand(time(NULL));
     i = rand() % (_map.size() - 2) + 1;
     j = rand() % (_map[0].size() - 2) + 1;
     if (_map[i][j] == ' ') {
         _map[i][j] = 'x';
-        _food = 1;
+        _food += 1;
     } else
         addFood();
 }
+
+void nibbler::countFood()
+{
+    for (int i = 1; i != (int)_map.size() - 1; i++)
+        for (int j = 1; j != (int)_map[i].size() - 1; j++)
+            if (_map[i][j] == 'x')
+                _food++;
+}
+
 void nibbler::initSnake()
 {
     press = 0;
+    _food = 0;
+    countFood();
+    while (_food != 10)
+        addFood();
     _snake.push_back(std::make_pair(1,3));
     _snake.push_back(std::make_pair(1,2));
     _snake.push_back(std::make_pair(1,1));
@@ -71,17 +83,14 @@ void nibbler::initSnake()
 void nibbler::deadSnake()
 {
     _snake.clear();
-    initSnake();
-    for (int i = 1; i != (int)_map.size() - 1; i++) {
-        for (int j = 1; j != (int)_map[0].size() - 1; j++) {
+    for (int i = 1; i != (int)_map.size() - 1; i++)
+        for (int j = 1; j != (int)_map[0].size() - 1; j++)
             if (_map[i][j] == 'o' || _map[i][j] == '0' || _map[i][j] == 'x')
                 _map[i][j] = ' ';
-        }
-    }
+    initSnake();
     _map[1][1] = 'o';
     _map[1][2] = 'o';
     _map[1][3] = '0';
-    _food = 0;
     SaveLastKey = -1;
 }
 
@@ -104,7 +113,7 @@ std::vector<std::string> nibbler::getMap()
         initSnake();
     } else
         map = _map;
-    if (_food == 0)
+    if (_food <= 1)
         addFood();
     return (map);
 }
@@ -215,13 +224,16 @@ int nibbler::GetY()
 void nibbler::MoveSnakeBody()
 {
     int i = 1;
+    bool eat = false;
 
-    if (_map[_snake[0].first][_snake[0].second] == 'x')
-        _food = 0;
+    if (_map[_snake[0].first][_snake[0].second] == 'x') {
+        _food -= 1;
+        eat = true;
+    }
     _map[_snake[0].first][_snake[0].second] = '0';
     for (; i != (int)_snake.size() - 1; i++)
         _map[_snake[i].first][_snake[i].second] = 'o';
-    if (_food == 0)
+    if (eat == true)
         _snake.push_back(std::make_pair(_snake[i].first, _snake[i].second));
     _map[_snake[i].first][_snake[i].second] = ' ';
 }
