@@ -56,6 +56,7 @@ class LibSfml : public IDisplay
         sf::Texture MagicCandy;
         sf::RectangleShape Vert;
         sf::RectangleShape Horiz;
+        sf::Texture Candy;
         sf::Texture Background;
         std::map<std::string, sf::Sprite> ListSprite;
 
