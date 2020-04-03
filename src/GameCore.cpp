@@ -115,6 +115,16 @@ bool GameCore::play()
         this->keyCore = this->Display->getEvent();
         if (this->keyCore == 'k')
             return false;
+        if (this->keyCore == 'p')
+            ///pause///
+        if (this->keyCore == 'l')
+            this->NewMenuLib();
+            /////menuLib
+        if (this->keyCore == 'm') {
+            std::vector<std::pair<int, std::string>> libs_name;
+            this->Display->Menu(this->Games_names, libs_name);
+        }
+            /////menu
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;

@@ -13,6 +13,7 @@ RM	=	rm -vf
 
 SRCS	= 	./src/lib_sfml.cpp \
 			./src/bind.cpp \
+			./src/menu.cpp \
 
 OBJS	= $(SRCS:.cpp=.o)
 

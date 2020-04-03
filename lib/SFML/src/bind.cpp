@@ -26,6 +26,8 @@ int LibSfml::bind()
                     return LEFT_KEY;
                 if (event.key.code == sf::Keyboard::Escape)
                     return LEAVE;
+                if (event.key.code == sf::Keyboard::M)
+                    return MENU;
             }
             else
                 return -1;
