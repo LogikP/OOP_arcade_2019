@@ -117,6 +117,16 @@ bool GameCore::play()
             GetHightScore(score);
             return false;
         }
+        if (this->keyCore == 'p')
+            ///pause///
+        if (this->keyCore == 'l')
+            this->NewMenuLib();
+            /////menuLib
+        if (this->keyCore == 'm') {
+            std::vector<std::pair<int, std::string>> libs_name;
+            this->Display->Menu(this->Games_names, libs_name);
+        }
+            /////menu
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;

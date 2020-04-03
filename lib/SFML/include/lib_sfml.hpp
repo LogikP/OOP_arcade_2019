@@ -13,12 +13,7 @@
 #include <unistd.h>
 
 
-enum BindingTouch {
-    left = 1,
-    right = 2,
-    top = 3,
-    bot = 4,
-};
+
 enum EventKey {
     UNKNOWN,
     LEFT_KEY,
@@ -26,6 +21,7 @@ enum EventKey {
     UP_KEY,
     DOWN_KEY,
     LEAVE = 'k',
+    MENU = 'm',
 };
 
 enum STATUS {
@@ -60,6 +56,7 @@ class LibSfml : public IDisplay
         sf::Texture MagicCandy;
         sf::RectangleShape Vert;
         sf::RectangleShape Horiz;
+        sf::Texture Candy;
         sf::Texture Background;
         std::map<std::string, sf::Sprite> ListSprite;
 

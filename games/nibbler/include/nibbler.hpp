@@ -14,16 +14,17 @@
 class nibbler : public IGame
 {
     private:
-       std::vector<std::string> _map;
-       std::vector<std::string> _score;
-       std::vector<std::pair<int,int>> _snake;
-       int SaveLastKey;
-       int _food;
-       int _init;
-       int press;
+      std::vector<std::string> _map;
+      std::vector<std::string> _score;
+      std::vector<std::pair<int,int>> _snake;
+      int SaveLastKey;
+      int _food;
+      int _init;
+      int press;
 
-       void initSnake();
-       void deadSnake();
+      void initSnake();
+      void deadSnake();
+      void countFood();
        // std::vector<std::pair<int,int>> _NibblerBody;
        // int ymax;
        // int xmax;

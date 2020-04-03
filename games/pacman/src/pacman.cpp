@@ -32,12 +32,12 @@ std::vector<std::string> pacman::getScore() const
 std::vector<std::string> pacman::getMap()
 {
     std::vector<std::string> map;
-    std::ifstream in("./maps/pacman-map.txt");
+    std::ifstream in("./maps/pacman-map-1.txt");
     std::string str;
 
     if (_init == 0) {
         if (!in)
-            std::cerr << "Cannot open the File : " << "pacman-map.txt"<<std::endl;
+            std::cerr << "Cannot open the File : " << "pacman-map-1.txt"<<std::endl;
         while (std::getline(in, str)) {
             if(str.size() > 0)
                 map.push_back(str);
@@ -102,7 +102,7 @@ void pacman::MovePlayer(int key)
                 _map[x + 1][y] = 'C';
                 _map[x][y] = ' ';
             }
-            break;            
+            break;
     }
 }
 
