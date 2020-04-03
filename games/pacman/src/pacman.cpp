@@ -55,16 +55,24 @@ void pacman::KeepMoving(int SaveLastKey)
     int x = GetX();
     int y = GetY();
 
-    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ')) {
+    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.')) {
+        if (_map[x][y - 1] == '.')
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
         _map[x][y - 1] = 'C';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ')) {
+    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.')) {
+        if (_map[x][y + 1] == '.')
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
         _map[x][y + 1] = 'C';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ')) {
+    } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.')) {
+        if (_map[x - 1][y] == '.')
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
         _map[x - 1][y] = 'C';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ')) {
+    } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' || _map[x +1][y] == '.')) {
+        if (_map[x + 1][y] == '.')
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
         _map[x + 1][y] = 'C';
         _map[x][y] = ' ';
     }/* else if (press == 1)
@@ -80,25 +88,25 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ') {
+            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.') {
                 _map[x][y - 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
-            if (_map[x][y + 1] == ' ') {
+            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.') {
                 _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 3:
-            if (_map[x - 1][y] == ' ') {
+            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.') {
                 _map[x - 1][y] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-            if (_map[x + 1][y] == ' ') {
+            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.') {
                 _map[x + 1][y] = 'C';
                 _map[x][y] = ' ';
             }
