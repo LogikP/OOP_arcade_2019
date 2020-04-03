@@ -12,7 +12,15 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
 {
     int width = caca_get_canvas_width(window.getCanvas());
     int height = caca_get_canvas_height(window.getCanvas());
+
     caca_clear_canvas(window.getCanvas());
+    caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
+    caca_put_str(window.getCanvas(), 0, 10, "Current Score");
+    caca_put_str(window.getCanvas(), 5, 12, score[0].c_str());
+    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
+    caca_put_str(window.getCanvas(), 0, 20, "HighScore");
+    caca_put_str(window.getCanvas(), 5, 22, score[1].c_str());
+    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
     for (int i = 0; i < (int)map.size(); i++) {
         for (int j = 0; j < (int)map[i].size(); j++) {
             if (map[i][j] == '0' || map[i][j] == 'o') {
