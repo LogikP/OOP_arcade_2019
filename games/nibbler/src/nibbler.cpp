@@ -79,6 +79,7 @@ void nibbler::initSnake()
 {
     press = 0;
     _food = 0;
+    _snake.clear();
     countFood();
     while (_food != 10)
         addFood();
@@ -105,24 +106,30 @@ void nibbler::deadSnake()
 std::vector<std::string> nibbler::getMap()
 {
     std::vector<std::string> map;
-    std::ifstream in("./maps/nibbler-map.txt");
+    std::ifstream in[2];
+    static std::string maps[2] = {"./maps/nibbler-map.txt", "./maps/nibbler-map-2.txt"};
+    static int i = 0;
     std::string str;
 
     if (_init == 0) {
-        if (!in)
+        in[i].open(maps[i]);
+        if (!in[i])
             std::cerr << "Cannot open the File : " << "nibbler-map.txt"<<std::endl;
-        while (std::getline(in, str)) {
+        while (std::getline(in[i], str)) {
             if(str.size() > 0)
                 map.push_back(str);
         }
-        in.close();
+        in[i].close();
         _init = 1;
         _map = map;
         initSnake();
     } else
         map = _map;
-    if (_food <= 1)
-        addFood();
+    if (_food == 0) {
+        _init = 0;
+        initSnake();
+        i = i == 1 ? i : i + 1;
+    }
     return (map);
 }
 
@@ -163,8 +170,10 @@ void nibbler::KeepMoving(int SaveLastKey)
         _snake[0].first = x + 1;
         _snake[0].second = y;
         MoveSnakeBody();
-    } else if (press == 1)
+    } else if (press == 1) {
+        _score[0] = "0";
         deadSnake();
+    }
 }
 
 int nibbler::ReceiveEvent(int key, int toto)
