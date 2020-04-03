@@ -23,11 +23,15 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-            } else if (map[i][j] == 'x') {
+            } else if (map[i][j] == 'x' || map[i][j] == 'M') {
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
-            } else
+            } else if (map[i][j] == 'C') {
+                caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
+                caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
+                caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
+            }  else
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
         }
     }
@@ -76,7 +80,7 @@ int libCaca::getEvent()
     caca_set_display_time(window.getDisplay(), 80000);
     direction = getKeyEventGame(direction);
     if (direction == LEAVE)
-        exit(0);
+        return 'k';
     return direction;
 }
 

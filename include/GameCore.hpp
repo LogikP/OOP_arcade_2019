@@ -56,4 +56,5 @@ class GameCore {
         std::vector<std::pair<int, std::string>> SelectLib();
         std::string getNameFromLibrary(std::string);
         std::string madeFormatLib(std::string, std::string);
+        void GetHightScore(std::vector<std::string> score);
 };

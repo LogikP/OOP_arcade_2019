@@ -172,7 +172,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("sfml") <= 0; i++);
-    i = i == (int)libs.size() ? 0 : i;
+    i = i == (int)libs.size()? 0 : i;
     return libs[i].second;
 }
 
@@ -180,6 +180,7 @@ std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("sfml") >= 0; i--);
+    i = i == 0 ? (int)libs.size() - 1 : i;
     return libs[i].second;
 }
 
@@ -282,7 +283,6 @@ void LibSfml::DrawMap(std::vector<std::string> map)
     int pos1 = 0;
     int pos2 = 0;
     int lenLine = map[0].length();
-    static int i = 0;
 
     for (std::string i : map) {
         pos2 = 0;
@@ -313,6 +313,7 @@ void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> sc
 {
     this->window.clear();
     this->_map = map;
+    this->_score = score;
     if (this->window.isOpen())
         DrawMap(map);
     usleep(100000);

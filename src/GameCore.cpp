@@ -111,20 +111,24 @@ bool GameCore::play()
     {
         std::vector<std::string> map = this->Game->getMap();
         std::vector<std::string> score = this->Game->getScore();
-//        std::string score = Game->g
         this->Display->InitProg(map, score);
         this->keyCore = this->Display->getEvent();
-        // if (this->keyCore != 0)
-        // {
-        //     ////endl event core
-        // }
-//        this->keyGame = this->Display->getEventGame();
+        if (this->keyCore == 'k') {
+            GetHightScore(score);
+            return false;
+        }
         this->Game->ReceiveEvent(this->keyCore, 0);
-//        this->Game->ReceiveEvent(key, 0);
-//        usleep(100000);
-
     }
     return true;
+}
+void GameCore::GetHightScore(std::vector<std::string> score)
+{
+    if (atoi(score[0].c_str()) > atoi(score[1].c_str())) {
+        remove("./maps/HightScore.txt");
+        std::ofstream MyFile("./maps/HightScore.txt");
+        MyFile << score[0].c_str();
+        MyFile.close();
+    }
 }
 
 template<typename T>

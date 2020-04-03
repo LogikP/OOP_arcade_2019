@@ -120,17 +120,17 @@ int LibNcurses::getEvent()
                     return (down);
             case KEY_LEFT:
                     wclear(window.window);
-                    wrefresh(window.window);return (left);
+                    wrefresh(window.window);
                     return (left);
             case KEY_RIGHT:
                     wclear(window.window);
-                    wrefresh(window.window);return (right);
+                    wrefresh(window.window);
                     return (right);
             case 27:
-                    wclear(window.window);
-                    wrefresh(window.window);
-                    endwin();
-                    exit(0);           
+                wclear(window.window);
+                wrefresh(window.window);
+                endwin();
+                return (LEAVE);
         }
         wclear(window.window);
         wrefresh(window.window);
@@ -151,7 +151,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
-    i = i == (int)libs.size() ? 0 : i;
+    i = i == (int)libs.size()? 0 : i;
     return libs[i].second;
 }
 
@@ -159,6 +159,7 @@ std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("ncurses") >= 0; i--);
+    i = i == 0 ? (int)libs.size() - 1 : i;
     return libs[i].second;
 }
 

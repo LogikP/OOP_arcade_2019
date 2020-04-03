@@ -11,16 +11,18 @@
 #include "curses.h"
 #include "MyWindow.hpp"
 
+enum BindingTouch
+{
+    left = 1,
+    right = 2,
+    up = 3,
+    down = 4,
+    LEAVE = 'k',
+};
+
 class LibNcurses : public IDisplay
 {
     private:
-    enum BindingTouch
-    {
-        left = 1,
-        right = 2,
-        up = 3,
-        down = 4,
-    };
         MyWindow window;
         WINDOW *game;
         WINDOW *_nibbler;
