@@ -26,7 +26,6 @@ nibbler::nibbler()
     in.close();
     SaveLastKey = 0;
     _init = 0;
-    _score.push_back("0");
     srand(time(NULL));
 }
 /*
@@ -138,7 +137,7 @@ void nibbler::KeepMoving(int SaveLastKey)
             _snake[i].second = _snake[i - 1].second;
         }
         _snake[0].first = x;
-        _snake[0].second = y - 1; 
+        _snake[0].second = y - 1;
         MoveSnakeBody();
     } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == 'x')) {
             for (int i = _snake.size() - 1; i != 0 ; i--) {
@@ -146,7 +145,7 @@ void nibbler::KeepMoving(int SaveLastKey)
             _snake[i].second = _snake[i - 1].second;
         }
         _snake[0].first = x;
-        _snake[0].second = y + 1; 
+        _snake[0].second = y + 1;
         MoveSnakeBody();
     } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == 'x')) {
         for (int i = _snake.size() - 1; i != 0 ; i--) {
@@ -154,15 +153,15 @@ void nibbler::KeepMoving(int SaveLastKey)
             _snake[i].second = _snake[i - 1].second;
         }
         _snake[0].first = x - 1;
-        _snake[0].second = y; 
-        MoveSnakeBody();       
+        _snake[0].second = y;
+        MoveSnakeBody();
     } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' || _map[x + 1][y] == 'x')) {
         for (int i = _snake.size() - 1; i != 0 ; i--) {
             _snake[i].first = _snake[i - 1].first;
             _snake[i].second = _snake[i - 1].second;
         }
         _snake[0].first = x + 1;
-        _snake[0].second = y; 
+        _snake[0].second = y;
         MoveSnakeBody();
     } else if (press == 1)
         deadSnake();
@@ -264,7 +263,7 @@ void nibbler::MovePlayer(int key)
                     _snake[i].second = _snake[i - 1].second;
                 }
                 _snake[0].first = x;
-                _snake[0].second = y - 1; 
+                _snake[0].second = y - 1;
                 MoveSnakeBody();
             }
             break;
@@ -298,7 +297,7 @@ void nibbler::MovePlayer(int key)
                 _snake[0].second = y;
                 MoveSnakeBody();
             }
-            break;            
+            break;
     }
 }
 

@@ -50,7 +50,7 @@ void LibSfml::initWindow()
         sf::Sprite sprite;
         sprite.setTexture(this->Apple);
         this->Apple.setSmooth(true);
-        sprite.setScale(0.15, 0.15);
+        sprite.setScale(0.10, 0.10);
         ListSprite["Apple"] = sprite;
     }
     if (!this->Wall_P.loadFromFile("./asset/assets-game/pacwall.bmp")) {
@@ -194,15 +194,58 @@ void LibSfml::DrawMap(std::vector<std::string> map)
     }
 }
 
+void LibSfml::DrawScore(std::vector<std::string> score)
+{
+    sf::Text Score;
+    sf::Text Name;
+    sf::Text HighScore;
+    sf::Font font;
+    if (this->_map[0].front() == 'W')
+        Name.setString("Nibbler");
+    else
+        Name.setString("Pacman");
+    if (!font.loadFromFile("./asset/Test-Font.ttf"))
+        throw(Error("Can't find the Font file"));
+    Score.setString("score: " + score.front());
+    HighScore.setString("HighScore :" +score.back());
+    Score.setFillColor(sf::Color::Yellow);
+    HighScore.setFillColor(sf::Color::Red);
+    Name.setFillColor(sf::Color::Green);
+    Name.setFont(font);
+    Score.setFont(font);
+    HighScore.setFont(font);
+    Name.setCharacterSize(150);
+    Score.setCharacterSize(50);
+    HighScore.setCharacterSize(50);
+    Name.setStyle(sf::Text::Bold);
+    Score.setStyle(sf::Text::Bold);
+    HighScore.setStyle(sf::Text::Bold);
+    Name.setPosition(sf::Vector2f(780, -20));
+    Score.setPosition(sf::Vector2f(50, 200));
+    HighScore.setPosition(sf::Vector2f(50, 300));
+
+    this->window.draw(Name);
+    this->window.draw(Score);
+    this->window.draw(HighScore);
+// Lib1.setString(Libs[0].second);
+//     Lib1.setFillColor(sf::Color::Green);
+//     Lib1.setPosition(sf::Vector2f(200, 400));
+//     Lib1.setFont(font);
+//     Lib1.setCharacterSize(150);
+//     Lib1.setStyle(sf::Text::Bold);
+}
+
 void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     this->window.clear();
     this->_map = map;
     this->_score = score;
-    if (this->window.isOpen())
+    if (this->window.isOpen()) {
         DrawMap(map);
-    usleep(100000);
-    this->window.display();
+        DrawScore(score);
+        usleep(100000);
+        this->window.display();
+    }
 }
 
 int LibSfml::getEvent()

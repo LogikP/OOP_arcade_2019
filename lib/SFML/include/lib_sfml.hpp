@@ -72,4 +72,5 @@ class LibSfml : public IDisplay
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>) final;
         void DrawMap(std::vector<std::string>);
         int bind();
+        void DrawScore(std::vector<std::string>);
 };
