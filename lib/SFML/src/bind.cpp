@@ -28,6 +28,8 @@ int LibSfml::bind()
                     return LEAVE;
                 if (event.key.code == sf::Keyboard::M)
                     return MENU;
+                if (event.key.code == sf::Keyboard::Space)
+                    return PAUSE;
             }
             else
                 return -1;

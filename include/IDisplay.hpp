@@ -20,5 +20,6 @@ class IDisplay {
         virtual std::string MenuLib(std::vector<std::pair<int, std::string>>) = 0;
         virtual std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>) = 0;
         virtual std::string Game() = 0;
+        virtual int Pause() = 0;
         virtual int getEvent() = 0;
 };

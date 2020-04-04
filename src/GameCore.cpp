@@ -85,6 +85,11 @@ int isGame(std::string peakGame, std::vector<std::pair<int, std::string>> names)
     return 0;
 }
 
+void GameCore::Kill(std::vector<std::string> score)
+{
+    this->GetHightScore(score);
+}
+
 bool GameCore::play()
 {
     //char *error;
@@ -114,11 +119,20 @@ bool GameCore::play()
         this->Display->InitProg(map, score);
         this->keyCore = this->Display->getEvent();
         if (this->keyCore == 'k') {
-            GetHightScore(score);
+            this->Kill(score);
             return false;
         }
-        if (this->keyCore == 'p')
+        if (this->keyCore == 'p') {
             ///pause///
+            int key = this->Display->Pause();
+            while (key == 0)
+                key = this->Display->Pause();
+            if (key == 'k') {
+                this->Kill(score);
+                return false;
+            }
+
+        }
         if (this->keyCore == 'l')
             this->NewMenuLib();
             /////menuLib

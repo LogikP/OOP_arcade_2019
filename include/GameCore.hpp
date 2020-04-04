@@ -57,4 +57,5 @@ class GameCore {
         std::string getNameFromLibrary(std::string);
         std::string madeFormatLib(std::string, std::string);
         void GetHightScore(std::vector<std::string> score);
+        void Kill(std::vector<std::string>);
 };

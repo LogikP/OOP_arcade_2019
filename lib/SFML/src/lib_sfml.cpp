@@ -257,6 +257,36 @@ void LibSfml::closeWindow()
     window.close();
 }
 
+int LibSfml::Pause()
+{
+    this->window.clear();
+    sf::Texture PauseTexture;
+    sf::Sprite SpritePause;
+
+    if (!PauseTexture.loadFromFile("./asset/assets-game/pause.png"))
+        throw(Error("Fail to open assset File"));
+    SpritePause.setTexture(PauseTexture);
+    SpritePause.setPosition(sf::Vector2f(700,250));
+
+    this->window.draw(SpritePause);
+    this->window.display();
+    if (this->window.isOpen())
+    {
+        sf::Event event;
+        while (this->window.pollEvent(event))
+        {
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Space)
+                    return 1;
+                if (event.key.code == sf::Keyboard::Escape)
+                    return LEAVE;
+            }
+        }
+    }
+    return 0;
+}
+
 //// For the dlsym Symbol /////
 extern "C" LibSfml *createDisplay()
 {
