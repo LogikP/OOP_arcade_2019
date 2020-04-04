@@ -23,6 +23,10 @@ void LibNcurses::closeWindow()
 
 void LibNcurses::initWindow()
 {
+ //       MyWindow ObjectWindow(0,0,0,0);
+   //     this->window =  ObjectWindow;
+        keypad(this->window.window, TRUE);
+     //   noecho();
     wrefresh(window.window);
 }
 
@@ -239,8 +243,9 @@ void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string>
 int LibNcurses::getEvent()
 {
     int choice;
+    static int i = 0;
 
-    keypad(this->window.window, TRUE);
+        refresh();
         wtimeout(window.window, 100);
         choice = wgetch(this->window.window);
         switch (choice) {
@@ -266,10 +271,6 @@ int LibNcurses::getEvent()
                 endwin();
                 return (LEAVE);
             case 'l':
-                wclear(game);
-                wrefresh(game);
-                wclear(help);
-                wrefresh(help);
                 wclear(window.window);
                 wrefresh(window.window);
                 return ('l');
@@ -400,7 +401,6 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
     int choice;
     unsigned int highlight = 0;
 
-
     while (choice != 27) {
         display_title();
         display_help();
@@ -429,10 +429,6 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
             case 10:
                 wclear(window.window);
                 wrefresh(window.window);
-                wclear(game);
-                wrefresh(game);
-                wclear(help);
-                wrefresh(help);
                 endwin();
                 return (libs[highlight].second);
                 break;
