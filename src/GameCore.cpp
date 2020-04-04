@@ -123,8 +123,7 @@ bool GameCore::play()
             return false;
         }
         if (this->keyCore == 'p') {
-            ///pause///
-            int key = this->Display->Pause();
+            int key = 0;
             while (key == 0)
                 key = this->Display->Pause();
             if (key == 'k') {
