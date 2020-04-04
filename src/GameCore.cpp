@@ -11,7 +11,7 @@
 template<typename T>
 T *GameCore::setNewLib(std::string Interface, std::string LibName)
 {
-    std::string path;
+   std::string path;
 
     path = "./lib/lib_arcade_" + LibName + ".so";
     if (this->libToDisplay[Interface])
