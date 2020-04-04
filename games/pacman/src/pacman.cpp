@@ -88,25 +88,25 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C') {
+            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.') {
                 _map[x][y - 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
-            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C') {
+            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.') {
                 _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 3:
-            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.' || _map[x - 1][y] == 'C') {
+            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.') {
                 _map[x - 1][y] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C') {
+            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.') {
                 _map[x + 1][y] = 'C';
                 _map[x][y] = ' ';
             }
@@ -120,33 +120,24 @@ int pacman::ReceiveEvent(int key, int toto)
     switch (key)
     {
         case 1:
-            if (SaveLastKey != 2) {
                 MovePlayer(key);
                 SaveLastKey = 1;
-            }
             break;
         case 2:
-            if (SaveLastKey != 1) {
                 MovePlayer(key);
                 SaveLastKey = 2;
-            }
             break;
         case 3:
-            if (SaveLastKey != 4) {
                 MovePlayer(key);
                 SaveLastKey = 3;
-            }
             break;
         case 4:
-            if (SaveLastKey != 3) {
                 MovePlayer(key);
                 SaveLastKey = 4;
-            }
             break;
         case -1:
             KeepMoving(SaveLastKey);
             break;
-
     }
     return 0;
 }
