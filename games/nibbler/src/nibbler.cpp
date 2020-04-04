@@ -83,11 +83,11 @@ void nibbler::initSnake()
     countFood();
     while (_food != 10)
         addFood();
-    _snake.push_back(std::make_pair(1,4));
-    _snake.push_back(std::make_pair(1,3));
-    _snake.push_back(std::make_pair(1,2));
-    _snake.push_back(std::make_pair(1,1));
-    _snake.push_back(std::make_pair(1,0));
+    _snake.push_back(std::make_pair(15,25));
+    _snake.push_back(std::make_pair(15,24));
+    _snake.push_back(std::make_pair(15,23));
+    _snake.push_back(std::make_pair(15,22));
+    _snake.push_back(std::make_pair(15,21));
     SaveLastKey = -1;
 }
 
@@ -99,10 +99,10 @@ void nibbler::deadSnake()
             if (_map[i][j] == 'o' || _map[i][j] == '0' || _map[i][j] == 'x')
                 _map[i][j] = ' ';
     initSnake();
-    _map[1][1] = 'o';
-    _map[1][2] = 'o';
-    _map[1][3] = 'o';
-    _map[1][4] = '0';
+    _map[15][22] = 'o';
+    _map[15][23] = 'o';
+    _map[15][24] = 'o';
+    _map[15][25] = '0';
 }
 
 std::vector<std::string> nibbler::getMap()
