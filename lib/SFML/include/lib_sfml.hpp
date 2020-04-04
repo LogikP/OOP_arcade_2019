@@ -45,9 +45,13 @@ class LibSfml : public IDisplay
         sf::Texture Wall_N;
         sf::Texture Wall_P;
         sf::Texture Pacman_Left;
+        sf::Texture Pacman_Left_Open;
         sf::Texture Pacman_Right;
+        sf::Texture Pacman_Right_Open;
         sf::Texture Pacman_Up;
+        sf::Texture Pacman_Up_Open;
         sf::Texture Pacman_Down;
+        sf::Texture Pacman_Down_Open;
         sf::Texture Nibbler_Head;
         sf::Texture Nibbler_Tail;
         sf::Texture Ghost1;
@@ -60,6 +64,7 @@ class LibSfml : public IDisplay
         sf::RectangleShape Horiz;
         sf::Texture Candy;
         sf::Texture Background;
+        int check = 0;
         std::map<std::string, sf::Sprite> ListSprite;
         std::string getNextLib(std::vector<std::pair<int, std::string>>);
         std::string getPrevLib(std::vector<std::pair<int, std::string>>);

@@ -92,6 +92,10 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(4));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(4));
+            } else if (map[i][a] == 'A' || map[i][a] == 'B' || map[i][a] == 'D') { 
+                wattron(window.window, COLOR_PAIR(4));
+                mvwaddch(window.window,i + 15, a + 80, 'C');
+                wattroff(window.window, COLOR_PAIR(4));
             } else if (map[i][a] == 'M') {
                 wattron(window.window, COLOR_PAIR(1));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
