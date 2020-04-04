@@ -20,11 +20,8 @@ int libCaca::Pause()
     while (event) {
         if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
             switch (caca_get_event_key_ch(&ev)) {
-            case CACA_KEY_ESCAPE:
-                pause = LEAVE;
-                break;
             case 32:
-                pause = 0;
+                pause = 1;
                 break;
             }
         }
