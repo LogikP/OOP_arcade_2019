@@ -12,11 +12,6 @@ libCaca::libCaca() : window()
 
 }
 
-int libCaca::Pause()
-{
-    return 0;
-}
-
 void libCaca::closeWindow()
 {
     caca_free_display(window.getDisplay());

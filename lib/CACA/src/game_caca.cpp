@@ -8,6 +8,28 @@
 #include <iostream>
 #include "lib_caca.hpp"
 
+int libCaca::Pause()
+{
+    int pause = 0;
+
+       caca_event_t ev;
+    unsigned int const event_mask = CACA_EVENT_KEY_PRESS
+| CACA_EVENT_RESIZE | CACA_EVENT_MOUSE_PRESS | CACA_EVENT_QUIT;
+    int event = caca_get_event(window.getDisplay(),  event_mask, &ev, 0);
+
+    while (event) {
+        if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
+            switch (caca_get_event_key_ch(&ev)) {
+            case 32:
+                pause = 1;
+                break;
+            }
+        }
+        event = caca_get_event(window.getDisplay(), CACA_EVENT_KEY_PRESS, &ev, 0);
+    }
+    return pause;
+}
+
 void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> score)
 {
     int width = caca_get_canvas_width(window.getCanvas());
@@ -77,6 +99,9 @@ int libCaca::getKeyEventGame(int quit)
                 case 'm':
                     quit = MENU_G;
                     break;
+                case 32:
+                    quit = PAUSE;
+                    break;
             }
             if (caca_get_event_type(&ev) & CACA_EVENT_QUIT) {
                 quit = 1;
@@ -99,6 +124,11 @@ int libCaca::getEvent()
         return 'l';
     else if (direction == MENU_G)
         return 'm';
+    else if (direction == PAUSE) {
+        caca_clear_canvas(window.getCanvas());
+        caca_refresh_display(this->window.getDisplay());
+        return 'p';
+    }
     return direction;
 }
 
