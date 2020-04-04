@@ -7,7 +7,7 @@
 
 #include "lib_sfml.hpp"
 
-std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
+std::string LibSfml::getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("sfml") <= 0; i++);
@@ -15,7 +15,7 @@ std::string getNextLib(std::vector<std::pair<int, std::string>> libs)
     return libs[i].second;
 }
 
-std::string getPrevLib(std::vector<std::pair<int, std::string>> libs)
+std::string LibSfml::getPrevLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
     for (; i > 0 && libs[i].second.compare("sfml") >= 0; i--);
