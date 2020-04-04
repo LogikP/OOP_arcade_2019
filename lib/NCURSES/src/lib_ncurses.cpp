@@ -36,22 +36,22 @@ void LibNcurses::PrintGameName()
         char const *fft_line=" |_| \\_|___|____/|____/|_____|_____|_| \\_\\";
         char const *sx_line= "                                          ";
         wattron(window.window,COLOR_PAIR(2));
-        mvwprintw(this->window.window, 12, (COLS/2) - (202/2) + 15, ft_line);
+        mvwprintw(this->window.window, 2, (COLS/2) - (202/2) + 78, ft_line);
         wattroff(window.window, COLOR_PAIR(2));
         wattron(window.window,COLOR_PAIR(1));
-        mvwprintw(this->window.window, 13, (COLS/2) - (202/2) + 15, sd_line);
+        mvwprintw(this->window.window, 3, (COLS/2) - (202/2) + 78, sd_line);
         wattroff(window.window, COLOR_PAIR(1));
         wattron(window.window,COLOR_PAIR(3));
-        mvwprintw(this->window.window, 14, (COLS/2) - (202/2) + 15, trd_line);
+        mvwprintw(this->window.window, 4, (COLS/2) - (202/2) + 78, trd_line);
         wattroff(window.window,COLOR_PAIR(3));
         wattron(window.window,COLOR_PAIR(4));
-        mvwprintw(this->window.window, 15, (COLS/2) - (202/2) + 15, fth_line);
+        mvwprintw(this->window.window, 5, (COLS/2) - (202/2) + 78, fth_line);
         wattroff(window.window,COLOR_PAIR(4));
         wattron(window.window,COLOR_PAIR(2));
-        mvwprintw(this->window.window, 16, (COLS/2) - (202/2) + 15, fft_line);
+        mvwprintw(this->window.window, 6, (COLS/2) - (202/2) + 78, fft_line);
         wattroff(window.window, COLOR_PAIR(2));
         wattron(window.window,COLOR_PAIR(1));
-        mvwprintw(this->window.window, 17, (COLS/2) - (202/2) + 15, sx_line);
+        mvwprintw(this->window.window, 7, (COLS/2) - (202/2) + 78, sx_line);
         wattroff(window.window, COLOR_PAIR(1));
         wrefresh(this->window.window);
     } else {
@@ -62,22 +62,22 @@ void LibNcurses::PrintGameName()
         char const *fft_line=" |_| /_/   \\_\\____|_|  |_/_/   \\_\\_| \\_|";
         char const *sx_line= "                                        ";
         wattron(window.window,COLOR_PAIR(2));
-        mvwprintw(this->window.window, 2, (COLS/2) - (202/2) + 70, ft_line);
+        mvwprintw(this->window.window, 2, (COLS/2) - (202/2) + 78, ft_line);
         wattroff(window.window, COLOR_PAIR(2));
         wattron(window.window,COLOR_PAIR(1));
-        mvwprintw(this->window.window, 3, (COLS/2) - (202/2) + 70, sd_line);
+        mvwprintw(this->window.window, 3, (COLS/2) - (202/2) + 78, sd_line);
         wattroff(window.window, COLOR_PAIR(1));
         wattron(window.window,COLOR_PAIR(3));
-        mvwprintw(this->window.window, 4, (COLS/2) - (202/2) + 70, trd_line);
+        mvwprintw(this->window.window, 4, (COLS/2) - (202/2) + 78, trd_line);
         wattroff(window.window,COLOR_PAIR(3));
         wattron(window.window,COLOR_PAIR(4));
-        mvwprintw(this->window.window, 5, (COLS/2) - (202/2) + 70, fth_line);
+        mvwprintw(this->window.window, 5, (COLS/2) - (202/2) + 78, fth_line);
         wattroff(window.window,COLOR_PAIR(4));
         wattron(window.window,COLOR_PAIR(2));
-        mvwprintw(this->window.window, 6, (COLS/2) - (202/2) + 70, fft_line);
+        mvwprintw(this->window.window, 6, (COLS/2) - (202/2) + 78, fft_line);
         wattroff(window.window, COLOR_PAIR(2));
         wattron(window.window,COLOR_PAIR(1));
-        mvwprintw(this->window.window, 7, (COLS/2) - (202/2) + 70, sx_line);
+        mvwprintw(this->window.window, 7, (COLS/2) - (202/2) + 78, sx_line);
         wattroff(window.window, COLOR_PAIR(1));
         wrefresh(this->window.window);
     }
@@ -176,22 +176,22 @@ int LibNcurses::Pause()
     char const *sx_line= "                               ";
 
     wattron(Pause,COLOR_PAIR(2));
-    mvwprintw(Pause, 5, (COLS/2) - (202/2) + 80 , ft_line);
+    mvwprintw(Pause, 5, (COLS/2) - (202/2) + 70 , ft_line);
     wattroff(Pause, COLOR_PAIR(2));
     wattron(Pause,COLOR_PAIR(1));
-    mvwprintw(Pause, 6, (COLS/2) - (202/2) + 80 , sd_line);
+    mvwprintw(Pause, 6, (COLS/2) - (202/2) + 70 , sd_line);
     wattroff(Pause, COLOR_PAIR(1));
     wattron(Pause,COLOR_PAIR(3));
-    mvwprintw(Pause, 7, (COLS/2) - (202/2) + 80, trd_line);
+    mvwprintw(Pause, 7, (COLS/2) - (202/2) + 70, trd_line);
     wattroff(Pause,COLOR_PAIR(3));
     wattron(Pause,COLOR_PAIR(4));
-    mvwprintw(Pause, 8, (COLS/2) - (202/2) + 80 , fth_line);
+    mvwprintw(Pause, 8, (COLS/2) - (202/2) + 70 , fth_line);
     wattroff(Pause,COLOR_PAIR(4));
     wattron(Pause,COLOR_PAIR(2));
-    mvwprintw(Pause, 9, (COLS/2) - (202/2) + 80, fft_line);
+    mvwprintw(Pause, 9, (COLS/2) - (202/2) + 70, fft_line);
     wattroff(Pause, COLOR_PAIR(2));
     wattron(Pause,COLOR_PAIR(1));
-    mvwprintw(Pause, 10, (COLS/2) - (202/2) + 80, sx_line);
+    mvwprintw(Pause, 10, (COLS/2) - (202/2) + 70, sx_line);
     wattroff(Pause, COLOR_PAIR(1));
   //  wattron(help,COLOR_PAIR(3));
 //    box(help, ACS_VLINE, ACS_HLINE);
@@ -218,6 +218,12 @@ int LibNcurses::Pause()
                 wclear(window.window);
                 wrefresh(window.window);
                 return ('l');
+            case 'm':
+                wclear(Pause);
+                wrefresh(Pause);
+                wclear(window.window);
+                wrefresh(window.window);
+                return ('m');
         }
     return 0;
 }
