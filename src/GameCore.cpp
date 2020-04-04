@@ -20,6 +20,23 @@ std::string GameCore::NewMenu(std::string Lib)
     return PeakGame;
 }
 
+IGame *GameCore::NewGameMenu()
+{
+    std::string PeakGame;
+    std::string path;
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    if (this->libToDisplay["IGame"])
+        dlclose(this->libToDisplay["IGame"]);
+    PeakGame = this->Display->Menu(this->Games_names, libs_name);
+    while (PeakGame == "ChangedLib")
+        PeakGame = this->NewMenuLib();
+    path = "./games/lib_arcade_" + PeakGame + ".so";
+    this->libToDisplay["IGame"] = dlopen(path.c_str(), RTLD_NOW);
+//    std::cout << path.c_str() << std::endl;
+    if (!this->libToDisplay["IGame"])
+        throw(Error("Can't open the New Library"));
+    return createObject<IGame>(this->libToDisplay["IGame"]);
+}
 
 void GameCore::Kill(std::vector<std::string> score)
 {
@@ -76,8 +93,9 @@ bool GameCore::play()
         }
         if (this->keyCore == 'm') {
             /////menu
-            std::vector<std::pair<int, std::string>> libs_name;
-            this->Display->Menu(this->Games_names, libs_name);
+            this->Game = this->NewGameMenu();
+            //std::vector<std::pair<int, std::string>> libs_name;
+            //this->Display->Menu(this->Games_names, libs_name);
         }
         this->Game->ReceiveEvent(this->keyCore, 0);
     }

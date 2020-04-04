@@ -62,4 +62,5 @@ class GameCore {
         void GetHightScore(std::vector<std::string> score);
         void Kill(std::vector<std::string>);
         std::string NewLibRunTime();
+        IGame *NewGameMenu();
 };
