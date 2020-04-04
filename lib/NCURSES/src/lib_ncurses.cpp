@@ -288,10 +288,6 @@ int LibNcurses::getEvent()
         wclear(window.window);
         wrefresh(window.window);
         return (-1);
-/*    wclear(window.window);
-    wrefresh(window.window);
-    endwin();
-    exit(0);*/
     return (0);
 }
 
@@ -325,11 +321,15 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
     refresh();
     int choice;
     unsigned int highlight = 0;
+    display_title();
+   // GetUsername();
+    display_help();
+    display_game();
 
     while (choice != 27) {
-        display_title();
-        display_help();
-        display_game();
+//        display_title();
+//        display_help();
+  //      display_game();
         for (unsigned int i = 0; i != games.size(); i+= 1) {
             if (i == highlight) {
                 wattron(window.window,A_REVERSE);

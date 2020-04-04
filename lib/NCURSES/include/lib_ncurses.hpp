@@ -49,4 +49,5 @@ class LibNcurses : public IDisplay
         void display_libs();
         void display_game();
         void PrintGameName();
+        void GetUsername();
 };
