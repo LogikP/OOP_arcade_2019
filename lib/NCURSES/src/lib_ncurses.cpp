@@ -191,6 +191,10 @@ int LibNcurses::getEvent()
                 wrefresh(window.window);
                 endwin();
                 return (LEAVE);
+            case 'l':
+                wclear(window.window);
+                wrefresh(window.window);
+                return ('l');
             case 32:
                 wclear(window.window);
                 wrefresh(window.window);
@@ -346,6 +350,11 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
             case 10:
                 wclear(window.window);
                 wrefresh(window.window);
+                wclear(game);
+                wrefresh(game);
+                wclear(help);
+                wrefresh(help);
+                endwin();                
                 return (libs[highlight].second);
                 break;
         }
