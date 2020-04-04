@@ -27,8 +27,8 @@ class LibNcurses : public IDisplay
         WINDOW *game;
         WINDOW *_nibbler;
         std::vector<std::string> _map;
-        std::string getNextLib(std::vector<std::pair<int, std::string>>);
-        std::string getPrevLib(std::vector<std::pair<int, std::string>>);
+        std::string getNextLibN(std::vector<std::pair<int, std::string>>);
+        std::string getPrevLibN(std::vector<std::pair<int, std::string>>);
 
     public:
         LibNcurses();

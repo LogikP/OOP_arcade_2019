@@ -155,7 +155,7 @@ std::string LibNcurses::Game()
     return "toto";
 }
 
-std::string LibNcurses::getNextLib(std::vector<std::pair<int, std::string>> libs)
+std::string LibNcurses::getNextLibN(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
     for (; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
@@ -163,11 +163,11 @@ std::string LibNcurses::getNextLib(std::vector<std::pair<int, std::string>> libs
     return libs[i].second;
 }
 
-std::string LibNcurses::getPrevLib(std::vector<std::pair<int, std::string>> libs)
+std::string LibNcurses::getPrevLibN(std::vector<std::pair<int, std::string>> libs)
 {
     int i = libs.size() - 1;
-    for (; i > 0 && libs[i].second.compare("ncurses") >= 0; i--);
-    i = i == 0 ? (int)libs.size() - 1 : i;
+    for (; i != 0 && libs[i].second.compare("ncurses") >= 0; i--);
+    i = i == -1 ? (int)libs.size() - 1 : i;
     return libs[i].second;
 }
 
@@ -216,7 +216,7 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
                 wrefresh(game);
                 wclear(window.window);
                 wrefresh(window.window);
-                return libs.size() == 0 ? "ncurses" : getNextLib(libs);
+                return libs.size() == 0 ? "ncurses" : getNextLibN(libs);
                 break;
             case 'l':
                 wclear(game);
@@ -230,7 +230,7 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
                 wrefresh(game);
                 wclear(window.window);
                 wrefresh(window.window);
-                return libs.size() == 0 ? "ncurses" : getPrevLib(libs);
+                return libs.size() == 0 ? "ncurses" : getPrevLibN(libs);
                 break;
         }
         refresh();
