@@ -5,13 +5,14 @@
 ** lib_ncurses_menu.cpp
 */
 
-#include "lib_ncurses.hpp"
+#include <string>
+#include <iostream>
 #include <curses.h>
 #include <time.h>
+#include "lib_ncurses.hpp"
 
 void LibNcurses::display_title()
 {
-    box(this->window.window, ACS_VLINE, ACS_HLINE);
     char const *ft_line= " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
     char const *sd_line= "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
     char const *trd_line="| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |";
@@ -61,17 +62,55 @@ void LibNcurses::display_title()
 
 }
 
+static std::string getstring()
+{
+    std::string input;
+
+    // let the terminal do the line editing
+    nocbreak();
+    echo();
+
+    // this reads from buffer after <ENTER>, not "raw" 
+    // so any backspacing etc. has already been taken care of
+    int ch = getch();
+
+    while ( ch != '\n' )
+    {
+        input.push_back( ch );
+        ch = getch();
+    }
+
+    // restore your cbreak / echo settings here
+
+    return input;
+}
+
 static void usage_help(WINDOW *help)
 {
+    wattron(help,COLOR_PAIR(2));
     wattron(help,COLOR_PAIR(1));
-    mvwprintw(help, 10, 15, "\t\t\t\n\n\n\n\tMove the cursor menu to select a game\n\n\tPress enter to choose a game.\
+    mvwprintw(help, 15, 15, "\t\t\t\n\n\n\n\tMove the cursor menu to select a game\n\n\tPress enter to choose a game.\
     \n\n\tIn Game :\n\n\tKey l : move to Library menu.\n\n\tFor starting push ENTER and for quit monitor push \"q\"");
     wattroff(help,COLOR_PAIR(1));
 }
 
+void LibNcurses::GetUsername()
+{
+    mvprintw(30, 80, "ENTER YOUR USERNAME: ");
+    std::string name = getstring();
+clrtoeol();          // clear line
+//    WINDOW *GetName;
+//    GetName = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
+ //     wattron(GetName,COLOR_PAIR(2));
+  //      mvwprintw(GetName, 30, (COLS/2) - (202/2) + 70 , "ENTER YOUR USERNAME: ");
+    // wattroff(GetName, COLOR_PAIR(2));
+    clrtoeol();          // clear line
+    refresh();
+    std::cout << name << std::endl;
+}
+
 void LibNcurses::display_help()
 {
-
     wattron(window.window,COLOR_PAIR(3));
     box(this->window.window, '*', '*');
     touchwin(this->window.window);
@@ -88,7 +127,6 @@ void LibNcurses::display_help()
     char const *sv_line= "                                                                 ";
 
 
-    wattron(help,COLOR_PAIR(2));
     mvwprintw(help, 2, (COLS/2) - (202/2) , ft_line);
     wattroff(help, COLOR_PAIR(2));
     wattron(help,COLOR_PAIR(1));
