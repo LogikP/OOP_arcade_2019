@@ -16,6 +16,7 @@ std::string GameCore::NewMenu(std::string Lib)
     this->Display = this->setNewLib<IDisplay>("IDisplay", Lib);
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     PeakGame = this->Display->Menu(this->Games_names, libs_name);
+    this->Display->initWindow();
     return PeakGame;
 }
 

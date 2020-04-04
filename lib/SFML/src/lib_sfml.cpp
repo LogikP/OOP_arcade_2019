@@ -114,8 +114,71 @@ void LibSfml::initWindow()
         sf::Sprite sprite;
         sprite.setTexture(this->Pacman_Right);
         this->Pacman_Right.setSmooth(true);
-        sprite.setScale(0.12, 0.12);
+        sprite.setScale(0.14, 0.14);
         ListSprite["Pacman_Right"] = sprite;
+    }
+    if (!this->Pacman_Right_Open.loadFromFile("./asset/assets-game/open_right.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Right_Open);
+        this->Pacman_Right_Open.setSmooth(true);
+        sprite.setScale(0.15, 0.15);
+        ListSprite["Pacman_Right_Open"] = sprite;
+    }
+    if (!this->Pacman_Up.loadFromFile("./asset/assets-game/pac-man3.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Up);
+        this->Pacman_Right.setSmooth(true);
+        sprite.setScale(0.12, 0.12);
+        ListSprite["Pacman_Up"] = sprite;
+    }
+    if (!this->Pacman_Up_Open.loadFromFile("./asset/assets-game/open_up.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Up_Open);
+        this->Pacman_Up_Open.setSmooth(true);
+        sprite.setScale(0.13, 0.13);
+        ListSprite["Pacman_Up_Open"] = sprite;
+    }
+    if (!this->Pacman_Left.loadFromFile("./asset/assets-game/pac-man2.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Left);
+        this->Pacman_Left.setSmooth(true);
+        sprite.setScale(0.12, 0.12);
+        ListSprite["Pacman_Left"] = sprite;
+    }
+    if (!this->Pacman_Left_Open.loadFromFile("./asset/assets-game/open_left.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Left_Open);
+        this->Pacman_Left_Open.setSmooth(true);
+        sprite.setScale(0.13, 0.13);
+        ListSprite["Pacman_Left_Open"] = sprite;
+    }
+    if (!this->Pacman_Down.loadFromFile("./asset/assets-game/pac-man1.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Down);
+        this->Pacman_Down.setSmooth(true);
+        sprite.setScale(0.12, 0.12);
+        ListSprite["Pacman_Down"] = sprite;
+    }
+    if (!this->Pacman_Down_Open.loadFromFile("./asset/assets-game/open_down.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->Pacman_Down_Open);
+        this->Pacman_Down_Open.setSmooth(true);
+        sprite.setScale(0.13, 0.13);
+        ListSprite["Pacman_Down_Open"] = sprite;
     }
 }
 
@@ -139,6 +202,9 @@ sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Fon
 
 void LibSfml::SetSpritePos(std::string Name, int LenLine, int pos1, int pos2)
 {
+    // if (Name == "WallPacman" || Name == "Candy" || Name == "WallNibbler")
+    //     this->ListSprite[Name].setPosition(window.getSize().x / 2 - (LenLine * 10) + (pos2) * 20 + 10, window.getSize().y / 8 + (pos1) * 20 + 10);
+    // else
     this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 10) + pos2 * 20, this->window.getSize().y / 8 + pos1 * 20);
     this->window.draw(this->ListSprite[Name]);
 }
@@ -173,7 +239,13 @@ void LibSfml::DrawMap(std::vector<std::string> map)
                     SetSpritePos("Candy", lenLine, pos1, pos2);
                     break;
                 case 'C':
-                    SetSpritePos("Pacman_Right", lenLine, pos1, pos2);
+                    if (this->check % 2 == 0)
+                        SetSpritePos("Pacman_Right", lenLine, pos1, pos2);
+                    else
+                        SetSpritePos("Pacman_Right_Open", lenLine, pos1, pos2);
+                    this->check++;
+                     if (check == 11)
+                         check = 1;
                     break;
                 case 'G':
                     SetSpritePos("Ghost1", lenLine, pos1, pos2);
@@ -237,7 +309,7 @@ void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> sc
     if (this->window.isOpen()) {
         DrawMap(map);
         DrawScore(score);
-        usleep(100000);
+        usleep(100600);
         this->window.display();
     }
 }
