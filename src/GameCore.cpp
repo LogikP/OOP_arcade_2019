@@ -8,6 +8,22 @@
 #include "GameCore.hpp"
 #include "Error.hpp"
 
+template<typename T>
+T *GameCore::setNewLib(std::string Interface, std::string LibName)
+{
+    std::string path;
+
+    path = "./lib/lib_arcade_" + LibName + ".so";
+    if (this->libToDisplay[Interface])
+        dlclose(this->libToDisplay[Interface]);
+    this->libToDisplay[Interface] = dlopen(path.c_str(), RTLD_NOW);
+//    std::cout << path.c_str() << std::endl;
+    if (!this->libToDisplay[Interface])
+        throw(Error("Can't open the New Library"));
+    return createObject<T>(this->libToDisplay[Interface]);
+}
+
+
 std::string GameCore::NewMenu(std::string Lib)
 {
     std::string PeakGame;
@@ -25,6 +41,7 @@ IGame *GameCore::NewGameMenu()
     std::string PeakGame;
     std::string path;
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+
     if (this->libToDisplay["IGame"])
         dlclose(this->libToDisplay["IGame"]);
     PeakGame = this->Display->Menu(this->Games_names, libs_name);
@@ -32,11 +49,31 @@ IGame *GameCore::NewGameMenu()
         PeakGame = this->NewMenuLib();
     path = "./games/lib_arcade_" + PeakGame + ".so";
     this->libToDisplay["IGame"] = dlopen(path.c_str(), RTLD_NOW);
-//    std::cout << path.c_str() << std::endl;
     if (!this->libToDisplay["IGame"])
         throw(Error("Can't open the New Library"));
     return createObject<IGame>(this->libToDisplay["IGame"]);
 }
+
+IDisplay *GameCore::NewLibRunTime()
+{
+    std::string PeakLib;
+    std::string path;
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+
+    PeakLib = this->Display->MenuLib(libs_name);
+    this->Display->closeWindow();
+    if (this->libToDisplay["IDisplay"])
+        dlclose(this->libToDisplay["IDisplay"]);
+    if (PeakLib == "Kill")
+        exit(0);
+    this->Libs["IDisplay"] = PeakLib;
+    path = "./lib/lib_arcade_" + PeakLib + ".so";
+    this->libToDisplay["IDisplay"] = dlopen(path.c_str(), RTLD_NOW);
+    if (!this->libToDisplay["IDisplay"])
+        throw(Error("Can't open the New Library"));
+    return createObject<IDisplay>(this->libToDisplay["IDisplay"]);
+}
+
 
 void GameCore::Kill(std::vector<std::string> score)
 {
@@ -88,17 +125,11 @@ bool GameCore::play()
                 this->Game = this->NewGameMenu();
         }
         if (this->keyCore == 'l') {
-            /////menuLib
-            std::string PeakLib = this->NewMenuLib();
-            // if (PeakLib == "Kill")
-            //     return false;
+            this->Display = this->NewLibRunTime();
+            this->Display->initWindow();
         }
-        if (this->keyCore == 'm') {
-            /////menu
+        if (this->keyCore == 'm')
             this->Game = this->NewGameMenu();
-            //std::vector<std::pair<int, std::string>> libs_name;
-            //this->Display->Menu(this->Games_names, libs_name);
-        }
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;
