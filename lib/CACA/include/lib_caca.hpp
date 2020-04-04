@@ -20,6 +20,8 @@ class libCaca : public IDisplay
             UP_KEY,
             DOWN_KEY,
             LEAVE,
+            LIB_G,
+            MENU_G
         };
 
         enum STATUS {

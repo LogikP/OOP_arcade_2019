@@ -60,6 +60,8 @@ class LibSfml : public IDisplay
         sf::Texture Candy;
         sf::Texture Background;
         std::map<std::string, sf::Sprite> ListSprite;
+        std::string getNextLib(std::vector<std::pair<int, std::string>>);
+        std::string getPrevLib(std::vector<std::pair<int, std::string>>);
 
     public:
         LibSfml();

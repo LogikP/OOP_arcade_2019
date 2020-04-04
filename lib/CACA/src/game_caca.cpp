@@ -12,7 +12,15 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
 {
     int width = caca_get_canvas_width(window.getCanvas());
     int height = caca_get_canvas_height(window.getCanvas());
+
     caca_clear_canvas(window.getCanvas());
+    caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
+    caca_put_str(window.getCanvas(), width / 2 - (map[0].size() / 2) - 13, height / 2 - 4, "Actual Score");
+    caca_put_str(window.getCanvas(), width / 2 - (map[0].size() / 2) - 6 - (score[1].size() / 2), height / 2 - 2, score[0].c_str());
+    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
+    caca_put_str(window.getCanvas(), width / 2 - (map[0].size() / 2) - 12, height / 2 + 2, "HighScore:");
+    caca_put_str(window.getCanvas(), width / 2 - (map[0].size() / 2) - 7 - (score[1].size() / 2), height / 2 + 4, score[1].c_str());
+    caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
     for (int i = 0; i < (int)map.size(); i++) {
         for (int j = 0; j < (int)map[i].size(); j++) {
             if (map[i][j] == '0' || map[i][j] == 'o') {
@@ -63,6 +71,12 @@ int libCaca::getKeyEventGame(int quit)
                 case CACA_KEY_ESCAPE:
                     quit = LEAVE;
                     break;
+                case 'l':
+                    quit = LIB_G;
+                    break;
+                case 'm':
+                    quit = MENU_G;
+                    break;
             }
             if (caca_get_event_type(&ev) & CACA_EVENT_QUIT) {
                 quit = 1;
@@ -77,10 +91,14 @@ int libCaca::getEvent()
 {
     int direction = -1;
 
-    caca_set_display_time(window.getDisplay(), 80000);
+    caca_set_display_time(window.getDisplay(), 100000);
     direction = getKeyEventGame(direction);
     if (direction == LEAVE)
         return 'k';
+    else if (direction == LIB_G)
+        return 'l';
+    else if (direction == MENU_G)
+        return 'm';
     return direction;
 }
 
