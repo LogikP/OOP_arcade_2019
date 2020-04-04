@@ -50,20 +50,6 @@ std::string GameCore::NewMenuLib()
         return "Kill";
 }
 
-std::string GameCore::NewLibRunTime()
-{
-    std::string PeakLib;
-    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
-    PeakLib = this->Display->MenuLib(libs_name);
-    if (PeakLib != "Kill") {
-        this->Libs["IDisplay"] = PeakLib;
-        this->Display->closeWindow();
-        this->Display = this->setNewLib<IDisplay>("IDisplay", PeakLib);
-        this->Display->initWindow();
-    }
-    else
-        return "Kill";
-}
 
 std::string GameCore::madeFormatLib(std::string str, std::string repo)
 {
@@ -115,20 +101,6 @@ std::vector<std::pair<int, std::string>> GameCore::GetLibName()
     return (vec);
 }
 
-template<typename T>
-T *GameCore::setNewLib(std::string Interface, std::string LibName)
-{
-    std::string path;
-
-    path = "./lib/lib_arcade_" + LibName + ".so";
-    if (this->libToDisplay[Interface])
-        dlclose(this->libToDisplay[Interface]);
-    this->libToDisplay[Interface] = dlopen(path.c_str(), RTLD_NOW);
-//    std::cout << path.c_str() << std::endl;
-    if (!this->libToDisplay[Interface])
-        throw(Error("Can't open the New Library"));
-    return createObject<T>(this->libToDisplay[Interface]);
-}
 
 int CheckIfLib(std::string lib_name)
 {

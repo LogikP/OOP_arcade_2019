@@ -149,7 +149,7 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(4));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(4));
-            } else if (map[i][a] == 'A' || map[i][a] == 'B' || map[i][a] == 'D') { 
+            } else if (map[i][a] == 'A' || map[i][a] == 'B' || map[i][a] == 'D') {
                 wattron(window.window, COLOR_PAIR(4));
                 mvwaddch(window.window,i + 15, a + 80, 'C');
                 wattroff(window.window, COLOR_PAIR(4));
@@ -199,7 +199,7 @@ int LibNcurses::Pause()
     wrefresh(Pause);
     int choice = wgetch(this->window.window);
         switch (choice) {
-            case 27:                
+            case 27:
                 wclear(Pause);
                 wrefresh(Pause);
                 wclear(window.window);
@@ -285,14 +285,9 @@ int LibNcurses::getEvent()
                 wrefresh(window.window);
                 return ('p');
         }
-        wclear(window.window);
-        wrefresh(window.window);
-        return (-1);
-/*    wclear(window.window);
+    wclear(window.window);
     wrefresh(window.window);
-    endwin();
-    exit(0);*/
-    return (0);
+    return (-1);
 }
 
 std::string LibNcurses::Game()
@@ -433,7 +428,7 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
                 wrefresh(game);
                 wclear(help);
                 wrefresh(help);
-                endwin();                
+                endwin();
                 return (libs[highlight].second);
                 break;
         }
