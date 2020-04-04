@@ -8,27 +8,6 @@
 #include "GameCore.hpp"
 #include "Error.hpp"
 
-std::vector<std::pair<int, std::string>> GameCore::SelectLib()
-{
-    std::size_t i = 0;
-    int count = 0;
-    std::vector<std::pair<int, std::string>> tmp;
-
-    while (i != this->Libs_names.size())
-    {
-        if (this->Libs["IDisplay"] == this->Libs_names[i].second)
-            i++;
-        else {
-            tmp.push_back(std::make_pair(count, this->Libs_names[i].second));
-            i++;
-            count++;
-        }
-        // tmp[count].first == (int)count;
-        // tmp[count].second == this->Libs_names[i].second;
-    }
-    return tmp;
-}
-
 std::string GameCore::NewMenu(std::string Lib)
 {
     std::string PeakGame;
@@ -40,70 +19,12 @@ std::string GameCore::NewMenu(std::string Lib)
     return PeakGame;
 }
 
-std::string GameCore::NewMenuLib()
-{
-    std::string PeakLib;
-    std::string PeakGame;
-    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
-
-    PeakLib = this->Display->MenuLib(libs_name);
-    // for(auto elem : this->Libs)
-    // {
-    //     std::cout << elem.first << " " << elem.second << std::endl;
-    // }
-    if (PeakLib != "Kill") {
-        this->Libs["IDisplay"] = PeakLib;
-        PeakGame = NewMenu(PeakLib);
-        return PeakGame;
-    }
-    else
-        return "Kill";
-}
-
-std::string GameCore::NewLibRunTime()
-{
-    std::string PeakLib;
-    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
-    PeakLib = this->Display->MenuLib(libs_name);
-    if (PeakLib != "Kill") {
-        this->Libs["IDisplay"] = PeakLib;
-        this->Display->closeWindow();
-        this->Display = this->setNewLib<IDisplay>("IDisplay", PeakLib);
-        this->Display->initWindow();
-    }
-    else
-        return "Kill";
-}
-
-std::string GameCore::madeFormatLib(std::string str, std::string repo)
-{
-    std::string tmp;
-    if (repo == "lib") {
-        tmp = "./lib/lib_arcade_" + str + ".so";
-//        std::cout << tmp << std::endl;
-        return tmp;
-    }
-    else if (repo == "games") {
-        tmp = "./games/lib_arcade_" + str + ".so";
-//        std::cout << tmp << std::endl;
-        return tmp;
-    }
-    else
-        return NULL;
-}
-
-int isGame(std::string peakGame, std::vector<std::pair<int, std::string>> names)
-{
-    for (int i = 0; i < (int)names.size(); i++)
-        if (peakGame.compare(names[i].second.c_str()) == 0)
-            return 1;
-    return 0;
-}
 
 void GameCore::Kill(std::vector<std::string> score)
 {
     this->GetHightScore(score);
 }
+
 
 bool GameCore::play()
 {
@@ -148,7 +69,7 @@ bool GameCore::play()
         }
         if (this->keyCore == 'l') {
             /////menuLib
-            std::string PeakLib = this->NewLibRunTime();
+            std::string PeakLib = this->NewMenuLib();
             // if (PeakLib == "Kill")
             //     return false;
         }
@@ -160,99 +81,6 @@ bool GameCore::play()
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;
-}
-void GameCore::GetHightScore(std::vector<std::string> score)
-{
-    if (atoi(score[0].c_str()) > atoi(score[1].c_str())) {
-        remove("./maps/HightScore.txt");
-        std::ofstream MyFile("./maps/HightScore.txt");
-        MyFile << score[0].c_str();
-        MyFile.close();
-    }
-}
-
-template<typename T>
-T *GameCore::setNewLib(std::string Interface, std::string LibName)
-{
-    std::string path;
-
-    path = "./lib/lib_arcade_" + LibName + ".so";
-    if (this->libToDisplay[Interface])
-        dlclose(this->libToDisplay[Interface]);
-    this->libToDisplay[Interface] = dlopen(path.c_str(), RTLD_NOW);
-//    std::cout << path.c_str() << std::endl;
-    if (!this->libToDisplay[Interface])
-        throw(Error("Can't open the New Library"));
-    return createObject<T>(this->libToDisplay[Interface]);
-}
-
-int CheckIfLib(std::string lib_name)
-{
-    if (lib_name.size() > 3 && lib_name.compare(lib_name.size()-3, 3, ".so") == 0)
-        return (1);
-    return (0);
-}
-
-std::vector<std::pair<int, std::string>> GameCore::GetLibName()
-{
-    std::vector<std::pair<int, std::string>> vec;
-    std::string path = "./lib/";
-    std::string name;
-    DIR* rep = opendir(path.c_str());
-    int i = 1;
-
-    vec.push_back(std::make_pair(0,this->Libs["IDisplay"]));
-    if (not rep)
-        throw(Error("Error, impossible to open the folder"));
-    while (true) {
-        struct dirent* ent = readdir(rep);
-        if (not ent) break;
-        name = ent->d_name;
-       name = name.substr(name.find_last_of('_') + 1,
-           name.find_last_of('.') - name.find_last_of('_') - 1);
-        if (CheckIfLib(ent->d_name) == 1 && name.compare(vec[0].second) != 0) {
-            vec.push_back(std::make_pair(i, name));
-            i++;
-        }
-    }
-    return (vec);
-}
-
-std::vector<std::pair<int, std::string>> GameCore::GetGameName()
-{
-    std::vector<std::pair<int, std::string>> vec;
-    std::string path = "./games/";
-    std::string name;
-    DIR* rep = opendir(path.c_str());
-    int i = 0;
-
-    if (not rep)
-        throw(Error("Error, impossible to open the folder"));
-    while (true) {
-        struct dirent* ent = readdir(rep);
-        if (not ent) break;
-        name = ent->d_name;
-        name = name.substr(name.find_last_of('_') + 1,
-           name.find_last_of('.') - name.find_last_of('_') - 1);
-        if (CheckIfLib(ent->d_name) == 1) {
-            vec.push_back(std::make_pair(i, name));
-            i++;
-        // if (not ent) break;
-        // if (ent->d_name[0] != '.') {
-        //     vec.push_back(std::make_pair(i, ent->d_name));
-        //     i++;
-        // }
-        }
-    }
-    return (vec);
-}
-
-std::string GameCore::getNameFromLibrary(std::string str)
-{
-    std::string tmp;
-    tmp = str.substr(str.find_last_of('_') + 1,
-    str.find_last_of('.') - str.find_last_of('_') - 1);
-    return tmp;
 }
 
 GameCore::GameCore(std::string libPath)

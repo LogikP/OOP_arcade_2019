@@ -24,6 +24,8 @@
 
 typedef IGame *(*createGame)();
 typedef IDisplay *(*createDisplay)();
+int CheckIfLib(std::string lib_name);
+int isGame(std::string peakGame, std::vector<std::pair<int, std::string>> names);
 
 class GameCore {
     private:
@@ -34,6 +36,7 @@ class GameCore {
         std::map<std::string, void*> libToDisplay;
         std::vector<std::pair<int,std::string>> Libs_names;
         std::vector<std::pair<int,std::string>> Games_names;
+        std::vector<std::string> _score;
         int keyCore = 0;
         int keyGame = 0;
 
