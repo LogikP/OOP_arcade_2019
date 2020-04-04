@@ -20,15 +20,18 @@ int libCaca::Pause()
 
     caca_clear_canvas(window.getCanvas());
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2 - 4, "   ___");
+    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2 - 10, "PRESS ESCAPE TO LEAVE");
+    caca_put_str(window.getCanvas(), width  / 2 - 14, height / 2 - 4, "   ___");
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-    caca_put_str(window.getCanvas(), width / 2 - 10, height / 2 - 3, "  / _ \\__ _ _   _ ___  ___ ");
+    caca_put_str(window.getCanvas(), width / 2 - 14, height / 2 - 3, "  / _ \\__ _ _   _ ___  ___ ");
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2 - 2, " / /_)/ _` | | | / __|/ _ \\");
+    caca_put_str(window.getCanvas(), width  / 2 - 14, height / 2 - 2, " / /_)/ _` | | | / __|/ _ \\");
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2 - 1, "/ ___/ (_| | |_| \\__ \\  __/");
+    caca_put_str(window.getCanvas(), width  / 2 - 14, height / 2 - 1, "/ ___/ (_| | |_| \\__ \\  __/");
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2, "\\/    \\__,_|\\__,_|___/\\___|");
+    caca_put_str(window.getCanvas(), width  / 2 - 14, height / 2, "\\/    \\__,_|\\__,_|___/\\___|");
+    caca_put_str(window.getCanvas(), width  / 2 - 10, height / 2 + 5, "PRESS M TO GO TO MENU");
+    caca_put_str(window.getCanvas(), width  / 2 - 12, height / 2 + 7, "PRESS SPACE TO GO TO GAME");
     while (event) {
         if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
             switch (caca_get_event_key_ch(&ev)) {
