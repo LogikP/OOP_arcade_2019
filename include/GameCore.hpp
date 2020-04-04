@@ -61,6 +61,6 @@ class GameCore {
         std::string madeFormatLib(std::string, std::string);
         void GetHightScore(std::vector<std::string> score);
         void Kill(std::vector<std::string>);
-        IDisplay *NewLibRunTime();
+        void NewLibRunTime();
         IGame *NewGameMenu();
 };

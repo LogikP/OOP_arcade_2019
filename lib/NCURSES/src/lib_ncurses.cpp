@@ -240,6 +240,7 @@ int LibNcurses::getEvent()
 {
     int choice;
 
+        keypad(this->window.window, TRUE);
         wtimeout(window.window, 100);
         choice = wgetch(this->window.window);
         switch (choice) {
@@ -394,7 +395,6 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
 {
     int choice;
     unsigned int highlight = 0;
-
 
     while (choice != 27) {
         display_title();
