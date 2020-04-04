@@ -60,6 +60,21 @@ std::string GameCore::NewMenuLib()
         return "Kill";
 }
 
+std::string GameCore::NewLibRunTime()
+{
+    std::string PeakLib;
+    std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
+    PeakLib = this->Display->MenuLib(libs_name);
+    if (PeakLib != "Kill") {
+        this->Libs["IDisplay"] = PeakLib;
+        this->Display->closeWindow();
+        this->Display = this->setNewLib<IDisplay>("IDisplay", PeakLib);
+        this->Display->initWindow();
+    }
+    else
+        return "Kill";
+}
+
 std::string GameCore::madeFormatLib(std::string str, std::string repo)
 {
     std::string tmp;
@@ -130,16 +145,18 @@ bool GameCore::play()
                 this->Kill(score);
                 return false;
             }
-
         }
-        if (this->keyCore == 'l')
-            this->NewMenuLib();
+        if (this->keyCore == 'l') {
             /////menuLib
+            std::string PeakLib = this->NewLibRunTime();
+            // if (PeakLib == "Kill")
+            //     return false;
+        }
         if (this->keyCore == 'm') {
+            /////menu
             std::vector<std::pair<int, std::string>> libs_name;
             this->Display->Menu(this->Games_names, libs_name);
         }
-            /////menu
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;

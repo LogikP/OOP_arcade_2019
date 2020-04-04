@@ -23,6 +23,7 @@ enum EventKey {
     LEAVE = 'k',
     MENU = 'm',
     PAUSE = 'p',
+    NEWLIB = 'l',
 };
 
 enum STATUS {

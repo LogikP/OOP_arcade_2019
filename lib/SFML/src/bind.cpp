@@ -30,6 +30,8 @@ int LibSfml::bind()
                     return MENU;
                 if (event.key.code == sf::Keyboard::Space)
                     return PAUSE;
+                if (event.key.code == sf::Keyboard::L)
+                    return NEWLIB;
             }
             else
                 return -1;
