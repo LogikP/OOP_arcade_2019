@@ -380,6 +380,8 @@ int LibSfml::Pause()
                     return 1;
                 if (event.key.code == sf::Keyboard::Escape)
                     return LEAVE;
+                if (event.key.code == sf::Keyboard::M)
+                    return MENU;
             }
         }
     }

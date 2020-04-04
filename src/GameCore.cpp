@@ -85,7 +85,7 @@ bool GameCore::play()
                 return false;
             }
             if (key == 'm')
-                this->NewGameMenu();
+                this->Game = this->NewGameMenu();
         }
         if (this->keyCore == 'l') {
             /////menuLib
