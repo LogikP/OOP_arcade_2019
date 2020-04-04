@@ -77,7 +77,7 @@ void LibNcurses::display_help()
     touchwin(this->window.window);
     wattroff(window.window,COLOR_PAIR(2));
     wrefresh(this->window.window);
-    WINDOW *help;
+//    WINDOW *help;
     help = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 10);
     char const *ft_line= "  _    _  ______          __  _____  _           __     __  ___  ";
     char const *sd_line= " | |  | |/ __ \\ \\        / / |  __ \\| |        /\\ \\   / / |__ \\ ";

@@ -88,25 +88,25 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.') {
+            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C') {
                 _map[x][y - 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
-            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.') {
+            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C') {
                 _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 3:
-            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.') {
+            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.' || _map[x - 1][y] == 'C') {
                 _map[x - 1][y] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.') {
+            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C') {
                 _map[x + 1][y] = 'C';
                 _map[x][y] = ' ';
             }

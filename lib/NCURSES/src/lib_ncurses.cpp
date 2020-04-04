@@ -105,6 +105,53 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
 
 int LibNcurses::Pause()
 {
+    WINDOW *Pause;
+    Pause = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
+    char const *ft_line= "  ____   _   _   _ ____  _____ ";
+    char const *sd_line= " |  _ \\ / \\ | | | / ___|| ____|";
+    char const *trd_line=" | |_) / _ \\| | | \\___ \\|  _|  ";
+    char const *fth_line=" |  __/ ___ \\ |_| |___) | |___ ";
+    char const *fft_line=" |_| /_/   \\_\\___/|____/|_____|";
+    char const *sx_line= "                               ";
+
+    wattron(Pause,COLOR_PAIR(2));
+    mvwprintw(Pause, 5, (COLS/2) - (202/2) + 70 , ft_line);
+    wattroff(Pause, COLOR_PAIR(2));
+    wattron(Pause,COLOR_PAIR(1));
+    mvwprintw(Pause, 6, (COLS/2) - (202/2) + 70 , sd_line);
+    wattroff(Pause, COLOR_PAIR(1));
+    wattron(Pause,COLOR_PAIR(3));
+    mvwprintw(Pause, 7, (COLS/2) - (202/2) + 70, trd_line);
+    wattroff(Pause,COLOR_PAIR(3));
+    wattron(Pause,COLOR_PAIR(4));
+    mvwprintw(Pause, 8, (COLS/2) - (202/2) + 70 , fth_line);
+    wattroff(Pause,COLOR_PAIR(4));
+    wattron(Pause,COLOR_PAIR(2));
+    mvwprintw(Pause, 9, (COLS/2) - (202/2) + 70, fft_line);
+    wattroff(Pause, COLOR_PAIR(2));
+    wattron(Pause,COLOR_PAIR(1));
+    mvwprintw(Pause, 10, (COLS/2) - (202/2) + 70, sx_line);
+    wattroff(Pause, COLOR_PAIR(1));
+  //  wattron(help,COLOR_PAIR(3));
+//    box(help, ACS_VLINE, ACS_HLINE);
+   // wattron(help,COLOR_PAIR(3));
+    wrefresh(Pause);
+    int choice = wgetch(this->window.window);
+        switch (choice) {
+            case 27:                
+                wclear(Pause);
+                wrefresh(Pause);
+                wclear(window.window);
+                wrefresh(window.window);
+                endwin();
+                return ('k');
+            case 32:
+                wclear(Pause);
+                wrefresh(Pause);
+                wclear(window.window);
+                wrefresh(window.window);
+                return ('p');
+        }
     return 0;
 }
 
@@ -144,6 +191,10 @@ int LibNcurses::getEvent()
                 wrefresh(window.window);
                 endwin();
                 return (LEAVE);
+            case 32:
+                wclear(window.window);
+                wrefresh(window.window);
+                return ('p');
         }
         wclear(window.window);
         wrefresh(window.window);
@@ -214,11 +265,17 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
             case 10:
                 wclear(window.window);
                 wrefresh(window.window);
+                wclear(help);
+                wrefresh(help);
+                wclear(game);
+                wrefresh(game);
                 return (games[highlight].second);
                 break;
             case 'n':
                 wclear(game);
                 wrefresh(game);
+                wclear(help);
+                wrefresh(help);
                 wclear(window.window);
                 wrefresh(window.window);
                 return libs.size() == 0 ? "ncurses" : getNextLib(libs);
@@ -226,6 +283,8 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
             case 'l':
                 wclear(game);
                 wrefresh(game);
+                wclear(help);
+                wrefresh(help);
                 wclear(window.window);
                 wrefresh(window.window);
                 return "ChangedLib";
@@ -233,6 +292,8 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
             case 'p':
                 wclear(game);
                 wrefresh(game);
+                wclear(help);
+                wrefresh(help);
                 wclear(window.window);
                 wrefresh(window.window);
                 return libs.size() == 0 ? "ncurses" : getPrevLib(libs);
