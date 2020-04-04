@@ -238,11 +238,38 @@ void LibSfml::DrawMap(std::vector<std::string> map)
                 case '.':
                     SetSpritePos("Candy", lenLine, pos1, pos2);
                     break;
+                case 'D':
+                    if (this->check % 2 == 0)
+                        SetSpritePos("Pacman_Down", lenLine, pos1, pos2);
+                    else
+                        SetSpritePos("Pacman_Down_Open", lenLine, pos1, pos2);
+                    this->check++;
+                     if (check == 11)
+                         check = 1;
+                    break;
                 case 'C':
                     if (this->check % 2 == 0)
                         SetSpritePos("Pacman_Right", lenLine, pos1, pos2);
                     else
                         SetSpritePos("Pacman_Right_Open", lenLine, pos1, pos2);
+                    this->check++;
+                     if (check == 11)
+                         check = 1;
+                    break;
+                case 'B':
+                    if (this->check % 2 == 0)
+                        SetSpritePos("Pacman_Up", lenLine, pos1, pos2);
+                    else
+                        SetSpritePos("Pacman_Up_Open", lenLine, pos1, pos2);
+                    this->check++;
+                     if (check == 11)
+                         check = 1;
+                    break;
+                case 'A':
+                    if (this->check % 2 == 0)
+                        SetSpritePos("Pacman_Left", lenLine, pos1, pos2);
+                    else
+                        SetSpritePos("Pacman_Left_Open", lenLine, pos1, pos2);
                     this->check++;
                      if (check == 11)
                          check = 1;

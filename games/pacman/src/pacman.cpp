@@ -57,23 +57,23 @@ void pacman::KeepMoving(int SaveLastKey)
 
     if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.')) {
         if (_map[x][y - 1] == '.')
-            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
-        _map[x][y - 1] = 'C';
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+        _map[x][y - 1] = 'A';
         _map[x][y] = ' ';
     } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.')) {
         if (_map[x][y + 1] == '.')
-            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
         _map[x][y + 1] = 'C';
         _map[x][y] = ' ';
     } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.')) {
         if (_map[x - 1][y] == '.')
-            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
-        _map[x - 1][y] = 'C';
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+        _map[x - 1][y] = 'B';
         _map[x][y] = ' ';
     } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' || _map[x +1][y] == '.')) {
         if (_map[x + 1][y] == '.')
-            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);        
-        _map[x + 1][y] = 'C';
+            _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+        _map[x + 1][y] = 'D';
         _map[x][y] = ' ';
     }/* else if (press == 1)
         deadSnake();*/
@@ -88,26 +88,30 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C') {
-                _map[x][y - 1] = 'C';
+            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
+            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+                _map[x][y - 1] = 'A';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
-            if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C') {
+             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
+            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
                 _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 3:
-            if (_map[x - 1][y] == ' '  || _map[x - 1][y] == '.' || _map[x - 1][y] == 'C') {
-                _map[x - 1][y] = 'C';
+             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
+            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+                _map[x - 1][y] = 'B';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-            if (_map[x + 1][y] == ' '  || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C') {
-                _map[x + 1][y] = 'C';
+             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
+            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+                _map[x + 1][y] = 'D';
                 _map[x][y] = ' ';
             }
             break;
@@ -155,7 +159,7 @@ int pacman::GetX()
 {
     for (unsigned int i = 0; i != _map.size(); i++) {
         for (int a = 0; _map[i][a] != '\n' && _map[i][a]; a++)
-            if (_map[i][a] == 'C')
+            if (_map[i][a] == 'C' || _map[i][a] == 'A' || _map[i][a] == 'B' || _map[i][a] == 'D')
                 return (i);
     }
     return (0);
@@ -165,7 +169,7 @@ int pacman::GetY()
 {
     for (unsigned int i = 0; i != _map.size(); i++) {
         for (int a = 0; _map[i][a] != '\n' && _map[i][a]; a++)
-            if (_map[i][a] == 'C')
+            if (_map[i][a] == 'C' || _map[i][a] == 'A' || _map[i][a] == 'B' || _map[i][a] == 'D')
                 return (a);
     }
     return (0);
