@@ -22,6 +22,7 @@ enum EventKey {
     DOWN_KEY,
     LEAVE = 'k',
     MENU = 'm',
+    PAUSE = 'p',
 };
 
 enum STATUS {
@@ -68,6 +69,7 @@ class LibSfml : public IDisplay
         void closeWindow() final;
         std::string Game() final;
         int getEvent() final;
+        int Pause() final;
         void InitProg(std::vector<std::string> map, std::vector<std::string> score) final;
         void SetSpritePos(std::string, int, int, int);
         std::string MenuLib(std::vector<std::pair<int,std::string>>) final;
@@ -76,3 +78,15 @@ class LibSfml : public IDisplay
         int bind();
         void DrawScore(std::vector<std::string>);
 };
+
+
+// // 'entity' peut être un sf::Sprite, un sf::Text, un sf::Shape ou n'importe quelle autre classe transformable
+
+// // change la rotation absolue de l'entité
+// entity.setRotation(45);
+
+// // tourne l'entité relativement à son orientation actuelle
+// entity.rotate(10);
+
+// // récupère la rotation absolue de l'entité
+// float rotation = entity.getRotation(); // = 55

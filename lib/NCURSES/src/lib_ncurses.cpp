@@ -79,11 +79,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
             } else if (map[i][a] == '.') {
                 wattron(window.window, COLOR_PAIR(4));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
-                wattroff(window.window, COLOR_PAIR(4)); 
+                wattroff(window.window, COLOR_PAIR(4));
             } else if (map[i][a] == 'G' || map[i][a] == 'U' || map[i][a] == 'H' || map[i][a] == 'T') {
                 wattron(window.window, COLOR_PAIR(2));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
-                wattroff(window.window, COLOR_PAIR(2)); 
+                wattroff(window.window, COLOR_PAIR(2));
             } else if (map[i][a] == 'o'|| map[i][a] == '0' || map[i][a] == ' ' || map[i][a] == 'x') {
                 wattron(window.window, COLOR_PAIR(3));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
@@ -101,6 +101,11 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
         }
 
     }
+}
+
+int LibNcurses::Pause()
+{
+    return 0;
 }
 
 void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string> score)

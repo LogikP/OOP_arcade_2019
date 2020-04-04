@@ -12,6 +12,11 @@ libCaca::libCaca() : window()
 
 }
 
+int libCaca::Pause()
+{
+    return 0;
+}
+
 void libCaca::closeWindow()
 {
     caca_free_display(window.getDisplay());
@@ -132,7 +137,7 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
     return "success";
 }
 
-extern "C" libCaca *createDisplay() 
+extern "C" libCaca *createDisplay()
 {
     return new libCaca;
 }
