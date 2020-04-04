@@ -5,6 +5,7 @@
 ** lib_caca
 */
 
+#include <iostream>
 #include "lib_caca.hpp"
 
 libCaca::libCaca() : window()
@@ -48,7 +49,7 @@ void libCaca::displayNameGames(std::string name)
 int libCaca::getNextLib(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
-    for (; i < (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
+    for (; i != (int)libs.size() && libs[i].second.compare("caca") <= 0; i++);
     i = i == (int)libs.size() ? 0 : i;
     return libs.size() == 0 ? 0 : libs[i].first;
 }

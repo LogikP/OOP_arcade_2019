@@ -303,7 +303,7 @@ std::string LibNcurses::Game()
 std::string LibNcurses::getNextLibN(std::vector<std::pair<int, std::string>> libs)
 {
     int i = 0;
-    for (; i < (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
+    for (; i != (int)libs.size() && libs[i].second.compare("ncurses") <= 0; i++);
     i = i == (int)libs.size()? 0 : i;
     return libs[i].second;
 }
