@@ -135,14 +135,14 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
 
 std::string libCaca::gameOver()
 {
-    int width = caca_get_canvas_width(window.getCanvas());
-    int height = caca_get_canvas_height(window.getCanvas());
     std::string over = "success";
     caca_event_t ev;
     unsigned int const event_mask = CACA_EVENT_KEY_PRESS
 | CACA_EVENT_RESIZE | CACA_EVENT_MOUSE_PRESS | CACA_EVENT_QUIT;
 
     while (over == "success") {
+        int width = caca_get_canvas_width(window.getCanvas());
+        int height = caca_get_canvas_height(window.getCanvas());
         int event = caca_get_event(window.getDisplay(),  event_mask, &ev, 0);
         caca_clear_canvas(window.getCanvas());
         while (event) {
@@ -162,7 +162,9 @@ std::string libCaca::gameOver()
             event = caca_get_event(window.getDisplay(), CACA_EVENT_KEY_PRESS, &ev, 0);
         }
         caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
-        caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");
+        caca_put_str(window.getCanvas(), width * 0.42, height * 0.2, "Game Over !");
+        caca_put_str(window.getCanvas(), width * 0.33, height * 0.5, "Press M to go back to Menu");
+        caca_put_str(window.getCanvas(), width * 0.33, height * 0.6, "Press R to reload the game");
         caca_refresh_display(this->window.getDisplay());
     }
     return over;
