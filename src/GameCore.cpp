@@ -143,9 +143,9 @@ bool GameCore::play()
         }
         if (this->Game->Loose()) {
             std::string Choice = this->Display->gameOver();
-            if (Choice == "Kill") {
+            if (Choice == "kill") {
                 this->Kill(score);
-                exit(0);
+                return false;
             }
             else if (Choice == "Menu") {
                 this->Game = this->NewGameMenu();
