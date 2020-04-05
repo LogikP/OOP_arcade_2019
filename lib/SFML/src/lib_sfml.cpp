@@ -263,6 +263,15 @@ void LibSfml::initWindow()
         sprite.setScale(0.13, 0.13);
         ListSprite["Pacman_Down_Open"] = sprite;
     }
+    if (!this->MagicCandy.loadFromFile("./asset/assets-game/shroom.png"))
+        throw(Error("Can't find the Asset file"));
+    else {
+        sf::Sprite sprite;
+        sprite.setTexture(this->MagicCandy);
+        this->MagicCandy.setSmooth(true);
+        sprite.setScale(0.09, 0.09);
+        ListSprite["Magic_Candy"] = sprite;
+    }
 }
 
 LibSfml::LibSfml() : window(sf::VideoMode(VideoMode.width, VideoMode.height, VideoMode.bitsPerPixel), "Arcade", sf::Style::Fullscreen)
@@ -285,12 +294,13 @@ sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Fon
 
 void LibSfml::SetSpritePos(std::string Name, int LenLine, int pos1, int pos2)
 {
-    if (Name == "Candy")
+    if (Name == "Candy" || Name == "Magic_Candy")
         this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 9.8) + pos2 * 25, this->window.getSize().y / 7.5 + pos1 * 25);
     else
         this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 10) + pos2 * 25, this->window.getSize().y / 8 + pos1 * 25);
     this->window.draw(this->ListSprite[Name]);
 }
+
 
 void LibSfml::DrawMap(std::vector<std::string> map)
 {
@@ -303,6 +313,9 @@ void LibSfml::DrawMap(std::vector<std::string> map)
         for (char c : str) {
             switch (c)
             {
+                case 'F':
+                    SetSpritePos("Magic_Candy", lenLine, pos1, pos2);
+                    break;
                 case 'W':
                     SetSpritePos("WallNibbler", lenLine, pos1, pos2);
                     break;
@@ -319,6 +332,9 @@ void LibSfml::DrawMap(std::vector<std::string> map)
                     SetSpritePos("WallPacman", lenLine, pos1, pos2);
                     break;
                 case '.':
+                    SetSpritePos("Candy", lenLine, pos1, pos2);
+                    break;
+                case 'I':
                     SetSpritePos("Candy", lenLine, pos1, pos2);
                     break;
                 case 'D':
@@ -381,34 +397,43 @@ void LibSfml::DrawScore(std::vector<std::string> score)
     sf::Text Score;
     sf::Text Name;
     sf::Text HighScore;
+    //sf::Text UserName;
     sf::Font font;
+
     if (this->_map[0].front() == 'W')
         Name.setString("Nibbler");
     else
         Name.setString("Pacman");
     if (!font.loadFromFile("./asset/Test-Font.ttf"))
         throw(Error("Can't find the Font file"));
-    Score.setString("score: " + score.front());
-    HighScore.setString("HighScore: " +score.back());
+    Score.setString("score: " + score[0]);
+    HighScore.setString("HighScore: " + score[1]);
+    //UserName.setString("Name: " + score[2]);
     Score.setFillColor(sf::Color::Yellow);
     HighScore.setFillColor(sf::Color::Red);
+    //UserName.setFillColor(sf::Color::Blue);
     Name.setFillColor(sf::Color::Green);
     Name.setFont(font);
     Score.setFont(font);
+    //UserName.setFont(font);
     HighScore.setFont(font);
     Name.setCharacterSize(150);
     Score.setCharacterSize(40);
     HighScore.setCharacterSize(40);
+    //UserName.setCharacterSize(40);
     Name.setStyle(sf::Text::Bold);
     Score.setStyle(sf::Text::Bold);
     HighScore.setStyle(sf::Text::Bold);
+    //UserName.setStyle(sf::Text::Bold);
     Name.setPosition(sf::Vector2f(780, -20));
     Score.setPosition(sf::Vector2f(30, 200));
     HighScore.setPosition(sf::Vector2f(30, 300));
+    //UserName.setPosition(sf::Vector2f(30, 100));
 
     this->window.draw(Name);
     this->window.draw(Score);
     this->window.draw(HighScore);
+    //this->window.draw(UserName);
 }
 
 void LibSfml::InitProg(std::vector<std::string> map, std::vector<std::string> score)
