@@ -437,6 +437,8 @@ std::string LibNcurses::gameOver()
 {
     WINDOW *GameOver;
     GameOver = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
+    keypad(GameOver, TRUE);
+    noecho();
     char const *ft_line= " _____   ___  ___  ___ _____   _____  _   _ ___________ ";
     char const *sd_line= "|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\";
     char const *trd_line="| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /";
@@ -467,6 +469,8 @@ std::string LibNcurses::gameOver()
     mvwprintw(GameOver, 16, (COLS/2) - (202/2) + 70 , "\tPress 'm' to go to MENU");
     mvwprintw(GameOver, 17, (COLS/2) - (202/2) + 70 , "\tPress 'ESC' to ESCAPE");
     int choice = wgetch(GameOver);
+
+    while (choice != 'r' || choice != 'm' || choice != 27) {
         switch (choice) {
             case 27:
                 wclear(GameOver);
@@ -488,6 +492,8 @@ std::string LibNcurses::gameOver()
                 wrefresh(window.window);
                 return ("Menu");
         }
+        choice = wgetch(GameOver);
+    }
     return ("kill");
 }
 
