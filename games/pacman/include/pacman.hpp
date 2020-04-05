@@ -20,6 +20,7 @@ class pacman : public IGame
        int SaveLastKey;
        int _init;
        std::vector<std::string> _score;
+       bool isEatable;
     public:
         pacman();
         std::string getName() const final;
@@ -33,4 +34,5 @@ class pacman : public IGame
         void KeepMoving(int SaveLastKey);
         int GetY();
         int GetX();
+        void MoveGhost();
 };
