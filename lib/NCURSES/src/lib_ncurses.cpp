@@ -466,6 +466,9 @@ std::string LibNcurses::gameOver()
     wattroff(GameOver, COLOR_PAIR(1));
     wrefresh(GameOver);
     
+    mvwprintw(GameOver, 15, (COLS/2) - (202/2) + 70 , "\tPress 'r' to RESTART");
+    mvwprintw(GameOver, 16, (COLS/2) - (202/2) + 70 , "\tPress 'm' to go to MENU");
+    mvwprintw(GameOver, 17, (COLS/2) - (202/2) + 70 , "\tPress 'ESC' to ESCAPE");
     int choice = wgetch(GameOver);
         switch (choice) {
             case 27:
