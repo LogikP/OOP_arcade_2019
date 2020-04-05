@@ -63,4 +63,5 @@ class GameCore {
         void Kill(std::vector<std::string>);
         void NewLibRunTime();
         IGame *NewGameMenu();
+        IGame *NewGame();
 };

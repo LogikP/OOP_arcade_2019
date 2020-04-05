@@ -21,6 +21,7 @@ class nibbler : public IGame
       int _food;
       int _init;
       int press;
+      bool loose = false;
 
       void initSnake();
       void deadSnake();

@@ -17,6 +17,7 @@ T *GameCore::setNewLib(std::string Interface, std::string LibName)
     if (this->libToDisplay[Interface])
         dlclose(this->libToDisplay[Interface]);
     this->libToDisplay[Interface] = dlopen(path.c_str(), RTLD_NOW);
+    this->Libs["IDisplay"] = LibName;
     if (!this->libToDisplay[Interface])
         throw(Error("Can't open the New Library"));
     return createObject<T>(this->libToDisplay[Interface]);
@@ -46,12 +47,23 @@ IGame *GameCore::NewGameMenu()
     PeakGame = this->Display->Menu(this->Games_names, libs_name);
     while (PeakGame == "ChangedLib")
         PeakGame = this->NewMenuLib();
+    this->Libs["IGame"] = PeakGame;
     path = "./games/lib_arcade_" + PeakGame + ".so";
     this->libToDisplay["IGame"] = dlopen(path.c_str(), RTLD_NOW);
     if (!this->libToDisplay["IGame"])
         throw(Error("Can't open the New Library"));
     return createObject<IGame>(this->libToDisplay["IGame"]);
 }
+
+IGame* GameCore::NewGame()
+{
+    if (this->libToDisplay["IGame"])
+        dlclose(this->libToDisplay["IGame"]);
+    std::string path = "./games/lib_arcade_" + this->Libs["IGame"] + ".so";
+    this->libToDisplay["IGame"] = dlopen(path.c_str(), RTLD_NOW);
+    if (!this->libToDisplay["IGame"])
+        throw(Error("Can't open the New Library"));
+    return createObject<IGame>(this->libToDisplay["IGame"]);}
 
 void GameCore::NewLibRunTime()
 {
@@ -128,6 +140,20 @@ bool GameCore::play()
         if (this->keyCore == 'm') {
             this->Game = this->NewGameMenu();
             this->Kill(score);
+        }
+        if (this->Game->Loose()) {
+            std::string Choice = this->Display->gameOver();
+            if (Choice == "Kill") {
+                this->Kill(score);
+                exit(0);
+            }
+            else if (Choice == "Menu") {
+                this->Game = this->NewGameMenu();
+                this->Kill(score);
+            }
+            else
+                this->Game = this->NewGame();
+
         }
         this->Game->ReceiveEvent(this->keyCore, 0);
     }

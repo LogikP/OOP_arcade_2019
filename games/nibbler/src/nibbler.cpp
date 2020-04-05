@@ -45,7 +45,12 @@ void nibbler::InitMap()
 
 bool nibbler::Loose()
 {
-
+    if (this->loose == true)
+    {
+        this->loose = false;
+        return true;
+    }
+    return false;
 }
 
 std::string nibbler::getName() const
@@ -108,6 +113,7 @@ void nibbler::deadSnake()
     _map[15][23] = 'o';
     _map[15][24] = 'o';
     _map[15][25] = '0';
+    this->loose = true;
 }
 
 std::vector<std::string> nibbler::getMap()
