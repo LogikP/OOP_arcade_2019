@@ -5,6 +5,9 @@
 ** pacman
 */
 
+#include <ctime>
+#include <chrono>
+#include <iomanip>
 #include "pacman.hpp"
 
 pacman::pacman()
@@ -12,6 +15,8 @@ pacman::pacman()
     _init = 0;
     _score.push_back("0");
     _score.push_back("0");
+    _score.push_back("0");
+    isEatable = false;
 }
 
 void pacman::InitMap()
@@ -34,12 +39,27 @@ std::vector<std::string> pacman::getScore() const
     return _score;
 }
 
+bool isFoodLeft(std::vector<std::string> map)
+{
+    for (int i = 0; i != map.size() - 1; i++) {
+        for (int j = 0; j != map[i].size() - 1; j++)
+            if (map[i][j] == '.')
+                return true;
+    }
+    return false;
+}
+
 std::vector<std::string> pacman::getMap()
 {
     std::vector<std::string> map;
     std::ifstream in("./maps/pacman-map-1.txt");
     std::string str;
+    std::clock_t time = 0;
 
+    if (isEatable == true)
+        time = std::clock();
+    if (15000 <= double(time) / CLOCKS_PER_SEC)
+        isEatable = false;
     if (_init == 0) {
         if (!in)
             std::cerr << "Cannot open the File : " << "pacman-map-1.txt"<<std::endl;
@@ -52,6 +72,10 @@ std::vector<std::string> pacman::getMap()
         _map = map;
     } else
         map = _map;
+    if (isFoodLeft(map) == false) {
+        SaveLastKey = -1;
+        _init = 0;
+    }
     return (map);
 }
 
@@ -60,34 +84,58 @@ void pacman::KeepMoving(int SaveLastKey)
     int x = GetX();
     int y = GetY();
 
-    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.' || y - 1 == -1)) {
-        if (y - 1 >= 0 && _map[x][y - 1] == '.')
+    if (SaveLastKey == 1 && _map[x][y - 1] != 'M') {
+        if (y - 1 >= 0 && (_map[x][y - 1] == '.' || _map[x][y - 1] == 'I' || _map[x][y - 1] == 'F')) {
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+            if (_map[x][y - 1] == 'F')
+                isEatable = true;
+        }
+        if (isEatable != true && (_map[x][y - 1] == 'G' || _map[x][y - 1] == 'U' || _map[x][y - 1] == 'H' || _map[x][y - 1] == 'T'))
+            return;
         if (y - 1 >= 0)
             _map[x][y - 1] = 'A';
         else
             _map[x][_map[x].size() - 1] = 'A';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.' || y + 1 >= _map[x].size())) {
-        if (y + 1 < _map[x].size() && _map[x][y + 1] == '.')
+    } else if (SaveLastKey == 2 && _map[x][y + 1] != 'M') {
+        if ((size_t)(y + 1) < _map[x].size() && (_map[x][y + 1] == '.' || _map[x][y + 1] == 'I' ||  _map[x][y + 1] == 'F')) {
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
-        if (y + 1 >= _map[x].size())
+            if (_map[x][y - 1] == 'F')
+                isEatable = true;
+        }
+        if (isEatable != true && (_map[x][y + 1] == 'G' || _map[x][y + 1] == 'U' || _map[x][y + 1] == 'H' || _map[x][y + 1] == 'T'))
+            return;
+        if ((size_t)(y + 1) >= _map[x].size())
             _map[x][0] = 'C';
         else
             _map[x][y + 1] = 'C';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.')) {
-        if (_map[x - 1][y] == '.')
+    } else if (SaveLastKey == 3 && _map[x - 1][y] != 'M') {
+        if (_map[x - 1][y] == '.' || _map[x - 1][y] == 'I' || _map[x - 1][y] == 'F') {
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+            if (_map[x - 1][y] == 'F')
+                isEatable = true;
+        }
+        if (isEatable != true && (_map[x - 1][y] == 'G' || _map[x - 1][y] == 'U' || _map[x - 1][y] == 'H' || _map[x - 1][y] == 'T'))
+            return ;
         _map[x - 1][y] = 'B';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 4 && (_map[x + 1][y] == ' ' || _map[x +1][y] == '.')) {
-        if (_map[x + 1][y] == '.')
+    } else if (SaveLastKey == 4 && _map[x + 1][y] != 'M') {
+        if (_map[x + 1][y] == '.' || _map[x + 1][y] == 'I' || _map[x + 1][y] == 'F') {
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+            if (_map[x + 1][y] == 'F')
+                isEatable = true;
+        }
+        if (isEatable != true && (_map[x + 1][y] == 'G' || _map[x + 1][y] == 'U' || _map[x + 1][y] == 'H' || _map[x + 1][y] == 'T'))
+            return;
         _map[x + 1][y] = 'D';
         _map[x][y] = ' ';
-    }/* else if (press == 1)
-        deadSnake();*/
+    }
+}
+
+void pacman::MoveGhost()
+{
+
 }
 
 void pacman::MovePlayer(int key)
@@ -99,8 +147,9 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
-            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D' || y - 1 == -1) {
+            if (_map[x][y - 1] != 'M' && y - 1 == -1) {
+                if (isEatable != true && (_map[x][y - 1] == 'G' || _map[x][y - 1] == 'U' || _map[x][y - 1] == 'H' || _map[x][y - 1] == 'T'))
+                    return;
                 if (y - 1 >= 0)
                     _map[x][y - 1] = 'A';
                 else
@@ -109,9 +158,9 @@ void pacman::MovePlayer(int key)
             }
             break;
         case 2:
-             if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C' ||
-            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D' || y + 1 == _map[x].size()) {
-                if (y + 1 >= _map[x].size())
+             if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C' || _map[x][y + 1] == 'I' || _map[x][y + 1] == 'F' ||
+            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D' || (size_t)(y + 1) == _map[x].size()) {
+                if ((size_t)(y + 1) >= _map[x].size())
                     _map[x][0] = 'C';
                 else
                     _map[x][y + 1] = 'C';
@@ -119,14 +168,14 @@ void pacman::MovePlayer(int key)
             }
             break;
         case 3:
-             if (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.'|| _map[x - 1][y] == 'C' ||
+             if (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.'|| _map[x - 1][y] == 'C' || _map[x - 1][y] == 'I' || _map[x - 1][y] == 'F' ||
             _map[x - 1][y] == 'A' || _map[x - 1][y] == 'B' || _map[x - 1][y] == 'D') {
                 _map[x - 1][y] = 'B';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-             if (_map[x + 1][y] == ' ' || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C' ||
+             if (_map[x + 1][y] == ' ' || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C' || _map[x+1][y] == 'I' || _map[x+1][y] == 'F' ||
             _map[x + 1][y] == 'A' || _map[x + 1][y] == 'B' || _map[x + 1][y] == 'D') {
                 _map[x + 1][y] = 'D';
                 _map[x][y] = ' ';
