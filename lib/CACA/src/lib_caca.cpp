@@ -135,7 +135,37 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
 
 std::string libCaca::gameOver()
 {
-    
+    int width = caca_get_canvas_width(window.getCanvas());
+    int height = caca_get_canvas_height(window.getCanvas());
+    std::string over = "success";
+    caca_event_t ev;
+    unsigned int const event_mask = CACA_EVENT_KEY_PRESS
+| CACA_EVENT_RESIZE | CACA_EVENT_MOUSE_PRESS | CACA_EVENT_QUIT;
+
+    while (over == "success") {
+        int event = caca_get_event(window.getDisplay(),  event_mask, &ev, 0);
+        caca_clear_canvas(window.getCanvas());
+        while (event) {
+            if (caca_get_event_type(&ev) == CACA_EVENT_KEY_PRESS) {
+                switch (caca_get_event_key_ch(&ev)) {
+                case 'r':
+                    over = "Restart";
+                    break;
+                case 'm':
+                    over = "Menu";
+                    break;
+                case CACA_KEY_ESCAPE:
+                    over = "kill";
+                    break;
+                }
+            }
+            event = caca_get_event(window.getDisplay(), CACA_EVENT_KEY_PRESS, &ev, 0);
+        }
+        caca_set_color_ansi(window.getCanvas(), CACA_WHITE, CACA_BLACK);
+        caca_put_str(window.getCanvas(), width / 2 - 8, height * 0.2, "Arcade Machines !");
+        caca_refresh_display(this->window.getDisplay());
+    }
+    return over;
 }
 
 extern "C" libCaca *createDisplay()

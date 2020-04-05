@@ -10,7 +10,7 @@
 
 MyWindowC::MyWindowC()
 {
-    _cv = caca_create_canvas(240, 80);
+    _cv = caca_create_canvas(0, 0);
     if (!_cv)
         return;
     _dp = caca_create_display(_cv);
