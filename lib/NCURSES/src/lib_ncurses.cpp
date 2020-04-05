@@ -25,7 +25,7 @@ void LibNcurses::initWindow()
 {
  //       MyWindow ObjectWindow(0,0,0,0);
    //     this->window =  ObjectWindow;
-        keypad(this->window.window, TRUE);
+//        keypad(this->window.window, TRUE);
      //   noecho();
     wrefresh(window.window);
 }
@@ -442,7 +442,58 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
 
 std::string LibNcurses::gameOver()
 {
+    WINDOW *GameOver;
+    GameOver = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
+    char const *ft_line= " _____   ___  ___  ___ _____   _____  _   _ ___________ ";
+    char const *sd_line= "|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\";
+    char const *trd_line="| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /";
+    char const *fth_line="| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / ";
+    char const *fft_line="| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ ";
+    char const *sx_line= " \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|";
+
+    wattron(GameOver,COLOR_PAIR(2));
+    mvwprintw(GameOver, 5, (COLS/2) - (202/2) + 70 , ft_line);
+    wattroff(GameOver, COLOR_PAIR(2));
+    wattron(GameOver,COLOR_PAIR(1));
+    mvwprintw(GameOver, 6, (COLS/2) - (202/2) + 70 , sd_line);
+    wattroff(GameOver, COLOR_PAIR(1));
+    wattron(GameOver,COLOR_PAIR(3));
+    mvwprintw(GameOver, 7, (COLS/2) - (202/2) + 70, trd_line);
+    wattroff(GameOver,COLOR_PAIR(3));
+    wattron(GameOver,COLOR_PAIR(4));
+    mvwprintw(GameOver, 8, (COLS/2) - (202/2) + 70 , fth_line);
+    wattroff(GameOver,COLOR_PAIR(4));
+    wattron(GameOver,COLOR_PAIR(2));
+    mvwprintw(GameOver, 9, (COLS/2) - (202/2) + 70, fft_line);
+    wattroff(GameOver, COLOR_PAIR(2));
+    wattron(GameOver,COLOR_PAIR(1));
+    mvwprintw(GameOver, 10, (COLS/2) - (202/2) + 70, sx_line);
+    wattroff(GameOver, COLOR_PAIR(1));
+    wrefresh(GameOver);
     
+    int choice = wgetch(GameOver);
+        switch (choice) {
+            case 27:
+                wclear(GameOver);
+                wrefresh(GameOver);
+                wclear(window.window);
+                wrefresh(window.window);
+                endwin();
+                return ("kill");
+            case 'r':
+                wclear(GameOver);
+                wrefresh(GameOver);
+                wclear(window.window);
+                wrefresh(window.window);
+                return ("Restart");
+            case 'm':
+                wclear(GameOver);
+                wrefresh(GameOver);
+                wclear(window.window);
+                wrefresh(window.window);
+                return ("Menu");
+        }
+    return ("kill");
 }
 
 extern "C" LibNcurses *createDisplay()
