@@ -243,7 +243,6 @@ void LibNcurses::InitProg(std::vector<std::string> map, std::vector<std::string>
 int LibNcurses::getEvent()
 {
     int choice;
-    static int i = 0;
 
         refresh();
         wtimeout(window.window, 100);
