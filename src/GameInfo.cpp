@@ -38,9 +38,15 @@ std::vector<std::pair<int, std::string>> GameCore::GetGameName()
 
 void GameCore::GetHightScore(std::vector<std::string> score)
 {
-    if (atoi(score[0].c_str()) > atoi(score[1].c_str())) {
-        remove("./maps/HightScore.txt");
-        std::ofstream MyFile("./maps/HightScore.txt");
+    if (atoi(score[0].c_str()) > atoi(score[1].c_str()) && this->Game->getMap()[0][0] == 'W') {
+        remove("./maps/HightScore-nibbler.txt");
+        std::ofstream MyFile("./maps/HightScore-nibbler.txt");
+        MyFile << score[0].c_str();
+        MyFile.close();
+    }
+    if (atoi(score[0].c_str()) > atoi(score[1].c_str()) && this->Game->getMap()[0][0] == 'M') {
+        remove("./maps/HightScore-pacman.txt");
+        std::ofstream MyFile("./maps/HightScore-pacman.txt");
         MyFile << score[0].c_str();
         MyFile.close();
     }

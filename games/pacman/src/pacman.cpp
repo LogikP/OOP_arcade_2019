@@ -13,9 +13,17 @@
 pacman::pacman()
 {
     _init = 0;
+    std::ifstream in("./maps/HightScore-pacman.txt");
+    std::string str;
+
     _score.push_back("0");
-    _score.push_back("0");
-    _score.push_back("0");
+    if (!in)
+        std::cerr << "Cannot open the File : " << "nibbler-map.txt"<<std::endl;
+    while (std::getline(in, str)) {
+        if(str.size() > 0)
+            _score.push_back(str);
+    }
+    in.close();
     isEatable = false;
 }
 

@@ -13,7 +13,7 @@
 
 nibbler::nibbler()
 {
-    std::ifstream in("./maps/HightScore.txt");
+    std::ifstream in("./maps/HightScore-nibbler.txt");
     std::string str;
 
     _score.push_back("0");
