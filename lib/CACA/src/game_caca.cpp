@@ -79,9 +79,12 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
-            } else if (map[i][j] == 'C' || map[i][j] == 'B' || map[i][j] == 'A' || map[i][j] == 'D') {
+            } else if (map[i][j] == 'C' || map[i][j] == 'B' || map[i][j] == 'A' || map[i][j] == 'D' || map[i][j] == '.') {
                 caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
-                caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), "C");
+                if (map[i][j] != '.')
+                    caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), "C");
+                else
+                    caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
             }  else
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
