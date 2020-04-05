@@ -22,4 +22,5 @@ class IDisplay {
         virtual std::string Game() = 0;
         virtual int Pause() = 0;
         virtual int getEvent() = 0;
+        virtual std::string gameOver() = 0;
 };

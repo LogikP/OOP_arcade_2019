@@ -439,6 +439,12 @@ std::string LibNcurses::MenuLib(std::vector<std::pair<int, std::string>> libs)
     endwin();
     return ("kill");
 }
+
+std::string LibNcurses::gameOver()
+{
+    
+}
+
 extern "C" LibNcurses *createDisplay()
 {
     return new LibNcurses;

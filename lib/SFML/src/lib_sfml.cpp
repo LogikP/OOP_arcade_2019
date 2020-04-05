@@ -8,6 +8,11 @@
 #include "lib_sfml.hpp"
 #include <string.h>
 
+std::string LibSfml::gameOver()
+{
+
+}
+
 void LibSfml::initWindow()
 {
     if (!this->Background.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
