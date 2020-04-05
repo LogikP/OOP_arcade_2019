@@ -35,4 +35,6 @@ class pacman : public IGame
         int GetY();
         int GetX();
         void MoveGhost();
+        void MakeGhostEatable();
+        void MakeGhostNoEatable();
 };

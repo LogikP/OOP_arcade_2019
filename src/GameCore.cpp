@@ -90,12 +90,6 @@ void GameCore::Kill(std::vector<std::string> score)
 
 bool GameCore::play()
 {
-    //char *error;
-    // for(auto elem : Libs)
-    // {
-    //     std::cout << elem.first << " " << elem.second << std::endl;
-    // }
-
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);

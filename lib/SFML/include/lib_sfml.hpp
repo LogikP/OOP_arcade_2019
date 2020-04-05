@@ -58,6 +58,7 @@ class LibSfml : public IDisplay
         sf::Texture Ghost2;
         sf::Texture Ghost3;
         sf::Texture Ghost4;
+        sf::Texture GhostEat;
         sf::Texture Apple;
         sf::Texture MagicCandy;
         sf::RectangleShape Vert;
@@ -85,15 +86,3 @@ class LibSfml : public IDisplay
         int bind();
         void DrawScore(std::vector<std::string>);
 };
-
-
-// // 'entity' peut être un sf::Sprite, un sf::Text, un sf::Shape ou n'importe quelle autre classe transformable
-
-// // change la rotation absolue de l'entité
-// entity.setRotation(45);
-
-// // tourne l'entité relativement à son orientation actuelle
-// entity.rotate(10);
-
-// // récupère la rotation absolue de l'entité
-// float rotation = entity.getRotation(); // = 55

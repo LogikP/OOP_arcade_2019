@@ -57,6 +57,27 @@ bool isFoodLeft(std::vector<std::string> map)
     return false;
 }
 
+void pacman::MakeGhostEatable()
+{
+    for (std::string str : _map) {
+        for (char c : str) {
+            if (c == 'G' || c == 'H' || c == 'T' || c == 'U')
+                c += 32;
+        }
+    }
+}
+
+void pacman::MakeGhostNoEatable()
+{
+    for (std::string str : _map) {
+        for (char c : str) {
+            if (c == 'G' || c == 'H' || c == 'T' || c == 'U')
+                c -= 32;
+        }
+    }
+}
+
+
 std::vector<std::string> pacman::getMap()
 {
     std::vector<std::string> map;
@@ -64,8 +85,12 @@ std::vector<std::string> pacman::getMap()
     std::string str;
     std::clock_t time = 0;
 
-    if (isEatable == true)
+    if (isEatable == true) {
         time = std::clock();
+        MakeGhostEatable();
+    }
+    else
+        MakeGhostNoEatable();
     if (15000 <= double(time) / CLOCKS_PER_SEC)
         isEatable = false;
     if (_init == 0) {

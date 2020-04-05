@@ -271,6 +271,16 @@ void LibSfml::initWindow()
         this->MagicCandy.setSmooth(true);
         sprite.setScale(0.09, 0.09);
         ListSprite["Magic_Candy"] = sprite;
+    // if (this->GhostEat.loadFromFile("./asset/assets-game/Run.bmp"))
+    //     throw(Error("Can't find the Asset file"));
+    // else
+    // {
+    //     sf::Sprite sprite;
+    //     sprite.setTexture(this->GhostEat);
+    //     this->GhostEat.setSmooth(true);
+    //     sprite.setScale(0.09, 0.09);
+    //     ListSprite["Ghost_Eat"] = sprite;
+    // }
     }
 }
 
@@ -385,6 +395,19 @@ void LibSfml::DrawMap(std::vector<std::string> map)
                 case 'U':
                     SetSpritePos("Ghost4", lenLine, pos1, pos2);
                     break;
+                case 'i':
+                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    break;
+                case 'h':
+                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    break;
+                case 't':
+                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    break;
+                case 'u':
+                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    break;
+
             }
             pos2++;
         }
