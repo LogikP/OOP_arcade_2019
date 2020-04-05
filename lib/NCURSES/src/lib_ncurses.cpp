@@ -25,7 +25,7 @@ void LibNcurses::initWindow()
 {
  //       MyWindow ObjectWindow(0,0,0,0);
    //     this->window =  ObjectWindow;
-//        keypad(this->window.window, TRUE);
+        keypad(this->window.window, TRUE);
      //   noecho();
     wrefresh(window.window);
 }
