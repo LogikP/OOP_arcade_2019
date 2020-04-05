@@ -95,27 +95,29 @@ void pacman::MovePlayer(int key)
         case 1:
             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
             _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+                if (_map[x][y - 1] == 'M')
+                    return;
                 _map[x][y - 1] = 'A';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
-             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
-            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+             if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C' ||
+            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D') {
                 _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
         case 3:
-             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
-            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+             if (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.'|| _map[x - 1][y] == 'C' ||
+            _map[x - 1][y] == 'A' || _map[x - 1][y] == 'B' || _map[x - 1][y] == 'D') {
                 _map[x - 1][y] = 'B';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
-            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
+             if (_map[x + 1][y] == ' ' || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C' ||
+            _map[x + 1][y] == 'A' || _map[x + 1][y] == 'B' || _map[x + 1][y] == 'D') {
                 _map[x + 1][y] = 'D';
                 _map[x][y] = ' ';
             }
