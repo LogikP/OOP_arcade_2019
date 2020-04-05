@@ -38,6 +38,7 @@ class LibNcurses : public IDisplay
         void closeWindow() final;
         int getEvent() final;
         int Pause() final;
+        std::string gameOver() final;
         void InitProg(std::vector<std::string> map, std::vector<std::string> score) final;
         void PrintMap(std::vector<std::string> map);
         void PrintScore(std::vector<std::string> score);

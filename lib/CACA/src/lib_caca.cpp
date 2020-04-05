@@ -133,6 +133,11 @@ std::string libCaca::Menu(std::vector<std::pair<int,std::string>> Games, std::ve
     return "success";
 }
 
+std::string libCaca::gameOver()
+{
+    
+}
+
 extern "C" libCaca *createDisplay()
 {
     return new libCaca;
