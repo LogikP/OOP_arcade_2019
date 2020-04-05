@@ -60,14 +60,21 @@ void pacman::KeepMoving(int SaveLastKey)
     int x = GetX();
     int y = GetY();
 
-    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.')) {
-        if (_map[x][y - 1] == '.')
+    if (SaveLastKey == 1 && (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.' || y - 1 == -1)) {
+        if (y - 1 >= 0 && _map[x][y - 1] == '.')
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
-        _map[x][y - 1] = 'A';
+        if (y - 1 >= 0)
+            _map[x][y - 1] = 'A';
+        else
+            _map[x][_map[x].size() - 1] = 'A';
         _map[x][y] = ' ';
-    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.')) {
-        if (_map[x][y + 1] == '.')
+    } else if (SaveLastKey == 2 && (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.' || y + 1 >= _map[x].size())) {
+        if (y + 1 < _map[x].size() && _map[x][y + 1] == '.')
             _score[0] = std::to_string(std::atoi(_score[0].c_str()) + 10);
+        if (y + 1 >= _map[x].size())
+            _map[x][0] = 'C';
+        else
+            _map[x][y + 1] = 'C';
         _map[x][y + 1] = 'C';
         _map[x][y] = ' ';
     } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.')) {
@@ -94,17 +101,21 @@ void pacman::MovePlayer(int key)
     switch (key) {
         case 1:
             if (_map[x][y - 1] == ' ' || _map[x][y - 1] == '.'|| _map[x][y - 1] == 'C' ||
-            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D') {
-                if (_map[x][y - 1] == 'M')
-                    return;
-                _map[x][y - 1] = 'A';
+            _map[x][y - 1] == 'A' || _map[x][y - 1] == 'B' || _map[x][y - 1] == 'D' || y - 1 == -1) {
+                if (y - 1 >= 0)
+                    _map[x][y - 1] = 'A';
+                else
+                    _map[x][_map[x].size() - 1] = 'A';
                 _map[x][y] = ' ';
             }
             break;
         case 2:
              if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C' ||
-            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D') {
-                _map[x][y + 1] = 'C';
+            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D' || y + 1 == _map[x].size()) {
+                if (y + 1 >= _map[x].size())
+                    _map[x][0] = 'C';
+                else
+                    _map[x][y + 1] = 'C';
                 _map[x][y] = ' ';
             }
             break;
