@@ -149,7 +149,7 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(3));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(3));
-            } else if (map[i][a] == 'C') {
+            } else if (map[i][a] == 'C' || map[i][a] == 'F') {
                 wattron(window.window, COLOR_PAIR(4));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(4));
@@ -161,6 +161,10 @@ void LibNcurses::PrintMap(std::vector<std::string> map)
                 wattron(window.window, COLOR_PAIR(1));
                 mvwaddch(window.window,i + 15, a + 80, map[i][a]);
                 wattroff(window.window, COLOR_PAIR(1));
+            } else if (map[i][a] == 'I') {
+                wattron(window.window, COLOR_PAIR(4));
+                mvwaddch(window.window,i + 15, a + 80, '.');
+                wattroff(window.window, COLOR_PAIR(4));
             } else
                 mvwaddch(window.window,i, a, map[i][a]);
         }
@@ -197,9 +201,6 @@ int LibNcurses::Pause()
     wattron(Pause,COLOR_PAIR(1));
     mvwprintw(Pause, 10, (COLS/2) - (202/2) + 70, sx_line);
     wattroff(Pause, COLOR_PAIR(1));
-  //  wattron(help,COLOR_PAIR(3));
-//    box(help, ACS_VLINE, ACS_HLINE);
-   // wattron(help,COLOR_PAIR(3));
     wrefresh(Pause);
     int choice = wgetch(this->window.window);
         switch (choice) {
@@ -323,9 +324,6 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
     display_game();
 
     while (choice != 27) {
-//        display_title();
-//        display_help();
-  //      display_game();
         for (unsigned int i = 0; i != games.size(); i+= 1) {
             if (i == highlight) {
                 wattron(window.window,A_REVERSE);
@@ -465,7 +463,6 @@ std::string LibNcurses::gameOver()
     mvwprintw(GameOver, 10, (COLS/2) - (202/2) + 70, sx_line);
     wattroff(GameOver, COLOR_PAIR(1));
     wrefresh(GameOver);
-    
     mvwprintw(GameOver, 15, (COLS/2) - (202/2) + 70 , "\tPress 'r' to RESTART");
     mvwprintw(GameOver, 16, (COLS/2) - (202/2) + 70 , "\tPress 'm' to go to MENU");
     mvwprintw(GameOver, 17, (COLS/2) - (202/2) + 70 , "\tPress 'ESC' to ESCAPE");
