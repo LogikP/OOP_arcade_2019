@@ -41,8 +41,8 @@ std::vector<std::string> pacman::getScore() const
 
 bool isFoodLeft(std::vector<std::string> map)
 {
-    for (int i = 0; i != map.size() - 1; i++) {
-        for (int j = 0; j != map[i].size() - 1; j++)
+    for (int i = 0; (size_t)i != map.size() - 1; i++) {
+        for (int j = 0; (size_t)j != map[i].size() - 1; j++)
             if (map[i][j] == '.')
                 return true;
     }
@@ -234,7 +234,7 @@ int pacman::GetY()
 
 void pacman::saveGame(std::string map)
 {
-
+    map = "toto";
 }
 
 //// For the dlsym Symbol /////
