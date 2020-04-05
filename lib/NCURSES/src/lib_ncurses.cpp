@@ -274,10 +274,6 @@ int LibNcurses::getEvent()
                 wrefresh(window.window);
                 return ('l');
             case 'm':
-                wclear(game);
-                wrefresh(game);
-                wclear(help);
-                wrefresh(help);
                 wclear(window.window);
                 wrefresh(window.window);
                 return ('m');
