@@ -23,6 +23,7 @@ class pacman : public IGame
     public:
         pacman();
         std::string getName() const final;
+        bool Loose() final;
         void InitMap() final;
         std::vector<std::string> getMap() final;
         std::vector<std::string> getScore() const final;
@@ -31,5 +32,5 @@ class pacman : public IGame
         void MovePlayer(int);
         void KeepMoving(int SaveLastKey);
         int GetY();
-        int GetX(); 
+        int GetX();
 };

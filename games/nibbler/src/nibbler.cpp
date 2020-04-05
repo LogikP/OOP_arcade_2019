@@ -43,6 +43,11 @@ void nibbler::InitMap()
 {
 }
 
+bool nibbler::Loose()
+{
+
+}
+
 std::string nibbler::getName() const
 {
     return "toto";

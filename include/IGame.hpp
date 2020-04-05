@@ -18,4 +18,5 @@ class IGame {
         virtual std::vector<std::string> getMap() = 0;
         virtual int ReceiveEvent(int, int) = 0;
         virtual void saveGame(std::string) = 0;
+        virtual bool Loose() = 0;
 };

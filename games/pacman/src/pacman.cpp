@@ -19,6 +19,11 @@ void pacman::InitMap()
 
 }
 
+bool pacman::Loose()
+{
+    return false;
+}
+
 std::string pacman::getName() const
 {
     return "Pacman";

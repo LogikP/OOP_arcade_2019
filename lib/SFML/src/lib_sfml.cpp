@@ -6,6 +6,7 @@
 */
 
 #include "lib_sfml.hpp"
+#include <string.h>
 
 void LibSfml::initWindow()
 {
@@ -53,7 +54,7 @@ void LibSfml::initWindow()
         sprite.setScale(0.08, 0.08);
         ListSprite["Apple"] = sprite;
     }
-    if (!this->Wall_P.loadFromFile("./asset/assets-game/pacwall.bmp")) {
+    if (!this->Wall_P.loadFromFile("./asset/assets-game/Block.png")) {
         throw(Error("Can't find the Asset file"));
     }
     else {
@@ -202,10 +203,10 @@ sf::Text InitText(std::vector<std::pair<int,std::string>> Vector, int i, sf::Fon
 
 void LibSfml::SetSpritePos(std::string Name, int LenLine, int pos1, int pos2)
 {
-    // if (Name == "WallPacman" || Name == "Candy" || Name == "WallNibbler")
-    //     this->ListSprite[Name].setPosition(window.getSize().x / 2 - (LenLine * 10) + (pos2) * 20 + 10, window.getSize().y / 8 + (pos1) * 20 + 10);
-    // else
-    this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 10) + pos2 * 20, this->window.getSize().y / 8 + pos1 * 20);
+    if (Name == "Candy")
+        this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 9.8) + pos2 * 25, this->window.getSize().y / 7.5 + pos1 * 25);
+    else
+        this->ListSprite[Name].setPosition(this->window.getSize().x / 2 - (LenLine * 10) + pos2 * 25, this->window.getSize().y / 8 + pos1 * 25);
     this->window.draw(this->ListSprite[Name]);
 }
 

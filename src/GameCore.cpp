@@ -17,7 +17,6 @@ T *GameCore::setNewLib(std::string Interface, std::string LibName)
     if (this->libToDisplay[Interface])
         dlclose(this->libToDisplay[Interface]);
     this->libToDisplay[Interface] = dlopen(path.c_str(), RTLD_NOW);
-//    std::cout << path.c_str() << std::endl;
     if (!this->libToDisplay[Interface])
         throw(Error("Can't open the New Library"));
     return createObject<T>(this->libToDisplay[Interface]);
@@ -68,11 +67,6 @@ void GameCore::NewLibRunTime()
         exit(0);
     this->Libs["IDisplay"] = PeakLib;
     this->Display = this->setNewLib<IDisplay>("IDisplay", PeakLib);
-    // path = "./lib/lib_arcade_" + PeakLib + ".so";
-    // this->libToDisplay["IDisplay"] = dlopen(path.c_str(), RTLD_NOW);
-    // if (!this->libToDisplay["IDisplay"])
-    //     throw(Error("Can't open the New Library"));
-    // return createObject<IDisplay>(this->libToDisplay["IDisplay"]);
 }
 
 
@@ -110,7 +104,6 @@ bool GameCore::play()
         std::vector<std::string> score = this->Game->getScore();
         this->Display->InitProg(map, score);
         this->keyCore = this->Display->getEvent();
-        std::cout << keyCore << std::endl;
         if (this->keyCore == 'k') {
             this->Kill(score);
             return false;
@@ -123,15 +116,19 @@ bool GameCore::play()
                 this->Kill(score);
                 return false;
             }
-            if (key == 'm')
+            if (key == 'm') {
                 this->Game = this->NewGameMenu();
+                this->Kill(score);
+            }
         }
         if (this->keyCore == 'l') {
             this->NewLibRunTime();
             this->Display->initWindow();
         }
-        if (this->keyCore == 'm')
+        if (this->keyCore == 'm') {
             this->Game = this->NewGameMenu();
+            this->Kill(score);
+        }
         this->Game->ReceiveEvent(this->keyCore, 0);
     }
     return true;

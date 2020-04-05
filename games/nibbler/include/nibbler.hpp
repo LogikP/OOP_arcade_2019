@@ -9,7 +9,7 @@
 #include "../../../include/IGame.hpp"
 #include <vector>
 #include <stdlib.h>
-#include <time.h>   
+#include <time.h>
 
 class nibbler : public IGame
 {
@@ -31,6 +31,7 @@ class nibbler : public IGame
     public:
         nibbler();
         void InitMap() final;
+        bool Loose() final;
      //   int GetNibblerSize();
    //     std::vector<std::pair<int,int>> GetNibblerBody();
         std::string getName() const final;
@@ -43,5 +44,5 @@ class nibbler : public IGame
         void MoveSnakeBody();
         void addFood();
         int GetY();
-        int GetX();        
+        int GetX();
 };
