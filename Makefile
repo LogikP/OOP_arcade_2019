@@ -15,7 +15,7 @@ SRCS	= 	./src/main.cpp \
 			./src/createObject.cpp \
 			./src/GameCore.cpp \
 			./src/LibInfo.cpp \
-			./src/GameInfo.cpp \
+			./src/GameInfo.cpp
 
 CPPFLAGS = -I ./include/
 CPPFLAGS += -W -Wall -Wextra
