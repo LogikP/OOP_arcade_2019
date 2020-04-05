@@ -271,16 +271,16 @@ void LibSfml::initWindow()
         this->MagicCandy.setSmooth(true);
         sprite.setScale(0.09, 0.09);
         ListSprite["Magic_Candy"] = sprite;
-    // if (this->GhostEat.loadFromFile("./asset/assets-game/Run.bmp"))
-    //     throw(Error("Can't find the Asset file"));
-    // else
-    // {
-    //     sf::Sprite sprite;
-    //     sprite.setTexture(this->GhostEat);
-    //     this->GhostEat.setSmooth(true);
-    //     sprite.setScale(0.09, 0.09);
-    //     ListSprite["Ghost_Eat"] = sprite;
-    // }
+    if (!this->GhostEat.loadFromFile("./asset/assets-game/Run.bmp"))
+        throw(Error("Can't find the Asset file"));
+    else
+    {
+        sf::Sprite sprite;
+        sprite.setTexture(this->GhostEat);
+        this->GhostEat.setSmooth(true);
+        sprite.setScale(0.09, 0.09);
+        ListSprite["Ghost_Eat"] = sprite;
+    }
     }
 }
 

@@ -180,7 +180,7 @@ void pacman::MovePlayer(int key)
         return ;
     switch (key) {
         case 1:
-            if (_map[x][y - 1] != 'M' && y - 1 == -1) {
+            if (_map[x][y - 1] != 'M' || y - 1 == -1) {
                 if (isEatable != true && (_map[x][y - 1] == 'G' || _map[x][y - 1] == 'U' || _map[x][y - 1] == 'H' || _map[x][y - 1] == 'T'))
                     return;
                 if (y - 1 >= 0)
@@ -191,8 +191,9 @@ void pacman::MovePlayer(int key)
             }
             break;
         case 2:
-             if (_map[x][y + 1] == ' ' || _map[x][y + 1] == '.'|| _map[x][y + 1] == 'C' || _map[x][y + 1] == 'I' || _map[x][y + 1] == 'F' ||
-            _map[x][y + 1] == 'A' || _map[x][y + 1] == 'B' || _map[x][y + 1] == 'D' || (size_t)(y + 1) == _map[x].size()) {
+             if (_map[x][y + 1] != 'M' || (size_t)(y + 1) == _map[x].size()) {
+                if (isEatable != true && (_map[x][y + 1] == 'G' || _map[x][y + 1] == 'U' || _map[x][y + 1] == 'H' || _map[x][y + 1] == 'T'))
+                    return;
                 if ((size_t)(y + 1) >= _map[x].size())
                     _map[x][0] = 'C';
                 else
@@ -201,15 +202,17 @@ void pacman::MovePlayer(int key)
             }
             break;
         case 3:
-             if (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.'|| _map[x - 1][y] == 'C' || _map[x - 1][y] == 'I' || _map[x - 1][y] == 'F' ||
-            _map[x - 1][y] == 'A' || _map[x - 1][y] == 'B' || _map[x - 1][y] == 'D') {
+             if (_map[x - 1][y] != 'M' ) {
+                if (isEatable != true && (_map[x - 1][y] == 'G' || _map[x - 1][y] == 'U' || _map[x - 1][y] == 'H' || _map[x - 1][y] == 'T'))
+                    return;
                 _map[x - 1][y] = 'B';
                 _map[x][y] = ' ';
             }
             break;
         case 4:
-             if (_map[x + 1][y] == ' ' || _map[x + 1][y] == '.'|| _map[x + 1][y] == 'C' || _map[x+1][y] == 'I' || _map[x+1][y] == 'F' ||
-            _map[x + 1][y] == 'A' || _map[x + 1][y] == 'B' || _map[x + 1][y] == 'D') {
+             if (_map[x + 1][y] != 'M' ) {
+                if (isEatable != true && (_map[x + 1][y] == 'G' || _map[x + 1][y] == 'U' || _map[x + 1][y] == 'H' || _map[x + 1][y] == 'T'))
+                    return;
                 _map[x + 1][y] = 'D';
                 _map[x][y] = ' ';
             }
