@@ -75,7 +75,6 @@ void pacman::KeepMoving(int SaveLastKey)
             _map[x][0] = 'C';
         else
             _map[x][y + 1] = 'C';
-        _map[x][y + 1] = 'C';
         _map[x][y] = ' ';
     } else if (SaveLastKey == 3 && (_map[x - 1][y] == ' ' || _map[x - 1][y] == '.')) {
         if (_map[x - 1][y] == '.')
