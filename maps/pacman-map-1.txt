@@ -1,24 +1,31 @@
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+M.....................M..................M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
 M........................................M
+M.MMMMMM.MMMMMMMM.MMMMMMMM.MMMMMMM.MMMMM.M
+M.MMMMMM.MMMMMMMM.MMMMMMMM.MMMMMMM.MMMMM.M
+M.MMMMMM.MMMMMMMM.MMMMMMMM.MMMMMMM.MMMMM.M
+M..........M................M............M
+M..........M................M............M
+M.MMM.MMMMMM.MMMM.MMM MMM.MMM.MMMMM.MMMMMM
+M.MMM.MMMMMM.MMMM.MG   HM.MMM.MMMMM.MMMMMM
+M.MMM.MMMMMM.MMMM.MU   TM.MMM.MMMMM.MMMMMM
+M.MMM.MMMMMM.MMMM.MMM MMM.MMM.MMMMM.MMMMMM
+..........................................
+M.MMMMMMMMM.MMMMMMMM.MMMMMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMM.....MMMMMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMM.MMMMMMMMMMMMMMMMM.MMMMM.M
 M........................................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M...............G....H...................M
-M........................................M
-M...............U....T...................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M.................C......................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
-M........................................M
+M.MMMMMM.MMMMMMMM.MMMMMMMM.MMMMMMM.MMMMM.M
+M.MMMMMM.MMMM.....MMM......MMMMMMM.MMMMM.M
+M.MMMMMM......MMM.....MMMM.MMMMMMM.MMMMM.M
+M.MMMMMM.MMMMMMMMMMMMMMMMM.MMMMMMM.MMMMM.M
+M................M....C..................M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.MMMMMMMMM.MMMMMMMMM.M.MMMMMMMMMM.MMMMM.M
+M.....................M..................M
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
