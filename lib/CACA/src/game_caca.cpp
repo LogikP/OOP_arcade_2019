@@ -67,15 +67,17 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
     caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
     for (int i = 0; i < (int)map.size(); i++) {
         for (int j = 0; j < (int)map[i].size(); j++) {
-            if (map[i][j] == '0' || map[i][j] == 'o') {
+            if (map[i][j] == 'I')
+                map[i][j] = '.';
+            if (map[i][j] == '0' || map[i][j] == 'o' || map[i][j] == 'T') {
                 caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i  - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_GREEN, CACA_BLACK);
-            } else if (map[i][j] == 'W') {
+            } else if (map[i][j] == 'W' || map[i][j] == 'G' || map[i][j] == 'U') {
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_RED, CACA_BLACK);
-            } else if (map[i][j] == 'x' || map[i][j] == 'M') {
+            } else if (map[i][j] == 'x' || map[i][j] == 'M' || map[i][j] == 'H') {
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
                 caca_set_color_ansi(window.getCanvas(), CACA_BLUE, CACA_BLACK);
@@ -85,6 +87,7 @@ void libCaca::InitProg(std::vector<std::string> map, std::vector<std::string> sc
                     caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), "C");
                 else
                     caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
+                caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
                 caca_set_color_ansi(window.getCanvas(), CACA_YELLOW, CACA_BLACK);
             }  else
                 caca_put_str(window.getCanvas(), width / 2 + j - (map[0].size() / 2), height / 2 + i - (map.size() / 2), &(map[i].c_str())[j]);
