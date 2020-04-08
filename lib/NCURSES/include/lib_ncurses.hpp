@@ -46,6 +46,7 @@ class LibNcurses : public IDisplay
         std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Game() final;
         void display_title();
+        void display_title2();
         void display_help();
         void display_libs();
         void display_game();

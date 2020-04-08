@@ -23,10 +23,7 @@ void LibNcurses::closeWindow()
 
 void LibNcurses::initWindow()
 {
- //       MyWindow ObjectWindow(0,0,0,0);
-   //     this->window =  ObjectWindow;
-        keypad(this->window.window, TRUE);
-     //   noecho();
+    keypad(this->window.window, TRUE);
     wrefresh(window.window);
 }
 
@@ -319,7 +316,6 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
     int choice;
     unsigned int highlight = 0;
     display_title();
-   // GetUsername();
     display_help();
     display_game();
 
@@ -381,10 +377,18 @@ std::string LibNcurses::Menu(std::vector<std::pair<int, std::string>> games, std
                 wrefresh(window.window);
                 return libs.size() == 0 ? "ncurses" : getPrevLibN(libs);
                 break;
+            case 27:
+                wclear(game);
+                wrefresh(game);
+                wclear(help);
+                wrefresh(help);
+                wclear(window.window);
+                wrefresh(window.window);
+                endwin();
+                return ("kill");
         }
         refresh();
      }
-    this->window.clear();
     endwin();
     return ("kill");
 }

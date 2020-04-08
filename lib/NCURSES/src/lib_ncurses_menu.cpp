@@ -9,6 +9,7 @@
 #include <iostream>
 #include <curses.h>
 #include <time.h>
+#include <fstream>
 #include "lib_ncurses.hpp"
 
 void LibNcurses::display_title()
@@ -59,55 +60,82 @@ void LibNcurses::display_title()
     mvwprintw(this->window.window, 12, (COLS/2) - (202/2) +35, elv_line);
     wattroff(window.window,COLOR_PAIR(3));
     wrefresh(this->window.window);
-
 }
 
-static std::string getstring()
+
+void LibNcurses::display_title2()
 {
-    std::string input;
+    char const *ft_line= " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ";
+    char const *sd_line= "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |";
+    char const *trd_line="| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |";
+    char const *fth_line="| |     /  \\     | || | |_   __ \\    | || |   .' ___  |  | || |     /  \\     | || | |_   ___ `.  | || | |_   ___  |  | |";
+    char const *fft_line="| |    / /\\ \\    | || |   | |__) |   | || |  / .'   \\_|  | || |    / /\\ \\    | || |   | |   `. \\ | || |   | |_  \\_|  | |";
+    char const *sx_line= "| |   / ____ \\   | || |   |  __ /    | || |  | |         | || |   / ____ \\   | || |   | |    | | | || |   |  _|  _   | |";
+    char const *sv_line= "| | _/ /    \\ \\_ | || |  _| |  \\ \\_  | || |  \\ `.___.'\\  | || | _/ /    \\ \\_ | || |  _| |___.' / | || |  _| |___/ |  | |";
+    char const *ht_line= "| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |";
+    char const *nn_line= "| |              | || |              | || |              | || |              | || |              | || |              | |";
+    char const *tn_line= "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |";
+    char const *elv_line=" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ";
 
-    // let the terminal do the line editing
-    nocbreak();
-    echo();
-
-    // this reads from buffer after <ENTER>, not "raw"
-    // so any backspacing etc. has already been taken care of
-    int ch = getch();
-
-    while ( ch != '\n' )
-    {
-        input.push_back( ch );
-        ch = getch();
-    }
-
-    // restore your cbreak / echo settings here
-
-    return input;
+     attron(COLOR_PAIR(2));
+    mvprintw( 2, (COLS/2) - (202/2) + 35, ft_line);
+    attroff( COLOR_PAIR(2));
+    attron(COLOR_PAIR(1));
+    mvprintw( 3, (COLS/2) - (202/2) + 35, sd_line);
+    attroff(COLOR_PAIR(1));
+    attron(COLOR_PAIR(3));
+    mvprintw( 4, (COLS/2) - (202/2) + 35, trd_line);
+    attroff(COLOR_PAIR(3));
+    attron(COLOR_PAIR(4));
+    mvprintw(5, (COLS/2) - (202/2) + 35, fth_line);
+    attroff(COLOR_PAIR(4));
+    attron(COLOR_PAIR(2));
+    mvprintw( 6, (COLS/2) - (202/2) + 35, fft_line);
+    attroff(COLOR_PAIR(2));
+    attron(COLOR_PAIR(1));
+    mvprintw( 7, (COLS/2) - (202/2) + 35, sx_line);
+    attroff( COLOR_PAIR(1));
+    attron(COLOR_PAIR(3));
+    mvprintw( 8, (COLS/2) - (202/2) + 35, sv_line);
+    attroff(COLOR_PAIR(3));
+    attron(COLOR_PAIR(4));
+    mvprintw( 9, (COLS/2) - (202/2) + 35, ht_line);
+    attroff(COLOR_PAIR(4));
+    attron(COLOR_PAIR(2));
+    mvprintw(10, (COLS/2) - (202/2) + 35, nn_line);
+    attroff(COLOR_PAIR(2));
+    attron(COLOR_PAIR(1));
+    mvprintw( 11, (COLS/2) - (202/2) + 35, tn_line);
+    attroff(COLOR_PAIR(1));
+    attron(COLOR_PAIR(3));
+    mvprintw(12, (COLS/2) - (202/2) +35, elv_line);
+    attroff(COLOR_PAIR(3));
+    refresh();
 }
 
 static void usage_help(WINDOW *help)
 {
     wattron(help,COLOR_PAIR(2));
     wattron(help,COLOR_PAIR(1));
-    mvwprintw(help, 15, 15, "\t\t\t\n\n\n\n\tMove the cursor menu to select a game\n\n\tPress enter to choose a game.\
-    \n\n\tIn Game :\n\n\tKey l : move to Library menu.\n\n\tFor starting push ENTER and for quit monitor push \"q\"");
+    mvwprintw(help, 8, 15, "\t\t\t\n\n\n\n\tSelect a game by using KEY UP and KEY DOWN\n\n\tPress ENTER to choose a game.\
+    \n\n\tIn Game :\n\n\tKey l : move to Library menu.\n\n\tKey p : move to a previous Library.\n\n\tKey SPACE : to pause the game.\n\n\tTo START push ENTER and to quit press ESCAPE");
     wattroff(help,COLOR_PAIR(1));
 }
 
 std::string LibNcurses::GetUsername()
 {
+    std::ofstream ofs;
+    char str[80];
+
+    echo();
+    display_title2();
     mvprintw(30, 80, "ENTER YOUR USERNAME: ");
-    std::string name = getstring();
-    clrtoeol();          // clear line
-//    WINDOW *GetName;
-//    GetName = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
- //     wattron(GetName,COLOR_PAIR(2));
-  //      mvwprintw(GetName, 30, (COLS/2) - (202/2) + 70 , "ENTER YOUR USERNAME: ");
-    // wattroff(GetName, COLOR_PAIR(2));
-    clrtoeol();          // clear line
+    getstr(str);
+    clear();
+    wrefresh(window.window);
     refresh();
-    std::cout << name << std::endl;
-    return name;
+    noecho();
+    return (str);
 }
 
 void LibNcurses::display_help()
@@ -117,7 +145,6 @@ void LibNcurses::display_help()
     touchwin(this->window.window);
     wattroff(window.window,COLOR_PAIR(2));
     wrefresh(this->window.window);
-//    WINDOW *help;
     help = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 10);
     char const *ft_line= "  _    _  ______          __  _____  _           __     __  ___  ";
     char const *sd_line= " | |  | |/ __ \\ \\        / / |  __ \\| |        /\\ \\   / / |__ \\ ";
@@ -158,8 +185,6 @@ void LibNcurses::display_help()
 
 void LibNcurses::display_game()
 {
-    //WINDOW *game;
-
     game = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40, 15, 100);
     wattron(game,COLOR_PAIR(2));
     box(game, ACS_VLINE, ACS_HLINE);
