@@ -53,4 +53,5 @@ class libCaca : public IDisplay
         void InitProg(std::vector<std::string> map, std::vector<std::string> score) final;
         std::string MenuLib(std::vector<std::pair<int, std::string>>) final;
         std::string Menu(std::vector<std::pair<int, std::string>>, std::vector<std::pair<int, std::string>>);
+        void setName(std::string name) final;
 };

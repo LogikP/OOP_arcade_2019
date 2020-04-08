@@ -519,6 +519,12 @@ int LibSfml::Pause()
     return 0;
 }
 
+void LibSfml::setName(std::string name)
+{
+    name = "toto";
+    return;
+}
+
 
 //// For the dlsym Symbol /////
 extern "C" LibSfml *createDisplay()

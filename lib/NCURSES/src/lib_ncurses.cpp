@@ -497,6 +497,12 @@ std::string LibNcurses::gameOver()
     return ("kill");
 }
 
+void LibNcurses::setName(std::string name)
+{
+    name = "toto";
+    return;
+}
+
 extern "C" LibNcurses *createDisplay()
 {
     return new LibNcurses;

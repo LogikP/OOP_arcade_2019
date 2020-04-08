@@ -24,4 +24,5 @@ class IDisplay {
         virtual int getEvent() = 0;
         virtual std::string gameOver() = 0;
         virtual std::string GetUsername() = 0;
+        virtual void setName(std::string name) = 0;
 };

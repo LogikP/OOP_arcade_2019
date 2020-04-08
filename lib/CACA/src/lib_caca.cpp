@@ -13,6 +13,12 @@ libCaca::libCaca() : window()
 
 }
 
+void libCaca::setName(std::string name)
+{
+    name = "toto";
+    return;
+}
+
 std::string libCaca::GetUsername()
 {
     return "toto";

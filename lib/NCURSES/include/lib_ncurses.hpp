@@ -51,4 +51,6 @@ class LibNcurses : public IDisplay
         void display_game();
         void PrintGameName();
         std::string GetUsername() final;
+        void setName(std::string name) final;
+
 };
