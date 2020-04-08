@@ -194,3 +194,68 @@ std::string LibSfml::Menu(std::vector<std::pair<int, std::string>> Games, std::v
     }
     return "success";
 }
+
+std::string LibSfml::GetUsername()
+{
+    this->window.clear();
+    sf::Sprite sprite;
+    sf::Texture texture;
+    sf::Sprite logo;
+    sf::Texture T_logo;
+    sf::Text text;
+    sf::Font font;
+    sf::Text tiping;
+
+    if (!font.loadFromFile("./asset/Test-Font.ttf"))
+        throw(Error("Can't find the Font file"));
+    if (!texture.loadFromFile("./asset/arcade-backgrounds.jpg", sf::IntRect(0,0,1920, 1080)))
+        throw(Error("Can't find the Asset file"));
+    if (!T_logo.loadFromFile("./asset/test-logo.png", sf::IntRect(0, 0, 600, 400)))
+        throw(Error("Can't find the Asset file"));
+    sprite.setTexture(texture);
+    logo.setTexture(T_logo);
+    logo.setPosition(sf::Vector2f(660,0));
+
+    text.setString("Enter You're Name: ");
+    text.setFillColor(sf::Color::Yellow);
+    text.setPosition(sf::Vector2f(200, 400));
+    text.setFont(font);
+    text.setCharacterSize(100);
+    text.setStyle(sf::Text::Regular);
+
+    tiping.setFillColor(sf::Color::Yellow);
+    tiping.setPosition(sf::Vector2f(1100, 400));
+    tiping.setFont(font);
+    tiping.setCharacterSize(100);
+    tiping.setStyle(sf::Text::Regular);
+    std::string tmp;
+    sf::Event event;
+    while (window.isOpen())
+    {
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::TextEntered)
+            {
+                if (event.text.unicode < 128) {
+                     tmp += static_cast<char>(event.text.unicode);
+                     tiping.setString(tmp);
+                }
+            }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if(event.key.code == sf::Keyboard::Enter)
+                    return tmp;
+                if (event.key.code == sf::Keyboard::Escape)
+                    return "kill";
+            }
+
+        }
+        this->window.clear();
+        this->window.draw(sprite);
+        this->window.draw(logo);
+        this->window.draw(text);
+        this->window.draw(tiping);
+        this->window.display();
+    }
+    return "success";
+}

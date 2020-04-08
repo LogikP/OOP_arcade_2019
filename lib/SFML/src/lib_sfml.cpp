@@ -269,7 +269,7 @@ void LibSfml::initWindow()
         sf::Sprite sprite;
         sprite.setTexture(this->MagicCandy);
         this->MagicCandy.setSmooth(true);
-        sprite.setScale(0.09, 0.09);
+        sprite.setScale(0.12, 0.12);
         ListSprite["Magic_Candy"] = sprite;
     if (!this->GhostEat.loadFromFile("./asset/assets-game/Run.bmp"))
         throw(Error("Can't find the Asset file"));
@@ -396,16 +396,16 @@ void LibSfml::DrawMap(std::vector<std::string> map)
                     SetSpritePos("Ghost4", lenLine, pos1, pos2);
                     break;
                 case 'i':
-                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    SetSpritePos("Magic_Candy", lenLine, pos1, pos2);
                     break;
                 case 'h':
-                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    SetSpritePos("Magic_Candy", lenLine, pos1, pos2);
                     break;
                 case 't':
-                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    SetSpritePos("Magic_Candy", lenLine, pos1, pos2);
                     break;
                 case 'u':
-                    SetSpritePos("Ghost_Eat", lenLine, pos1, pos2);
+                    SetSpritePos("Magic_Candy", lenLine, pos1, pos2);
                     break;
 
             }
@@ -518,6 +518,7 @@ int LibSfml::Pause()
     }
     return 0;
 }
+
 
 //// For the dlsym Symbol /////
 extern "C" LibSfml *createDisplay()

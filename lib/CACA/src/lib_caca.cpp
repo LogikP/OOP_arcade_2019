@@ -13,6 +13,11 @@ libCaca::libCaca() : window()
 
 }
 
+std::string libCaca::GetUsername()
+{
+    return "toto";
+}
+
 void libCaca::closeWindow()
 {
     caca_free_display(window.getDisplay());

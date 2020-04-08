@@ -70,7 +70,7 @@ static std::string getstring()
     nocbreak();
     echo();
 
-    // this reads from buffer after <ENTER>, not "raw" 
+    // this reads from buffer after <ENTER>, not "raw"
     // so any backspacing etc. has already been taken care of
     int ch = getch();
 
@@ -94,11 +94,11 @@ static void usage_help(WINDOW *help)
     wattroff(help,COLOR_PAIR(1));
 }
 
-void LibNcurses::GetUsername()
+std::string LibNcurses::GetUsername()
 {
     mvprintw(30, 80, "ENTER YOUR USERNAME: ");
     std::string name = getstring();
-clrtoeol();          // clear line
+    clrtoeol();          // clear line
 //    WINDOW *GetName;
 //    GetName = subwin(stdscr, LINES / 4 + 18, COLS / 6 + 40 + 70, 15, 10);
  //     wattron(GetName,COLOR_PAIR(2));
@@ -107,6 +107,7 @@ clrtoeol();          // clear line
     clrtoeol();          // clear line
     refresh();
     std::cout << name << std::endl;
+    return name;
 }
 
 void LibNcurses::display_help()

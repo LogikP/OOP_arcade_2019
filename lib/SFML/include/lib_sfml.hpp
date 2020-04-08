@@ -78,6 +78,7 @@ class LibSfml : public IDisplay
         int getEvent() final;
         int Pause() final;
         std::string gameOver() final;
+        std::string GetUsername() final;
         void InitProg(std::vector<std::string> map, std::vector<std::string> score) final;
         void SetSpritePos(std::string, int, int, int);
         std::string MenuLib(std::vector<std::pair<int,std::string>>) final;

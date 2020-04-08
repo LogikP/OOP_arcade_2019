@@ -91,6 +91,9 @@ void GameCore::Kill(std::vector<std::string> score)
 bool GameCore::play()
 {
     this->Display = createObject<IDisplay>(this->libToDisplay["IDisplay"]);
+    std::string KeyBoard = this->Display->GetUsername();
+    if (KeyBoard == "kill")
+        return false;
     std::vector<std::pair<int, std::string>>libs_name = this->SelectLib();
     std::string PeakGame = this->Display->Menu(this->Games_names, libs_name);
     while ((isGame(PeakGame, this->Games_names) == 0 && PeakGame != "kill") || PeakGame == "ChangedLib") {

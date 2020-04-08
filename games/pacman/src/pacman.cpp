@@ -59,20 +59,33 @@ bool isFoodLeft(std::vector<std::string> map)
 
 void pacman::MakeGhostEatable()
 {
-    for (std::string str : _map) {
-        for (char c : str) {
-            if (c == 'G' || c == 'H' || c == 'T' || c == 'U')
-                c += 32;
+    for (size_t i = 0; i < this->_map.size(); i++)
+    {
+        for(size_t j = 0; j < this->_map[i].size(); j++)
+        {
+            if (this->_map[i][j] == 'G')
+                this->_map[i][j] = 'g';
         }
     }
+
+    // for (std::string str : _map) {
+    //     for (char c : str) {
+    //         if (c == 'G')
+    //             c == ''
+    //         // if (c == 'G' || c == 'H' || c == 'T' || c == 'U') {
+    //         //     c += 20;
+    //         }
+    //     }
+    // }
 }
 
 void pacman::MakeGhostNoEatable()
 {
     for (std::string str : _map) {
         for (char c : str) {
-            if (c == 'G' || c == 'H' || c == 'T' || c == 'U')
-                c -= 32;
+            if (c == 'g' || c == 'h' || c == 't' || c == 'u') {
+                c -= 20;
+            }
         }
     }
 }
